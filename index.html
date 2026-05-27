@@ -164,6 +164,32 @@
     .work-card:hover .card-title { text-decoration: underline; text-underline-offset: 2px; }
     .card-desc { font-size: 14px; color: var(--muted); line-height: 1.5; margin-top: 4px; }
 
+    /* ── FONT WEIGHT HOVER ── */
+    .card-title,
+    .card-desc,
+    .card-category,
+    .header-tagline,
+    .about-body,
+    .services-list li,
+    .contact-cta,
+    .footer-copy,
+    .footer-links a,
+    .header-nav a {
+      transition: font-weight 0s, opacity 0.15s; /* instant weight snap, no reflow jank */
+    }
+    .card-title:hover,
+    .card-desc:hover,
+    .card-category:hover,
+    .header-tagline:hover,
+    .about-body:hover,
+    .services-list li:hover,
+    .contact-cta:hover,
+    .footer-copy:hover,
+    .footer-links a:hover,
+    .header-nav a:hover {
+      font-weight: 500;
+    }
+
     /* ── MARQUEE ── */
     .marquee-wrap { overflow: hidden; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 14px 0; }
     .marquee-track { display: flex; gap: 48px; width: max-content; animation: marquee 24s linear infinite; }
@@ -685,23 +711,23 @@
   <section id="work">
     <div class="work-rows">
 
-      <!-- ── Showreel: full width ── -->
+      <!-- ── Reel 2026: full width top ── -->
       <div class="work-row full">
         <article class="work-card">
           <a href="#"><div class="card-media r-wide">
-            <video preload="none" poster="assets/thumbs/reel2025.jpg" data-src="assets/work/reel2025.mp4" muted loop playsinline></video>
+            <video preload="none" poster="assets/thumbs/reel2026.jpg" data-src="assets/work/reel2026.mp4" muted loop playsinline></video>
           </div></a>
           <div class="card-text">
             <span class="card-category">Work</span>
             <div class="card-meta">
-              <p class="card-title">2025 Showreel</p>
-              <p class="card-desc">A year of motion, craft, and stories that move.</p>
+              <p class="card-title">2026 Showreel</p>
+              <p class="card-desc">Motion, craft, and stories that move.</p>
             </div>
           </div>
         </article>
       </div>
 
-      <!-- ── Row 1: wide | narrow ── -->
+      <!-- Row 1: wide | narrow -->
       <div class="work-row alt">
         <article class="work-card">
           <a href="#"><div class="card-media r-wide">
@@ -709,6 +735,147 @@
           </div></a>
           <div class="card-text"><span class="card-category">Work</span>
             <div class="card-meta"><p class="card-title">Prime</p><p class="card-desc">Product film for a next-generation platform.</p></div>
+          </div>
+        </article>
+        <article class="work-card">
+          <a href="#"><div class="card-media r-wide">
+            <video preload="none" poster="assets/thumbs/glow-collagen.jpg" data-src="assets/work/glow-collagen.mp4" muted loop playsinline></video>
+          </div></a>
+          <div class="card-text"><span class="card-category">Work</span>
+            <div class="card-meta"><p class="card-title">Glow Collagen</p><p class="card-desc">Product launch film for a wellness brand.</p></div>
+          </div>
+        </article>
+      </div>
+
+      <!-- Row 2: narrow | wide -->
+      <div class="work-row">
+        <article class="work-card">
+          <a href="#"><div class="card-media r-wide">
+            <video preload="none" poster="assets/thumbs/sleep-melts.jpg" data-src="assets/work/sleep-melts.mp4" muted loop playsinline></video>
+          </div></a>
+          <div class="card-text"><span class="card-category">Work</span>
+            <div class="card-meta"><p class="card-title">Sleep Melts</p><p class="card-desc">Brand film for a sleep wellness product launch.</p></div>
+          </div>
+        </article>
+        <article class="work-card">
+          <a href="#"><div class="card-media r-wide">
+            <video preload="none" poster="assets/thumbs/w-features.jpg" data-src="assets/work/w-features.mp4" muted loop playsinline></video>
+          </div></a>
+          <div class="card-text"><span class="card-category">Work</span>
+            <div class="card-meta"><p class="card-title">W — Features</p><p class="card-desc">Motion design for the W feature suite.</p></div>
+          </div>
+        </article>
+      </div>
+
+      <!-- Row 3: wide | narrow -->
+      <div class="work-row alt">
+        <article class="work-card">
+          <a href="#"><div class="card-media r-wide">
+            <video preload="none" poster="assets/thumbs/alpha-edge-wide.jpg" data-src="assets/work/alpha-edge-wide.mp4" muted loop playsinline></video>
+          </div></a>
+          <div class="card-text"><span class="card-category">Work</span>
+            <div class="card-meta"><p class="card-title">Alpha Edge</p><p class="card-desc">Brand film for Groww's Alpha Edge platform.</p></div>
+          </div>
+        </article>
+        <article class="work-card">
+          <a href="#"><div class="card-media r-wide">
+            <video preload="none" poster="assets/thumbs/pcos.jpg" data-src="assets/work/pcos.mp4" muted loop playsinline></video>
+          </div></a>
+          <div class="card-text"><span class="card-category">Work</span>
+            <div class="card-meta"><p class="card-title">PCOS</p><p class="card-desc">Motion design for a health awareness campaign.</p></div>
+          </div>
+        </article>
+      </div>
+
+      <!-- Row 4: narrow | wide -->
+      <div class="work-row">
+        <article class="work-card">
+          <a href="#"><div class="card-media r-wide">
+            <video preload="none" poster="assets/thumbs/w-onboard.jpg" data-src="assets/work/w-onboard.mp4" muted loop playsinline></video>
+          </div></a>
+          <div class="card-text"><span class="card-category">Work</span>
+            <div class="card-meta"><p class="card-title">W — Onboarding</p><p class="card-desc">Interface motion that turns first impressions into loyalty.</p></div>
+          </div>
+        </article>
+        <article class="work-card">
+          <a href="#"><div class="card-media r-wide">
+            <video preload="none" poster="assets/thumbs/marine-cg.jpg" data-src="assets/work/marine-cg.mp4" muted loop playsinline></video>
+          </div></a>
+          <div class="card-text"><span class="card-category">Work</span>
+            <div class="card-meta"><p class="card-title">Marine CG</p><p class="card-desc">CG product film for a marine wellness range.</p></div>
+          </div>
+        </article>
+      </div>
+
+      <!-- Row 5: wide | narrow -->
+      <div class="work-row alt">
+        <article class="work-card">
+          <a href="#"><div class="card-media r-wide">
+            <video preload="none" poster="assets/thumbs/book-launch.jpg" data-src="assets/work/book-launch.mp4" muted loop playsinline></video>
+          </div></a>
+          <div class="card-text"><span class="card-category">Work</span>
+            <div class="card-meta"><p class="card-title">Book Launch</p><p class="card-desc">Launch film for The Alpha Bets — Groww × ZebraLearn.</p></div>
+          </div>
+        </article>
+        <article class="work-card">
+          <a href="#"><div class="card-media r-wide">
+            <video preload="none" poster="assets/thumbs/slow-sci.jpg" data-src="assets/work/slow-sci.mp4" muted loop playsinline></video>
+          </div></a>
+          <div class="card-text"><span class="card-category">Work</span>
+            <div class="card-meta"><p class="card-title">Slow Science</p><p class="card-desc">Visual storytelling for a science-backed brand.</p></div>
+          </div>
+        </article>
+      </div>
+
+      <!-- Row 6: narrow | wide -->
+      <div class="work-row">
+        <article class="work-card">
+          <a href="#"><div class="card-media r-wide">
+            <video preload="none" poster="assets/thumbs/alpha-edge-uac.jpg" data-src="assets/work/alpha-edge-uac.mp4" muted loop playsinline></video>
+          </div></a>
+          <div class="card-text"><span class="card-category">Work</span>
+            <div class="card-meta"><p class="card-title">Alpha Edge — UAC</p><p class="card-desc">Performance creative for user acquisition campaigns.</p></div>
+          </div>
+        </article>
+        <article class="work-card">
+          <a href="#"><div class="card-media r-wide">
+            <video preload="none" poster="assets/thumbs/signedup.jpg" data-src="assets/work/signedup.mp4" muted loop playsinline></video>
+          </div></a>
+          <div class="card-text"><span class="card-category">Work</span>
+            <div class="card-meta"><p class="card-title">Signed Up</p><p class="card-desc">Onboarding motion for a new user experience.</p></div>
+          </div>
+        </article>
+      </div>
+
+      <!-- Row 7: wide | narrow — MTF placeholder -->
+      <div class="work-row alt">
+        <article class="work-card">
+          <a href="#"><div class="card-media r-wide">
+            <video preload="none" data-src="assets/work/MTF_Dark_V2.mp4" muted loop playsinline></video>
+            <div class="pending">MTF_Dark_V2.mp4<small>copy from SSD → assets/work/ to activate</small></div>
+          </div></a>
+          <div class="card-text"><span class="card-category">Work</span>
+            <div class="card-meta"><p class="card-title">MTF</p><p class="card-desc">Dark brand film — motion and identity.</p></div>
+          </div>
+        </article>
+        <article class="work-card">
+          <a href="#"><div class="card-media r-wide">
+            <video preload="none" poster="assets/thumbs/wealth-circle.jpg" data-src="assets/work/wealth-circle.mp4" muted loop playsinline></video>
+          </div></a>
+          <div class="card-text"><span class="card-category">Work</span>
+            <div class="card-meta"><p class="card-title">Wealth Circle</p><p class="card-desc">Motion identity for Groww's wealth management tier.</p></div>
+          </div>
+        </article>
+      </div>
+
+      <!-- Row 8: narrow | wide -->
+      <div class="work-row">
+        <article class="work-card">
+          <a href="#"><div class="card-media r-wide">
+            <video preload="none" poster="assets/thumbs/iifl.jpg" data-src="assets/work/iifl.mp4" muted loop playsinline></video>
+          </div></a>
+          <div class="card-text"><span class="card-category">Work</span>
+            <div class="card-meta"><p class="card-title">IIFL</p><p class="card-desc">Motion identity for a leading financial services brand.</p></div>
           </div>
         </article>
         <article class="work-card">
@@ -721,54 +888,34 @@
         </article>
       </div>
 
-      <!-- ── Row 2: narrow | wide ── -->
-      <div class="work-row">
-        <article class="work-card">
-          <a href="#"><div class="card-media r-wide">
-            <video preload="none" poster="assets/thumbs/w-features.jpg" data-src="assets/work/w-features.mp4" muted loop playsinline></video>
-          </div></a>
-          <div class="card-text"><span class="card-category">Work</span>
-            <div class="card-meta"><p class="card-title">W — Features</p><p class="card-desc">Motion design for the W feature suite.</p></div>
-          </div>
-        </article>
-        <article class="work-card">
-          <a href="#"><div class="card-media r-wide">
-            <video preload="none" poster="assets/thumbs/w-onboard.jpg" data-src="assets/work/w-onboard.mp4" muted loop playsinline></video>
-          </div></a>
-          <div class="card-text"><span class="card-category">Work</span>
-            <div class="card-meta"><p class="card-title">W — Onboarding</p><p class="card-desc">Interface motion that turns first impressions into loyalty.</p></div>
-          </div>
-        </article>
-      </div>
-
-      <!-- ── Row 3: wide | narrow ── -->
+      <!-- Row 9: wide | narrow -->
       <div class="work-row alt">
         <article class="work-card">
           <a href="#"><div class="card-media r-wide">
-            <video preload="none" poster="assets/thumbs/alpha-edge-wide.jpg" data-src="assets/work/alpha-edge-wide.mp4" muted loop playsinline></video>
+            <video preload="none" poster="assets/thumbs/ntg.jpg" data-src="assets/work/ntg.mp4" muted loop playsinline></video>
           </div></a>
           <div class="card-text"><span class="card-category">Work</span>
-            <div class="card-meta"><p class="card-title">Alpha Edge</p><p class="card-desc">Brand film for Groww's Alpha Edge platform.</p></div>
+            <div class="card-meta"><p class="card-title">NTG</p><p class="card-desc">Brand film and motion for NTG.</p></div>
           </div>
         </article>
         <article class="work-card">
           <a href="#"><div class="card-media r-wide">
-            <video preload="none" poster="assets/thumbs/alpha-edge-uac.jpg" data-src="assets/work/alpha-edge-uac.mp4" muted loop playsinline></video>
+            <video preload="none" poster="assets/thumbs/wide-d3.jpg" data-src="assets/work/wide-d3.mp4" muted loop playsinline></video>
           </div></a>
           <div class="card-text"><span class="card-category">Work</span>
-            <div class="card-meta"><p class="card-title">Alpha Edge — UAC</p><p class="card-desc">Performance creative for user acquisition campaigns.</p></div>
+            <div class="card-meta"><p class="card-title">D3 Wide</p><p class="card-desc">Wide-format film for a vitamin D3 product.</p></div>
           </div>
         </article>
       </div>
 
-      <!-- ── Row 4: narrow | wide ── -->
+      <!-- Row 10: narrow | wide -->
       <div class="work-row">
         <article class="work-card">
           <a href="#"><div class="card-media r-wide">
-            <video preload="none" poster="assets/thumbs/wealth-circle.jpg" data-src="assets/work/wealth-circle.mp4" muted loop playsinline></video>
+            <video preload="none" poster="assets/thumbs/agenda.jpg" data-src="assets/work/agenda.mp4" muted loop playsinline></video>
           </div></a>
           <div class="card-text"><span class="card-category">Work</span>
-            <div class="card-meta"><p class="card-title">Wealth Circle</p><p class="card-desc">Motion identity for Groww's wealth management tier.</p></div>
+            <div class="card-meta"><p class="card-title">Agenda</p><p class="card-desc">Event design and motion for a flagship conference.</p></div>
           </div>
         </article>
         <article class="work-card">
@@ -781,16 +928,8 @@
         </article>
       </div>
 
-      <!-- ── Row 5: wide | narrow ── -->
+      <!-- Row 11: wide | narrow -->
       <div class="work-row alt">
-        <article class="work-card">
-          <a href="#"><div class="card-media r-wide">
-            <video preload="none" poster="assets/thumbs/book-launch.jpg" data-src="assets/work/book-launch.mp4" muted loop playsinline></video>
-          </div></a>
-          <div class="card-text"><span class="card-category">Work</span>
-            <div class="card-meta"><p class="card-title">Book Launch</p><p class="card-desc">Launch film for The Alpha Bets — Groww × ZebraLearn.</p></div>
-          </div>
-        </article>
         <article class="work-card">
           <a href="#"><div class="card-media r-wide">
             <video preload="none" poster="assets/thumbs/tv.jpg" data-src="assets/work/tv.mp4" muted loop playsinline></video>
@@ -799,58 +938,18 @@
             <div class="card-meta"><p class="card-title">TV</p><p class="card-desc">Broadcast creative for a financial product launch.</p></div>
           </div>
         </article>
+        <article class="work-card">
+          <a href="#"><div class="card-media r-wide">
+            <video preload="none" poster="assets/thumbs/graph.jpg" data-src="assets/work/graph.mp4" muted loop playsinline></video>
+          </div></a>
+          <div class="card-text"><span class="card-category">Work</span>
+            <div class="card-meta"><p class="card-title">Data in Motion</p><p class="card-desc">Animated data visualisation for a financial dashboard.</p></div>
+          </div>
+        </article>
       </div>
 
-      <!-- ── Row 6: narrow | wide ── -->
+      <!-- Row 12: narrow | wide -->
       <div class="work-row">
-        <article class="work-card">
-          <a href="#"><div class="card-media r-wide">
-            <video preload="none" poster="assets/thumbs/signedup.jpg" data-src="assets/work/signedup.mp4" muted loop playsinline></video>
-          </div></a>
-          <div class="card-text"><span class="card-category">Work</span>
-            <div class="card-meta"><p class="card-title">Signed Up</p><p class="card-desc">Onboarding motion for a new user experience.</p></div>
-          </div>
-        </article>
-        <article class="work-card">
-          <a href="#"><div class="card-media r-wide">
-            <video preload="none" poster="assets/thumbs/watchlist.jpg" data-src="assets/work/watchlist.mp4" muted loop playsinline></video>
-          </div></a>
-          <div class="card-text"><span class="card-category">Work</span>
-            <div class="card-meta"><p class="card-title">Watchlist</p><p class="card-desc">Product motion for the Groww watchlist feature.</p></div>
-          </div>
-        </article>
-      </div>
-
-      <!-- ── Row 7: wide | narrow ── -->
-      <div class="work-row alt">
-        <article class="work-card">
-          <a href="#"><div class="card-media r-wide">
-            <video preload="none" poster="assets/thumbs/iifl.jpg" data-src="assets/work/iifl.mp4" muted loop playsinline></video>
-          </div></a>
-          <div class="card-text"><span class="card-category">Work</span>
-            <div class="card-meta"><p class="card-title">IIFL</p><p class="card-desc">Motion identity for a leading financial services brand.</p></div>
-          </div>
-        </article>
-        <article class="work-card">
-          <a href="#"><div class="card-media r-wide">
-            <video preload="none" poster="assets/thumbs/agenda.jpg" data-src="assets/work/agenda.mp4" muted loop playsinline></video>
-          </div></a>
-          <div class="card-text"><span class="card-category">Work</span>
-            <div class="card-meta"><p class="card-title">Agenda</p><p class="card-desc">Event design and motion for a flagship conference.</p></div>
-          </div>
-        </article>
-      </div>
-
-      <!-- ── Row 8: narrow | wide ── -->
-      <div class="work-row">
-        <article class="work-card">
-          <a href="#"><div class="card-media r-wide">
-            <video preload="none" poster="assets/thumbs/ntg.jpg" data-src="assets/work/ntg.mp4" muted loop playsinline></video>
-          </div></a>
-          <div class="card-text"><span class="card-category">Work</span>
-            <div class="card-meta"><p class="card-title">NTG</p><p class="card-desc">Brand film and motion for NTG.</p></div>
-          </div>
-        </article>
         <article class="work-card">
           <a href="#"><div class="card-media r-wide">
             <video preload="none" poster="assets/thumbs/insight-w.jpg" data-src="assets/work/insight-w.mp4" muted loop playsinline></video>
@@ -859,12 +958,6 @@
             <div class="card-meta"><p class="card-title">W — Insight Stall</p><p class="card-desc">Immersive experience design for the W booth at Insight.</p></div>
           </div>
         </article>
-      </div>
-
-      <!-- ── Row 9: wide | narrow
-           SSD files — copy to assets/work/ to activate
-           multicap-hd.mp4 · multicap2.mp4 ── -->
-      <div class="work-row alt">
         <article class="work-card">
           <a href="#"><div class="card-media r-wide">
             <video preload="none" poster="assets/thumbs/multicap-hd.jpg" data-src="assets/work/multicap-hd.mp4" muted loop playsinline></video>
@@ -872,6 +965,19 @@
           </div></a>
           <div class="card-text"><span class="card-category">Work</span>
             <div class="card-meta"><p class="card-title">MultiCap HD</p><p class="card-desc">Multi-cap product film.</p></div>
+          </div>
+        </article>
+      </div>
+
+      <!-- Row 13: wide | narrow -->
+      <div class="work-row alt">
+        <article class="work-card">
+          <a href="#"><div class="card-media r-wide">
+            <video preload="none" poster="assets/thumbs/scalper.jpg" data-src="assets/work/scalper.mp4" muted loop playsinline></video>
+            <div class="pending">scalper.mp4<small>copy from SSD to activate</small></div>
+          </div></a>
+          <div class="card-text"><span class="card-category">Work</span>
+            <div class="card-meta"><p class="card-title">Scalper Mode</p><p class="card-desc">Motion creative for a high-frequency trading feature.</p></div>
           </div>
         </article>
         <article class="work-card">
@@ -885,8 +991,7 @@
         </article>
       </div>
 
-      <!-- ── Row 10: narrow | wide
-           master-corp.mp4 · ipo-3d.mp4 ── -->
+      <!-- Row 14: narrow | wide -->
       <div class="work-row">
         <article class="work-card">
           <a href="#"><div class="card-media r-wide">
@@ -904,28 +1009,6 @@
           </div></a>
           <div class="card-text"><span class="card-category">Work</span>
             <div class="card-meta"><p class="card-title">IPO — 3D</p><p class="card-desc">3D motion for an IPO product launch.</p></div>
-          </div>
-        </article>
-      </div>
-
-      <!-- ── Row 11: wide | narrow
-           scalper.mp4 · graph.mp4 ── -->
-      <div class="work-row alt">
-        <article class="work-card">
-          <a href="#"><div class="card-media r-wide">
-            <video preload="none" poster="assets/thumbs/scalper.jpg" data-src="assets/work/scalper.mp4" muted loop playsinline></video>
-            <div class="pending">scalper.mp4<small>copy from SSD to activate</small></div>
-          </div></a>
-          <div class="card-text"><span class="card-category">Work</span>
-            <div class="card-meta"><p class="card-title">Scalper Mode</p><p class="card-desc">Motion creative for a high-frequency trading feature.</p></div>
-          </div>
-        </article>
-        <article class="work-card">
-          <a href="#"><div class="card-media r-wide">
-            <video preload="none" poster="assets/thumbs/graph.jpg" data-src="assets/work/graph.mp4" muted loop playsinline></video>
-          </div></a>
-          <div class="card-text"><span class="card-category">Work</span>
-            <div class="card-meta"><p class="card-title">Data in Motion</p><p class="card-desc">Animated data visualisation for a financial dashboard.</p></div>
           </div>
         </article>
       </div>
