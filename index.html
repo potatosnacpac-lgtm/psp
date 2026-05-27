@@ -46,7 +46,8 @@
       border-bottom: 1px solid var(--border);
     }
     .header-left { display: flex; align-items: flex-start; gap: 20px; max-width: 640px; }
-    .logo-mark { width: 52px; height: 52px; flex-shrink: 0; margin-top: 2px; }
+    .logo-mark { width: 38px; height: auto; flex-shrink: 0; margin-top: 2px; }
+    .logo-mark svg { width: 100%; height: auto; display: block; color: #111; }
     .header-tagline { font-size: 20px; font-weight: 300; line-height: 1.35; letter-spacing: -0.01em; }
     .header-nav { display: flex; align-items: center; gap: 28px; padding-top: 4px; flex-shrink: 0; }
     .header-nav a { font-size: 14px; transition: color 0.15s; }
@@ -134,6 +135,327 @@
     .footer-links a { font-size: 12px; color: var(--muted); transition: color 0.15s; }
     .footer-links a:hover { color: var(--fg); }
 
+    /* ── CONTACT OVERLAY ── */
+    .contact-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.88);
+      z-index: 950;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+    .contact-overlay.open {
+      opacity: 1;
+      pointer-events: all;
+    }
+    .contact-modal {
+      background: #fff;
+      width: min(520px, 92vw);
+      padding: 48px 52px 52px;
+      position: relative;
+      transform: translateY(16px);
+      transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .contact-overlay.open .contact-modal {
+      transform: translateY(0);
+    }
+    .contact-modal-label {
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 32px;
+    }
+    .contact-modal-item {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      margin-bottom: 28px;
+    }
+    .contact-modal-item:last-of-type { margin-bottom: 0; }
+    .contact-modal-type {
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .contact-modal-value {
+      font-size: clamp(18px, 3vw, 26px);
+      font-weight: 300;
+      letter-spacing: -0.01em;
+      border-bottom: 1px solid var(--fg);
+      padding-bottom: 2px;
+      display: inline-block;
+      transition: color 0.2s, border-color 0.2s;
+    }
+    .contact-modal-value:hover { color: var(--muted); border-color: var(--muted); }
+    .contact-modal-close {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: var(--fg);
+      padding: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0.45;
+      transition: opacity 0.15s;
+    }
+    .contact-modal-close:hover { opacity: 1; }
+
+    /* ── VIDEO LIGHTBOX ── */
+    .vl-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.92);
+      z-index: 900;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+    .vl-backdrop.open {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    .vl-box {
+      position: relative;
+      width: min(92vw, 160vh); /* never taller than viewport */
+      aspect-ratio: 16 / 9;
+      background: #000;
+      border-radius: 4px;
+      overflow: hidden;
+      transform: scale(0.96);
+      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .vl-backdrop.open .vl-box {
+      transform: scale(1);
+    }
+
+    #vl-player {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+    }
+
+    /* control bar */
+    .vl-controls {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 16px 20px 14px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, transparent 100%);
+      opacity: 0;
+      transition: opacity 0.2s;
+    }
+    .vl-box:hover .vl-controls { opacity: 1; }
+
+    .vl-btn {
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: #fff;
+      padding: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 3px;
+      transition: background 0.15s;
+      flex-shrink: 0;
+    }
+    .vl-btn:hover { background: rgba(255,255,255,0.15); }
+
+    .vl-close-btn {
+      position: absolute;
+      top: 14px;
+      right: 14px;
+      background: rgba(0,0,0,0.5);
+      border: none;
+      cursor: pointer;
+      color: #fff;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.15s;
+      z-index: 2;
+    }
+    .vl-close-btn:hover { background: rgba(0,0,0,0.8); }
+
+    /* ── CUSTOM CURSOR ── */
+    *, *::before, *::after { cursor: none !important; }
+    .cursor-dot {
+      position: fixed;
+      top: 0; left: 0;
+      width: 12px;
+      height: 12px;
+      background: #fff;
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 99999;
+      transform: translate(-50%, -50%);
+      mix-blend-mode: difference;   /* inverts whatever's beneath — always visible */
+      transition: width 0.12s, height 0.12s;
+      will-change: left, top;
+    }
+    .cursor-dot.clicking {
+      width: 18px;
+      height: 18px;
+    }
+
+    .card-media { cursor: none; }
+
+    /* ── FULLSCREEN MENU OVERLAY ── */
+    .menu-overlay {
+      position: fixed;
+      inset: 0;
+      background: #111;
+      z-index: 1000;
+      display: flex;
+      flex-direction: column;
+      padding: 28px var(--pad) 28px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .menu-overlay.open {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    .menu-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+    }
+    .menu-logo { width: 36px; height: auto; }
+
+    .menu-close {
+      cursor: pointer;
+      color: #fff;
+      line-height: 1;
+      font-size: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 32px;
+      height: 32px;
+      opacity: 0.7;
+      transition: opacity 0.15s;
+    }
+    .menu-close:hover { opacity: 1; }
+
+    .menu-nav {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-start;
+      padding-left: calc(50% - 40px);
+      gap: 4px;
+    }
+    .menu-nav a {
+      font-size: clamp(36px, 7vw, 80px);
+      font-weight: 400;
+      letter-spacing: -0.02em;
+      color: #fff;
+      text-transform: uppercase;
+      line-height: 1.15;
+      transition: opacity 0.15s;
+      display: block;
+    }
+    .menu-nav a:hover { opacity: 0.4; }
+
+    .menu-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .menu-footer-copy { font-size: 12px; color: rgba(255,255,255,0.35); }
+    .menu-social { display: flex; gap: 24px; list-style: none; }
+    .menu-social a { font-size: 13px; color: rgba(255,255,255,0.55); transition: color 0.15s; }
+    .menu-social a:hover { color: #fff; }
+
+    /* ── TOOLS submenu ── */
+    .menu-tools-group { display: flex; flex-direction: column; }
+    .menu-tools-toggle {
+      font-size: clamp(36px, 7vw, 80px);
+      font-weight: 400;
+      letter-spacing: -0.02em;
+      color: #fff;
+      text-transform: uppercase;
+      line-height: 1.15;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      transition: opacity 0.15s;
+      user-select: none;
+    }
+    .menu-tools-toggle:hover { opacity: 0.4; }
+    .tools-arrow {
+      transition: transform 0.25s ease;
+      flex-shrink: 0;
+      margin-top: 4px;
+    }
+    .menu-tools-group.open .tools-arrow { transform: rotate(180deg); }
+
+    .menu-tools-items {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease, opacity 0.3s ease;
+      opacity: 0;
+      padding-left: 4px;
+    }
+    .menu-tools-group.open .menu-tools-items {
+      max-height: 300px;
+      opacity: 1;
+    }
+    .menu-tool-item {
+      font-size: clamp(18px, 2.5vw, 30px) !important;
+      font-weight: 300 !important;
+      letter-spacing: -0.01em !important;
+      color: rgba(255,255,255,0.65) !important;
+      text-transform: none !important;
+      padding: 6px 0;
+      transition: color 0.15s !important;
+    }
+    .menu-tool-item:hover { color: #fff !important; opacity: 1 !important; }
+
+    /* staggered nav item entrance */
+    .menu-overlay.open .menu-nav a {
+      animation: menuIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
+    }
+    .menu-overlay.open .menu-nav a:nth-child(1) { animation-delay: 0.05s; }
+    .menu-overlay.open .menu-nav a:nth-child(2) { animation-delay: 0.10s; }
+    .menu-overlay.open .menu-nav a:nth-child(3) { animation-delay: 0.15s; }
+    .menu-overlay.open .menu-nav a:nth-child(4) { animation-delay: 0.20s; }
+    @keyframes menuIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
     /* ── MOBILE ── */
     @media (max-width: 700px) {
       :root { --pad: 16px; }
@@ -145,6 +467,7 @@
       .work-row .work-card:last-child,
       .work-row.full .work-card { padding: 0 var(--pad); }
       #about, #contact { grid-template-columns: 1fr; gap: 24px; }
+      .menu-nav { padding-left: 0; }
     }
   </style>
 </head>
@@ -154,13 +477,11 @@
   <header>
     <div class="header-left">
       <div class="logo-mark">
-        <svg viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <rect x="1" y="1" width="50" height="50" stroke="#111" stroke-width="1.5"/>
-          <rect x="12" y="12" width="28" height="5" fill="#111"/>
-          <rect x="12" y="12" width="5" height="15" fill="#111"/>
-          <rect x="12" y="24" width="28" height="5" fill="#111"/>
-          <rect x="35" y="27" width="5" height="13" fill="#111"/>
-          <rect x="12" y="36" width="28" height="5" fill="#111"/>
+        <svg viewBox="0 0 289 386" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M121.944 0.50899C124.299 0.332857 125.734 0.414067 128.089 0.531488C128.754 3.95219 128.729 11.5143 128.747 15.1628L128.768 36.6025V117.63L128.736 210.415L128.813 237.352C128.838 243.547 129.063 250.323 128.36 256.424C121.209 257.004 112.647 255.799 105.648 254.5C81.415 250.001 60.9502 239.124 42.4597 222.958C42.3666 222.879 42.2738 222.8 42.1806 222.721C17.4963 200.146 2.80104 168.588 0.733504 135.486C-1.40435 101.708 10.072 68.4804 32.6009 43.2221C55.5206 17.6754 87.6686 2.30618 121.944 0.50899Z" fill="currentColor"/>
+          <path d="M160.76 129.049C194.267 129.588 226.27 143.057 250.078 166.642C274.36 190.431 288.17 222.91 288.458 256.902C288.753 291.721 274.831 322.93 250.549 347.536C249.02 349.072 247.445 350.563 245.831 352.011C223.893 371.393 189.799 386.159 160.222 384.369C159.881 379.721 160.148 372.423 160.162 367.575L160.176 337.063L160.166 239.098L160.19 166.472C160.19 157.61 159.649 136.886 160.76 129.049Z" fill="currentColor"/>
+          <path d="M0.292753 256.39C4.49428 256.209 8.7032 256.364 12.8798 256.855C47.4092 260.524 79.0255 277.884 100.652 305.05C114.86 322.927 124.039 344.274 127.245 366.883C128.019 372.103 128.796 379.49 128.177 384.629C119.754 385.294 109.037 385.055 100.473 385.055L55.5707 385.062L18.3448 385.048C13.3389 385.006 4.91158 385.195 0.229474 384.527C-0.218065 379.848 0.124009 371.523 0.140532 366.429L0.180958 332.535L0.186945 284.036C0.179211 275.302 -0.144239 264.918 0.292753 256.39Z" fill="currentColor"/>
+          <path d="M164.314 0.174655C172.499 -0.149134 181.959 0.0758646 190.231 0.0790287L236.265 0.0818396L267.983 0.0670767C274.269 0.066022 282.031 -0.150892 288.191 0.473131C288.989 5.62212 288.785 13.5157 288.792 18.8915V46.1615L288.799 96.4736C288.806 100.602 289.319 125.395 288.261 127.898C287.196 128.709 287.027 128.458 285.434 128.616C252.63 127.563 221.436 114.156 198.096 91.0799C174.137 67.0025 160.623 34.4594 160.475 0.492464L164.314 0.174655Z" fill="currentColor"/>
         </svg>
       </div>
       <p class="header-tagline">
@@ -175,7 +496,7 @@
           <circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="22" y2="22"/>
         </svg>
       </span>
-      <span class="nav-icon" aria-label="Menu">
+      <span class="nav-icon" id="menu-open" aria-label="Open menu">
         <svg width="20" height="14" viewBox="0 0 20 14" fill="none">
           <line x1="0" y1="1" x2="20" y2="1" stroke="currentColor" stroke-width="1.5"/>
           <line x1="0" y1="7" x2="20" y2="7" stroke="currentColor" stroke-width="1.5"/>
@@ -186,6 +507,121 @@
   </header>
 
 
+  <!-- CONTACT OVERLAY -->
+  <div class="contact-overlay" id="contact-overlay" role="dialog" aria-modal="true" aria-label="Contact">
+    <div class="contact-modal">
+      <button class="contact-modal-close" id="contact-modal-close" aria-label="Close contact">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+          <line x1="1" y1="1" x2="13" y2="13" stroke="currentColor" stroke-width="1.8"/>
+          <line x1="13" y1="1" x2="1" y2="13" stroke="currentColor" stroke-width="1.8"/>
+        </svg>
+      </button>
+      <p class="contact-modal-label">Get in touch</p>
+      <div class="contact-modal-item">
+        <span class="contact-modal-type">Email</span>
+        <a href="mailto:potatosnacpac@gmail.com" class="contact-modal-value">potatosnacpac@gmail.com</a>
+      </div>
+      <div class="contact-modal-item">
+        <span class="contact-modal-type">Phone</span>
+        <a href="tel:+918637070820" class="contact-modal-value">+91 86370 70820</a>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- VIDEO LIGHTBOX -->
+  <div class="vl-backdrop" id="vl-backdrop" role="dialog" aria-modal="true" aria-label="Video player">
+    <div class="vl-box" id="vl-box">
+      <video id="vl-player" playsinline></video>
+
+      <!-- close × -->
+      <button class="vl-close-btn" id="vl-close" aria-label="Close">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+          <line x1="1" y1="1" x2="13" y2="13" stroke="white" stroke-width="1.8"/>
+          <line x1="13" y1="1" x2="1" y2="13" stroke="white" stroke-width="1.8"/>
+        </svg>
+      </button>
+
+      <!-- bottom controls -->
+      <div class="vl-controls">
+        <!-- mute toggle -->
+        <button class="vl-btn" id="vl-mute" aria-label="Toggle mute">
+          <!-- unmuted icon (shown by default) -->
+          <svg id="icon-sound" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+            <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/>
+            <path d="M15.54 8.46a5 5 0 0 1 0 7.07"/>
+            <path d="M19.07 4.93a10 10 0 0 1 0 14.14"/>
+          </svg>
+          <!-- muted icon (hidden by default) -->
+          <svg id="icon-mute" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" style="display:none">
+            <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/>
+            <line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/>
+          </svg>
+        </button>
+
+        <!-- spacer -->
+        <div style="flex:1"></div>
+
+        <!-- fullscreen toggle -->
+        <button class="vl-btn" id="vl-fs" aria-label="Toggle fullscreen">
+          <svg id="icon-expand" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+            <polyline points="15 3 21 3 21 9"/><polyline points="9 21 3 21 3 15"/>
+            <line x1="21" y1="3" x2="14" y2="10"/><line x1="3" y1="21" x2="10" y2="14"/>
+          </svg>
+          <svg id="icon-shrink" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" style="display:none">
+            <polyline points="4 14 10 14 10 20"/><polyline points="20 10 14 10 14 4"/>
+            <line x1="10" y1="14" x2="3" y2="21"/><line x1="21" y1="3" x2="14" y2="10"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- FULLSCREEN MENU OVERLAY -->
+  <div class="menu-overlay" id="menu-overlay" role="dialog" aria-modal="true" aria-label="Site navigation">
+    <div class="menu-top">
+      <!-- Brand logo in white -->
+      <svg class="menu-logo" viewBox="0 0 289 386" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M121.944 0.50899C124.299 0.332857 125.734 0.414067 128.089 0.531488C128.754 3.95219 128.729 11.5143 128.747 15.1628L128.768 36.6025V117.63L128.736 210.415L128.813 237.352C128.838 243.547 129.063 250.323 128.36 256.424C121.209 257.004 112.647 255.799 105.648 254.5C81.415 250.001 60.9502 239.124 42.4597 222.958C42.3666 222.879 42.2738 222.8 42.1806 222.721C17.4963 200.146 2.80104 168.588 0.733504 135.486C-1.40435 101.708 10.072 68.4804 32.6009 43.2221C55.5206 17.6754 87.6686 2.30618 121.944 0.50899Z" fill="white"/>
+        <path d="M160.76 129.049C194.267 129.588 226.27 143.057 250.078 166.642C274.36 190.431 288.17 222.91 288.458 256.902C288.753 291.721 274.831 322.93 250.549 347.536C249.02 349.072 247.445 350.563 245.831 352.011C223.893 371.393 189.799 386.159 160.222 384.369C159.881 379.721 160.148 372.423 160.162 367.575L160.176 337.063L160.166 239.098L160.19 166.472C160.19 157.61 159.649 136.886 160.76 129.049Z" fill="white"/>
+        <path d="M0.292753 256.39C4.49428 256.209 8.7032 256.364 12.8798 256.855C47.4092 260.524 79.0255 277.884 100.652 305.05C114.86 322.927 124.039 344.274 127.245 366.883C128.019 372.103 128.796 379.49 128.177 384.629C119.754 385.294 109.037 385.055 100.473 385.055L55.5707 385.062L18.3448 385.048C13.3389 385.006 4.91158 385.195 0.229474 384.527C-0.218065 379.848 0.124009 371.523 0.140532 366.429L0.180958 332.535L0.186945 284.036C0.179211 275.302 -0.144239 264.918 0.292753 256.39Z" fill="white"/>
+        <path d="M164.314 0.174655C172.499 -0.149134 181.959 0.0758646 190.231 0.0790287L236.265 0.0818396L267.983 0.0670767C274.269 0.066022 282.031 -0.150892 288.191 0.473131C288.989 5.62212 288.785 13.5157 288.792 18.8915V46.1615L288.799 96.4736C288.806 100.602 289.319 125.395 288.261 127.898C287.196 128.709 287.027 128.458 285.434 128.616C252.63 127.563 221.436 114.156 198.096 91.0799C174.137 67.0025 160.623 34.4594 160.475 0.492464L164.314 0.174655Z" fill="white"/>
+      </svg>
+      <span class="menu-close" id="menu-close" aria-label="Close menu">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+          <line x1="1" y1="1" x2="19" y2="19" stroke="white" stroke-width="1.5"/>
+          <line x1="19" y1="1" x2="1" y2="19" stroke="white" stroke-width="1.5"/>
+        </svg>
+      </span>
+    </div>
+
+    <nav class="menu-nav">
+      <a href="#work"  id="menu-link">Work</a>
+      <a href="#about" id="menu-link">About</a>
+      <a href="#" id="menu-contact-link">Contact</a>
+      <div class="menu-tools-group">
+        <span class="menu-tools-toggle" id="menu-tools-toggle">Tools
+          <svg class="tools-arrow" width="14" height="14" viewBox="0 0 14 14" fill="none">
+            <polyline points="2,4 7,10 12,4" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </span>
+        <div class="menu-tools-items" id="menu-tools-items">
+          <a href="https://5554792048798.gumroad.com/l/rlgegw" target="_blank" rel="noopener" class="menu-tool-item">RenQ ↗</a>
+        </div>
+      </div>
+    </nav>
+
+    <div class="menu-footer">
+      <span class="menu-footer-copy">© 2026 Snacpac Studio</span>
+      <ul class="menu-social">
+        <li><a href="https://www.instagram.com/potatosnacpac?igsh=YmJ1b2xjdXdneXp1&utm_source=qr" target="_blank" rel="noopener">Instagram</a></li>
+        <li><a href="https://www.linkedin.com/in/motionman/" target="_blank" rel="noopener">LinkedIn</a></li>
+      </ul>
+    </div>
+  </div>
+
+
   <section id="work">
     <div class="work-rows">
 
@@ -193,7 +629,7 @@
       <div class="work-row full">
         <article class="work-card">
           <a href="#"><div class="card-media r-wide">
-            <video src="assets/work/reel2025.mp4" autoplay muted loop playsinline></video>
+            <video preload="none" poster="assets/thumbs/reel2025.jpg" data-src="assets/work/reel2025.mp4" muted loop playsinline></video>
           </div></a>
           <div class="card-text">
             <span class="card-category">Work</span>
@@ -209,7 +645,7 @@
       <div class="work-row alt">
         <article class="work-card">
           <a href="#"><div class="card-media r-wide">
-            <video src="assets/work/prime.mp4" autoplay muted loop playsinline></video>
+            <video preload="none" poster="assets/thumbs/prime.jpg" data-src="assets/work/prime.mp4" muted loop playsinline></video>
           </div></a>
           <div class="card-text"><span class="card-category">Work</span>
             <div class="card-meta"><p class="card-title">Prime</p><p class="card-desc">Product film for a next-generation platform.</p></div>
@@ -217,7 +653,7 @@
         </article>
         <article class="work-card">
           <a href="#"><div class="card-media r-wide">
-            <video src="assets/work/w-intro.mp4" autoplay muted loop playsinline></video>
+            <video preload="none" poster="assets/thumbs/w-intro.jpg" data-src="assets/work/w-intro.mp4" muted loop playsinline></video>
           </div></a>
           <div class="card-text"><span class="card-category">Work</span>
             <div class="card-meta"><p class="card-title">W — Intro</p><p class="card-desc">The opening statement for W by Groww.</p></div>
@@ -229,7 +665,7 @@
       <div class="work-row">
         <article class="work-card">
           <a href="#"><div class="card-media r-wide">
-            <video src="assets/work/w-features.mp4" autoplay muted loop playsinline></video>
+            <video preload="none" poster="assets/thumbs/w-features.jpg" data-src="assets/work/w-features.mp4" muted loop playsinline></video>
           </div></a>
           <div class="card-text"><span class="card-category">Work</span>
             <div class="card-meta"><p class="card-title">W — Features</p><p class="card-desc">Motion design for the W feature suite.</p></div>
@@ -237,7 +673,7 @@
         </article>
         <article class="work-card">
           <a href="#"><div class="card-media r-wide">
-            <video src="assets/work/w-onboard.mp4" autoplay muted loop playsinline></video>
+            <video preload="none" poster="assets/thumbs/w-onboard.jpg" data-src="assets/work/w-onboard.mp4" muted loop playsinline></video>
           </div></a>
           <div class="card-text"><span class="card-category">Work</span>
             <div class="card-meta"><p class="card-title">W — Onboarding</p><p class="card-desc">Interface motion that turns first impressions into loyalty.</p></div>
@@ -249,7 +685,7 @@
       <div class="work-row alt">
         <article class="work-card">
           <a href="#"><div class="card-media r-wide">
-            <video src="assets/work/alpha-edge-wide.mp4" autoplay muted loop playsinline></video>
+            <video preload="none" poster="assets/thumbs/alpha-edge-wide.jpg" data-src="assets/work/alpha-edge-wide.mp4" muted loop playsinline></video>
           </div></a>
           <div class="card-text"><span class="card-category">Work</span>
             <div class="card-meta"><p class="card-title">Alpha Edge</p><p class="card-desc">Brand film for Groww's Alpha Edge platform.</p></div>
@@ -257,7 +693,7 @@
         </article>
         <article class="work-card">
           <a href="#"><div class="card-media r-wide">
-            <video src="assets/work/alpha-edge-uac.mp4" autoplay muted loop playsinline></video>
+            <video preload="none" poster="assets/thumbs/alpha-edge-uac.jpg" data-src="assets/work/alpha-edge-uac.mp4" muted loop playsinline></video>
           </div></a>
           <div class="card-text"><span class="card-category">Work</span>
             <div class="card-meta"><p class="card-title">Alpha Edge — UAC</p><p class="card-desc">Performance creative for user acquisition campaigns.</p></div>
@@ -269,7 +705,7 @@
       <div class="work-row">
         <article class="work-card">
           <a href="#"><div class="card-media r-wide">
-            <video src="assets/work/wealth-circle.mp4" autoplay muted loop playsinline></video>
+            <video preload="none" poster="assets/thumbs/wealth-circle.jpg" data-src="assets/work/wealth-circle.mp4" muted loop playsinline></video>
           </div></a>
           <div class="card-text"><span class="card-category">Work</span>
             <div class="card-meta"><p class="card-title">Wealth Circle</p><p class="card-desc">Motion identity for Groww's wealth management tier.</p></div>
@@ -277,7 +713,7 @@
         </article>
         <article class="work-card">
           <a href="#"><div class="card-media r-wide">
-            <video src="assets/work/ipo-meesho.mp4" autoplay muted loop playsinline></video>
+            <video preload="none" poster="assets/thumbs/ipo-meesho.jpg" data-src="assets/work/ipo-meesho.mp4" muted loop playsinline></video>
           </div></a>
           <div class="card-text"><span class="card-category">Work</span>
             <div class="card-meta"><p class="card-title">IPO — Meesho</p><p class="card-desc">Launch film for the Meesho IPO on Groww.</p></div>
@@ -289,7 +725,7 @@
       <div class="work-row alt">
         <article class="work-card">
           <a href="#"><div class="card-media r-wide">
-            <video src="assets/work/book-launch.mp4" autoplay muted loop playsinline></video>
+            <video preload="none" poster="assets/thumbs/book-launch.jpg" data-src="assets/work/book-launch.mp4" muted loop playsinline></video>
           </div></a>
           <div class="card-text"><span class="card-category">Work</span>
             <div class="card-meta"><p class="card-title">Book Launch</p><p class="card-desc">Launch film for The Alpha Bets — Groww × ZebraLearn.</p></div>
@@ -297,7 +733,7 @@
         </article>
         <article class="work-card">
           <a href="#"><div class="card-media r-wide">
-            <video src="assets/work/tv.mp4" autoplay muted loop playsinline></video>
+            <video preload="none" poster="assets/thumbs/tv.jpg" data-src="assets/work/tv.mp4" muted loop playsinline></video>
           </div></a>
           <div class="card-text"><span class="card-category">Work</span>
             <div class="card-meta"><p class="card-title">TV</p><p class="card-desc">Broadcast creative for a financial product launch.</p></div>
@@ -309,7 +745,7 @@
       <div class="work-row">
         <article class="work-card">
           <a href="#"><div class="card-media r-wide">
-            <video src="assets/work/signedup.mp4" autoplay muted loop playsinline></video>
+            <video preload="none" poster="assets/thumbs/signedup.jpg" data-src="assets/work/signedup.mp4" muted loop playsinline></video>
           </div></a>
           <div class="card-text"><span class="card-category">Work</span>
             <div class="card-meta"><p class="card-title">Signed Up</p><p class="card-desc">Onboarding motion for a new user experience.</p></div>
@@ -317,7 +753,7 @@
         </article>
         <article class="work-card">
           <a href="#"><div class="card-media r-wide">
-            <video src="assets/work/watchlist.mp4" autoplay muted loop playsinline></video>
+            <video preload="none" poster="assets/thumbs/watchlist.jpg" data-src="assets/work/watchlist.mp4" muted loop playsinline></video>
           </div></a>
           <div class="card-text"><span class="card-category">Work</span>
             <div class="card-meta"><p class="card-title">Watchlist</p><p class="card-desc">Product motion for the Groww watchlist feature.</p></div>
@@ -329,7 +765,7 @@
       <div class="work-row alt">
         <article class="work-card">
           <a href="#"><div class="card-media r-wide">
-            <video src="assets/work/iifl.mp4" autoplay muted loop playsinline></video>
+            <video preload="none" poster="assets/thumbs/iifl.jpg" data-src="assets/work/iifl.mp4" muted loop playsinline></video>
           </div></a>
           <div class="card-text"><span class="card-category">Work</span>
             <div class="card-meta"><p class="card-title">IIFL</p><p class="card-desc">Motion identity for a leading financial services brand.</p></div>
@@ -337,7 +773,7 @@
         </article>
         <article class="work-card">
           <a href="#"><div class="card-media r-wide">
-            <video src="assets/work/agenda.mp4" autoplay muted loop playsinline></video>
+            <video preload="none" poster="assets/thumbs/agenda.jpg" data-src="assets/work/agenda.mp4" muted loop playsinline></video>
           </div></a>
           <div class="card-text"><span class="card-category">Work</span>
             <div class="card-meta"><p class="card-title">Agenda</p><p class="card-desc">Event design and motion for a flagship conference.</p></div>
@@ -349,7 +785,7 @@
       <div class="work-row">
         <article class="work-card">
           <a href="#"><div class="card-media r-wide">
-            <video src="assets/work/ntg.mp4" autoplay muted loop playsinline></video>
+            <video preload="none" poster="assets/thumbs/ntg.jpg" data-src="assets/work/ntg.mp4" muted loop playsinline></video>
           </div></a>
           <div class="card-text"><span class="card-category">Work</span>
             <div class="card-meta"><p class="card-title">NTG</p><p class="card-desc">Brand film and motion for NTG.</p></div>
@@ -357,7 +793,7 @@
         </article>
         <article class="work-card">
           <a href="#"><div class="card-media r-wide">
-            <video src="assets/work/insight-w.mp4" autoplay muted loop playsinline></video>
+            <video preload="none" poster="assets/thumbs/insight-w.jpg" data-src="assets/work/insight-w.mp4" muted loop playsinline></video>
           </div></a>
           <div class="card-text"><span class="card-category">Work</span>
             <div class="card-meta"><p class="card-title">W — Insight Stall</p><p class="card-desc">Immersive experience design for the W booth at Insight.</p></div>
@@ -371,7 +807,7 @@
       <div class="work-row alt">
         <article class="work-card">
           <a href="#"><div class="card-media r-wide">
-            <video src="assets/work/multicap-hd.mp4" autoplay muted loop playsinline></video>
+            <video preload="none" poster="assets/thumbs/multicap-hd.jpg" data-src="assets/work/multicap-hd.mp4" muted loop playsinline></video>
             <div class="pending">multicap-hd.mp4<small>copy from SSD to activate</small></div>
           </div></a>
           <div class="card-text"><span class="card-category">Work</span>
@@ -380,7 +816,7 @@
         </article>
         <article class="work-card">
           <a href="#"><div class="card-media r-wide">
-            <video src="assets/work/multicap2.mp4" autoplay muted loop playsinline></video>
+            <video preload="none" poster="assets/thumbs/multicap2.jpg" data-src="assets/work/multicap2.mp4" muted loop playsinline></video>
             <div class="pending">multicap2.mp4<small>copy from SSD to activate</small></div>
           </div></a>
           <div class="card-text"><span class="card-category">Work</span>
@@ -394,7 +830,7 @@
       <div class="work-row">
         <article class="work-card">
           <a href="#"><div class="card-media r-wide">
-            <video src="assets/work/master-corp.mp4" autoplay muted loop playsinline></video>
+            <video preload="none" poster="assets/thumbs/master-corp.jpg" data-src="assets/work/master-corp.mp4" muted loop playsinline></video>
             <div class="pending">master-corp.mp4<small>copy from SSD to activate</small></div>
           </div></a>
           <div class="card-text"><span class="card-category">Work</span>
@@ -403,7 +839,7 @@
         </article>
         <article class="work-card">
           <a href="#"><div class="card-media r-wide">
-            <video src="assets/work/ipo-3d.mp4" autoplay muted loop playsinline></video>
+            <video preload="none" poster="assets/thumbs/ipo-3d.jpg" data-src="assets/work/ipo-3d.mp4" muted loop playsinline></video>
             <div class="pending">ipo-3d.mp4<small>copy from SSD to activate</small></div>
           </div></a>
           <div class="card-text"><span class="card-category">Work</span>
@@ -417,7 +853,7 @@
       <div class="work-row alt">
         <article class="work-card">
           <a href="#"><div class="card-media r-wide">
-            <video src="assets/work/scalper.mp4" autoplay muted loop playsinline></video>
+            <video preload="none" poster="assets/thumbs/scalper.jpg" data-src="assets/work/scalper.mp4" muted loop playsinline></video>
             <div class="pending">scalper.mp4<small>copy from SSD to activate</small></div>
           </div></a>
           <div class="card-text"><span class="card-category">Work</span>
@@ -426,7 +862,7 @@
         </article>
         <article class="work-card">
           <a href="#"><div class="card-media r-wide">
-            <video src="assets/work/graph.mp4" autoplay muted loop playsinline></video>
+            <video preload="none" poster="assets/thumbs/graph.jpg" data-src="assets/work/graph.mp4" muted loop playsinline></video>
           </div></a>
           <div class="card-text"><span class="card-category">Work</span>
             <div class="card-meta"><p class="card-title">Data in Motion</p><p class="card-desc">Animated data visualisation for a financial dashboard.</p></div>
@@ -447,7 +883,7 @@
       <span>Launch Campaigns</span><span class="dot"> · </span>
       <span>UI Animation</span><span class="dot"> · </span>
       <span>Design Systems</span><span class="dot"> · </span>
-      <span>Demo Reels</span><span class="dot"> · </span>
+
       <span>3D &amp; Motion</span><span class="dot"> · </span>
       <span>Illustration</span><span class="dot"> · </span>
       <span>Brand Films</span><span class="dot"> · </span>
@@ -456,7 +892,7 @@
       <span>Launch Campaigns</span><span class="dot"> · </span>
       <span>UI Animation</span><span class="dot"> · </span>
       <span>Design Systems</span><span class="dot"> · </span>
-      <span>Demo Reels</span><span class="dot"> · </span>
+
       <span>3D &amp; Motion</span><span class="dot"> · </span>
       <span>Illustration</span><span class="dot"> · </span>
     </div>
@@ -472,11 +908,10 @@
       </p>
       <ul class="services-list">
         <li>Brand Identity &amp; Visual Systems <span class="svc-num">01</span></li>
-        <li>Interface &amp; Product Design <span class="svc-num">02</span></li>
-        <li>Motion Design &amp; Animation <span class="svc-num">03</span></li>
-        <li>Launch Films &amp; Demo Reels <span class="svc-num">04</span></li>
-        <li>Marketing Design &amp; Campaigns <span class="svc-num">05</span></li>
-        <li>Illustration &amp; 3D <span class="svc-num">06</span></li>
+        <li>Motion Design &amp; Animation <span class="svc-num">02</span></li>
+        <li>Launch Films <span class="svc-num">03</span></li>
+        <li>Marketing Design &amp; Campaigns <span class="svc-num">04</span></li>
+        <li>Illustration &amp; 3D <span class="svc-num">05</span></li>
       </ul>
     </div>
   </section>
@@ -487,7 +922,7 @@
     <p class="contact-label">Contact</p>
     <div>
       <p class="contact-cta">Got a product that deserves<br>to look <em>alive?</em></p>
-      <a href="mailto:hello@snacpac.co" class="contact-email">hello@snacpac.co</a>
+      <a href="mailto:potatosnacpac@gmail.com" class="contact-email">potatosnacpac@gmail.com</a>
     </div>
   </section>
 
@@ -498,36 +933,198 @@
     <ul class="footer-links">
       <li><a href="#work">Work</a></li>
       <li><a href="#about">About</a></li>
-      <li><a href="https://twitter.com/snacpac" target="_blank" rel="noopener">Twitter</a></li>
-      <li><a href="https://instagram.com/snacpac" target="_blank" rel="noopener">Instagram</a></li>
+      <li><a href="https://www.instagram.com/potatosnacpac?igsh=YmJ1b2xjdXdneXp1&utm_source=qr" target="_blank" rel="noopener">Instagram</a></li>
+      <li><a href="https://www.linkedin.com/in/motionman/" target="_blank" rel="noopener">LinkedIn</a></li>
     </ul>
   </footer>
 
 
   <script>
-    // Play/pause videos as they scroll into view
-    const vids = document.querySelectorAll('video');
-    if (vids.length) {
-      const io = new IntersectionObserver(entries => {
-        entries.forEach(e => {
-          if (e.isIntersecting) {
-            e.target.play().catch(() => {});
-            // hide pending label once video plays
-            const p = e.target.nextElementSibling;
-            if (p && p.classList.contains('pending')) p.style.display = 'none';
-          } else {
-            e.target.pause();
-          }
-        });
-      }, { threshold: 0.15 });
-      vids.forEach(v => io.observe(v));
+    // ── Lazy-load: fetch src when near viewport, but don't autoplay ──
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        const v = e.target;
+        // Load the file once it's close to view
+        if (e.isIntersecting && v.dataset.src && v.getAttribute('src') !== v.dataset.src) {
+          v.src = v.dataset.src;
+          const p = v.parentElement.querySelector('.pending');
+          if (p) p.style.display = 'none';
+        }
+        // Pause anything that scrolls out of view (in case hover left it playing)
+        if (!e.isIntersecting) v.pause();
+      });
+    }, {
+      threshold: 0.05,
+      rootMargin: '0px 0px 600px 0px'
+    });
+
+    document.querySelectorAll('video[data-src]').forEach(v => io.observe(v));
+
+    // ── Hover-to-play on work cards ──
+    document.querySelectorAll('.card-media').forEach(card => {
+      const vid = card.querySelector('video');
+      if (!vid) return;
+      card.addEventListener('mouseenter', () => {
+        if (vid.src) vid.play().catch(() => {});
+      });
+      card.addEventListener('mouseleave', () => {
+        vid.pause();
+      });
+    });
+
+    // ── Tools submenu toggle ──
+    const toolsToggle = document.getElementById('menu-tools-toggle');
+    const toolsGroup  = toolsToggle.closest('.menu-tools-group');
+    toolsToggle.addEventListener('click', () => toolsGroup.classList.toggle('open'));
+
+    // ── Contact overlay ──
+    const contactOverlay = document.getElementById('contact-overlay');
+    const contactClose   = document.getElementById('contact-modal-close');
+    const menuContactLink = document.getElementById('menu-contact-link');
+
+    function openContact() {
+      closeMenu();                          // close nav menu first
+      contactOverlay.classList.add('open');
+      document.body.style.overflow = 'hidden';
     }
+    function closeContact() {
+      contactOverlay.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    menuContactLink.addEventListener('click', e => { e.preventDefault(); openContact(); });
+    contactClose.addEventListener('click', closeContact);
+    contactOverlay.addEventListener('click', e => { if (e.target === contactOverlay) closeContact(); });
+
+    // ── Video Lightbox ──
+    const backdrop  = document.getElementById('vl-backdrop');
+    const vlBox     = document.getElementById('vl-box');
+    const player    = document.getElementById('vl-player');
+    const vlClose   = document.getElementById('vl-close');
+    const vlMute    = document.getElementById('vl-mute');
+    const vlFS      = document.getElementById('vl-fs');
+    const iconSound = document.getElementById('icon-sound');
+    const iconMuted = document.getElementById('icon-mute');
+    const iconExp   = document.getElementById('icon-expand');
+    const iconShrk  = document.getElementById('icon-shrink');
+
+    function openLightbox(src) {
+      player.src = src;
+      player.muted = false;
+      player.currentTime = 0;
+      backdrop.classList.add('open');
+      document.body.style.overflow = 'hidden';
+      player.play().catch(() => {
+        // autoplay with audio blocked — fall back to muted
+        player.muted = true;
+        syncMuteIcon();
+        player.play().catch(() => {});
+      });
+      syncMuteIcon();
+    }
+
+    function closeLightbox() {
+      backdrop.classList.remove('open');
+      document.body.style.overflow = '';
+      player.pause();
+      player.src = '';
+      // exit native fullscreen if active
+      if (document.fullscreenElement) document.exitFullscreen().catch(() => {});
+    }
+
+    function syncMuteIcon() {
+      iconSound.style.display = player.muted ? 'none' : '';
+      iconMuted.style.display = player.muted ? ''     : 'none';
+    }
+
+    // Click any card-media to open lightbox
+    document.querySelectorAll('.card-media').forEach(card => {
+      card.addEventListener('click', e => {
+        e.preventDefault();
+        const vid = card.querySelector('video[data-src]');
+        if (!vid) return;
+        // use already-loaded src if available, else data-src
+        const src = vid.getAttribute('src') || vid.dataset.src;
+        if (src) openLightbox(src);
+      });
+    });
+
+    // Close button
+    vlClose.addEventListener('click', closeLightbox);
+
+    // Click backdrop outside the box to close
+    backdrop.addEventListener('click', e => { if (e.target === backdrop) closeLightbox(); });
+
+    // Mute toggle
+    vlMute.addEventListener('click', () => {
+      player.muted = !player.muted;
+      syncMuteIcon();
+    });
+
+    // Fullscreen toggle
+    vlFS.addEventListener('click', () => {
+      if (!document.fullscreenElement) {
+        vlBox.requestFullscreen().catch(() => {});
+      } else {
+        document.exitFullscreen().catch(() => {});
+      }
+    });
+
+    // Sync fullscreen icon
+    document.addEventListener('fullscreenchange', () => {
+      const fs = !!document.fullscreenElement;
+      iconExp.style.display  = fs ? 'none' : '';
+      iconShrk.style.display = fs ? ''     : 'none';
+    });
+
+    // ── Fullscreen menu ──
+    const overlay  = document.getElementById('menu-overlay');
+    const btnOpen  = document.getElementById('menu-open');
+    const btnClose = document.getElementById('menu-close');
+
+    function openMenu() {
+      overlay.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeMenu() {
+      overlay.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    btnOpen.addEventListener('click', openMenu);
+    btnClose.addEventListener('click', closeMenu);
+
+    // Close when a nav link is clicked
+    overlay.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMenu));
+
+    // Close on Escape key (any overlay)
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape') {
+        if (backdrop.classList.contains('open'))        closeLightbox();
+        else if (contactOverlay.classList.contains('open')) closeContact();
+        else closeMenu();
+      }
+    });
+
     // Marquee pause on hover
     const t = document.getElementById('marquee');
     if (t) {
       t.parentElement.addEventListener('mouseenter', () => t.style.animationPlayState = 'paused');
       t.parentElement.addEventListener('mouseleave', () => t.style.animationPlayState = 'running');
     }
+
+    // ── Custom cursor dot (mix-blend-mode:difference handles all color contexts) ──
+    const dot = document.createElement('div');
+    dot.className = 'cursor-dot';
+    document.body.appendChild(dot);
+
+    document.addEventListener('mousemove', e => {
+      dot.style.left = e.clientX + 'px';
+      dot.style.top  = e.clientY + 'px';
+    });
+
+    document.addEventListener('mousedown', () => dot.classList.add('clicking'));
+    document.addEventListener('mouseup',   () => dot.classList.remove('clicking'));
   </script>
 
 </body>
