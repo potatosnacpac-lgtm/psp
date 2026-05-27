@@ -940,37 +940,28 @@
 
 
   <script>
-    // ── Lazy-load: fetch src when near viewport, but don't autoplay ──
+    // ── Play when in viewport, pause when out ──
     const io = new IntersectionObserver(entries => {
       entries.forEach(e => {
         const v = e.target;
-        // Load the file once it's close to view
-        if (e.isIntersecting && v.dataset.src && v.getAttribute('src') !== v.dataset.src) {
-          v.src = v.dataset.src;
-          const p = v.parentElement.querySelector('.pending');
-          if (p) p.style.display = 'none';
+        if (e.isIntersecting) {
+          // First time visible: load the src
+          if (v.dataset.src && v.getAttribute('src') !== v.dataset.src) {
+            v.src = v.dataset.src;
+            const p = v.parentElement.querySelector('.pending');
+            if (p) p.style.display = 'none';
+          }
+          v.play().catch(() => {});
+        } else {
+          v.pause();
         }
-        // Pause anything that scrolls out of view (in case hover left it playing)
-        if (!e.isIntersecting) v.pause();
       });
     }, {
-      threshold: 0.05,
-      rootMargin: '0px 0px 600px 0px'
+      threshold: 0.2,               // play once 20% of the video is visible
+      rootMargin: '0px 0px 400px 0px' // pre-fetch 400px before entering view
     });
 
     document.querySelectorAll('video[data-src]').forEach(v => io.observe(v));
-
-    // ── Hover-to-play on work cards ──
-    document.querySelectorAll('.card-media').forEach(card => {
-      const vid = card.querySelector('video');
-      if (!vid) return;
-      card.addEventListener('mouseenter', () => {
-        if (vid.src) vid.play().catch(() => {});
-      });
-      card.addEventListener('mouseleave', () => {
-        vid.pause();
-      });
-    });
 
     // ── Tools submenu toggle ──
     const toolsToggle = document.getElementById('menu-tools-toggle');
