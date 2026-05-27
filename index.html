@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Snacpac — Design & Motion for SaaS</title>
+  <meta name="description" content="Snacpac is a design and motion studio crafting world-class visuals for SaaS products." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;1,300;1,400&display=swap" rel="stylesheet" />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:     #ffffff;
+      --fg:     #111111;
+      --muted:  #888888;
+      --border: #e5e5e5;
+      --pad:    32px;
+      --gap:    2px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--fg);
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      font-size: 14px;
+      font-weight: 400;
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    img, video { display: block; width: 100%; height: 100%; object-fit: cover; }
+
+    /* ── HEADER ── */
+    header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      padding: 28px var(--pad) 24px;
+      border-bottom: 1px solid var(--border);
+    }
+    .header-left { display: flex; align-items: flex-start; gap: 20px; max-width: 640px; }
+    .logo-mark { width: 52px; height: 52px; flex-shrink: 0; margin-top: 2px; }
+    .header-tagline { font-size: 20px; font-weight: 300; line-height: 1.35; letter-spacing: -0.01em; }
+    .header-nav { display: flex; align-items: center; gap: 28px; padding-top: 4px; flex-shrink: 0; }
+    .header-nav a { font-size: 14px; transition: color 0.15s; }
+    .header-nav a:hover { color: var(--muted); }
+    .nav-icon { display: flex; align-items: center; cursor: pointer; }
+    .nav-icon:hover { color: var(--muted); }
+
+    /* ── GRID ── */
+    .work-rows { display: flex; flex-direction: column; }
+
+    .work-row {
+      display: grid;
+      gap: var(--gap);
+      border-top: 1px solid var(--border);
+      grid-template-columns: 38fr 62fr;
+    }
+    .work-row.alt  { grid-template-columns: 62fr 38fr; }
+    .work-row.full { grid-template-columns: 1fr; }
+
+    .work-card { display: flex; flex-direction: column; padding: 0 var(--pad); }
+    .work-row .work-card:first-child { padding-right: calc(var(--pad) / 2); }
+    .work-row .work-card:last-child  { padding-left:  calc(var(--pad) / 2); }
+    .work-row.full .work-card        { padding: 0 var(--pad); }
+
+    .card-media { position: relative; overflow: hidden; background: #111; }
+    .r-wide  { aspect-ratio: 16 / 9; }
+
+    .card-media video { transition: transform 0.65s cubic-bezier(0.16, 1, 0.3, 1); }
+    .work-card:hover .card-media video { transform: scale(1.03); }
+
+    /* pending slot — shows when video file not yet copied in */
+    .card-media video:not([src]) ~ .pending,
+    .pending {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #666;
+      background: #f2f2f2;
+      pointer-events: none;
+    }
+    .pending small { font-size: 10px; color: #aaa; }
+
+    .card-text { padding: 16px 0 32px; display: flex; gap: 40px; align-items: flex-start; }
+    .card-category { font-size: 13px; white-space: nowrap; flex-shrink: 0; padding-top: 2px; }
+    .card-meta { display: flex; flex-direction: column; gap: 4px; }
+    .card-title { font-size: 18px; font-weight: 400; line-height: 1.25; letter-spacing: -0.01em; }
+    .work-card:hover .card-title { text-decoration: underline; text-underline-offset: 2px; }
+    .card-desc { font-size: 14px; color: var(--muted); line-height: 1.5; margin-top: 4px; }
+
+    /* ── MARQUEE ── */
+    .marquee-wrap { overflow: hidden; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 14px 0; }
+    .marquee-track { display: flex; gap: 48px; width: max-content; animation: marquee 24s linear infinite; }
+    .marquee-track span { font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); white-space: nowrap; }
+    .marquee-track .dot { color: var(--border); }
+    @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+    /* ── ABOUT ── */
+    #about { border-top: 1px solid var(--border); padding: 64px var(--pad); display: grid; grid-template-columns: 38fr 62fr; gap: 64px; }
+    .about-label { font-size: 13px; }
+    .about-body { font-size: 18px; font-weight: 300; line-height: 1.5; letter-spacing: -0.01em; margin-bottom: 40px; max-width: 520px; }
+    .about-body em { font-style: italic; color: var(--muted); }
+    .services-list { list-style: none; border-top: 1px solid var(--border); }
+    .services-list li { display: flex; justify-content: space-between; padding: 14px 0; border-bottom: 1px solid var(--border); font-size: 14px; }
+    .svc-num { font-size: 11px; color: var(--muted); }
+
+    /* ── CONTACT ── */
+    #contact { border-top: 1px solid var(--border); padding: 64px var(--pad) 48px; display: grid; grid-template-columns: 38fr 62fr; gap: 64px; }
+    .contact-label { font-size: 13px; }
+    .contact-cta { font-size: clamp(22px, 3vw, 42px); font-weight: 300; line-height: 1.2; letter-spacing: -0.02em; margin-bottom: 32px; }
+    .contact-cta em { font-style: italic; color: var(--muted); }
+    .contact-email { font-size: 14px; border-bottom: 1px solid var(--fg); padding-bottom: 2px; display: inline-block; transition: color 0.2s, border-color 0.2s; }
+    .contact-email:hover { color: var(--muted); border-color: var(--muted); }
+
+    /* ── FOOTER ── */
+    footer { border-top: 1px solid var(--border); padding: 24px var(--pad); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
+    .footer-copy { font-size: 12px; color: var(--muted); }
+    .footer-links { display: flex; gap: 20px; list-style: none; }
+    .footer-links a { font-size: 12px; color: var(--muted); transition: color 0.15s; }
+    .footer-links a:hover { color: var(--fg); }
+
+    /* ── MOBILE ── */
+    @media (max-width: 700px) {
+      :root { --pad: 16px; }
+      header { flex-direction: column; gap: 16px; }
+      .header-nav { display: none; }
+      .header-tagline { font-size: 16px; }
+      .work-row, .work-row.alt, .work-row.full { grid-template-columns: 1fr; }
+      .work-row .work-card:first-child,
+      .work-row .work-card:last-child,
+      .work-row.full .work-card { padding: 0 var(--pad); }
+      #about, #contact { grid-template-columns: 1fr; gap: 24px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <div class="header-left">
+      <div class="logo-mark">
+        <svg viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="1" y="1" width="50" height="50" stroke="#111" stroke-width="1.5"/>
+          <rect x="12" y="12" width="28" height="5" fill="#111"/>
+          <rect x="12" y="12" width="5" height="15" fill="#111"/>
+          <rect x="12" y="24" width="28" height="5" fill="#111"/>
+          <rect x="35" y="27" width="5" height="13" fill="#111"/>
+          <rect x="12" y="36" width="28" height="5" fill="#111"/>
+        </svg>
+      </div>
+      <p class="header-tagline">
+        Snacpac is a design and motion studio that brings SaaS products to life through craft, motion, and visual storytelling.
+      </p>
+    </div>
+    <nav class="header-nav">
+      <a href="#work">Work</a>
+      <a href="#about">About</a>
+      <span class="nav-icon" aria-label="Search">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="22" y2="22"/>
+        </svg>
+      </span>
+      <span class="nav-icon" aria-label="Menu">
+        <svg width="20" height="14" viewBox="0 0 20 14" fill="none">
+          <line x1="0" y1="1" x2="20" y2="1" stroke="currentColor" stroke-width="1.5"/>
+          <line x1="0" y1="7" x2="20" y2="7" stroke="currentColor" stroke-width="1.5"/>
+          <line x1="0" y1="13" x2="20" y2="13" stroke="currentColor" stroke-width="1.5"/>
+        </svg>
+      </span>
+    </nav>
+  </header>
+
+
+  <section id="work">
+    <div class="work-rows">
+
+      <!-- ── Showreel: full width ── -->
+      <div class="work-row full">
+        <article class="work-card">
+          <a href="#"><div class="card-media r-wide">
+            <video src="assets/work/reel2025.mp4" autoplay muted loop playsinline></video>
+          </div></a>
+          <div class="card-text">
+            <span class="card-category">Work</span>
+            <div class="card-meta">
+              <p class="card-title">2025 Showreel</p>
+              <p class="card-desc">A year of motion, craft, and stories that move.</p>
+            </div>
+          </div>
+        </article>
+      </div>
+
+      <!-- ── Row 1: wide | narrow ── -->
+      <div class="work-row alt">
+        <article class="work-card">
+          <a href="#"><div class="card-media r-wide">
+            <video src="assets/work/prime.mp4" autoplay muted loop playsinline></video>
+          </div></a>
+          <div class="card-text"><span class="card-category">Work</span>
+            <div class="card-meta"><p class="card-title">Prime</p><p class="card-desc">Product film for a next-generation platform.</p></div>
+          </div>
+        </article>
+        <article class="work-card">
+          <a href="#"><div class="card-media r-wide">
+            <video src="assets/work/w-intro.mp4" autoplay muted loop playsinline></video>
+          </div></a>
+          <div class="card-text"><span class="card-category">Work</span>
+            <div class="card-meta"><p class="card-title">W — Intro</p><p class="card-desc">The opening statement for W by Groww.</p></div>
+          </div>
+        </article>
+      </div>
+
+      <!-- ── Row 2: narrow | wide ── -->
+      <div class="work-row">
+        <article class="work-card">
+          <a href="#"><div class="card-media r-wide">
+            <video src="assets/work/w-features.mp4" autoplay muted loop playsinline></video>
+          </div></a>
+          <div class="card-text"><span class="card-category">Work</span>
+            <div class="card-meta"><p class="card-title">W — Features</p><p class="card-desc">Motion design for the W feature suite.</p></div>
+          </div>
+        </article>
+        <article class="work-card">
+          <a href="#"><div class="card-media r-wide">
+            <video src="assets/work/w-onboard.mp4" autoplay muted loop playsinline></video>
+          </div></a>
+          <div class="card-text"><span class="card-category">Work</span>
+            <div class="card-meta"><p class="card-title">W — Onboarding</p><p class="card-desc">Interface motion that turns first impressions into loyalty.</p></div>
+          </div>
+        </article>
+      </div>
+
+      <!-- ── Row 3: wide | narrow ── -->
+      <div class="work-row alt">
+        <article class="work-card">
+          <a href="#"><div class="card-media r-wide">
+            <video src="assets/work/alpha-edge-wide.mp4" autoplay muted loop playsinline></video>
+          </div></a>
+          <div class="card-text"><span class="card-category">Work</span>
+            <div class="card-meta"><p class="card-title">Alpha Edge</p><p class="card-desc">Brand film for Groww's Alpha Edge platform.</p></div>
+          </div>
+        </article>
+        <article class="work-card">
+          <a href="#"><div class="card-media r-wide">
+            <video src="assets/work/alpha-edge-uac.mp4" autoplay muted loop playsinline></video>
+          </div></a>
+          <div class="card-text"><span class="card-category">Work</span>
+            <div class="card-meta"><p class="card-title">Alpha Edge — UAC</p><p class="card-desc">Performance creative for user acquisition campaigns.</p></div>
+          </div>
+        </article>
+      </div>
+
+      <!-- ── Row 4: narrow | wide ── -->
+      <div class="work-row">
+        <article class="work-card">
+          <a href="#"><div class="card-media r-wide">
+            <video src="assets/work/wealth-circle.mp4" autoplay muted loop playsinline></video>
+          </div></a>
+          <div class="card-text"><span class="card-category">Work</span>
+            <div class="card-meta"><p class="card-title">Wealth Circle</p><p class="card-desc">Motion identity for Groww's wealth management tier.</p></div>
+          </div>
+        </article>
+        <article class="work-card">
+          <a href="#"><div class="card-media r-wide">
+            <video src="assets/work/ipo-meesho.mp4" autoplay muted loop playsinline></video>
+          </div></a>
+          <div class="card-text"><span class="card-category">Work</span>
+            <div class="card-meta"><p class="card-title">IPO — Meesho</p><p class="card-desc">Launch film for the Meesho IPO on Groww.</p></div>
+          </div>
+        </article>
+      </div>
+
+      <!-- ── Row 5: wide | narrow ── -->
+      <div class="work-row alt">
+        <article class="work-card">
+          <a href="#"><div class="card-media r-wide">
+            <video src="assets/work/book-launch.mp4" autoplay muted loop playsinline></video>
+          </div></a>
+          <div class="card-text"><span class="card-category">Work</span>
+            <div class="card-meta"><p class="card-title">Book Launch</p><p class="card-desc">Launch film for The Alpha Bets — Groww × ZebraLearn.</p></div>
+          </div>
+        </article>
+        <article class="work-card">
+          <a href="#"><div class="card-media r-wide">
+            <video src="assets/work/tv.mp4" autoplay muted loop playsinline></video>
+          </div></a>
+          <div class="card-text"><span class="card-category">Work</span>
+            <div class="card-meta"><p class="card-title">TV</p><p class="card-desc">Broadcast creative for a financial product launch.</p></div>
+          </div>
+        </article>
+      </div>
+
+      <!-- ── Row 6: narrow | wide ── -->
+      <div class="work-row">
+        <article class="work-card">
+          <a href="#"><div class="card-media r-wide">
+            <video src="assets/work/signedup.mp4" autoplay muted loop playsinline></video>
+          </div></a>
+          <div class="card-text"><span class="card-category">Work</span>
+            <div class="card-meta"><p class="card-title">Signed Up</p><p class="card-desc">Onboarding motion for a new user experience.</p></div>
+          </div>
+        </article>
+        <article class="work-card">
+          <a href="#"><div class="card-media r-wide">
+            <video src="assets/work/watchlist.mp4" autoplay muted loop playsinline></video>
+          </div></a>
+          <div class="card-text"><span class="card-category">Work</span>
+            <div class="card-meta"><p class="card-title">Watchlist</p><p class="card-desc">Product motion for the Groww watchlist feature.</p></div>
+          </div>
+        </article>
+      </div>
+
+      <!-- ── Row 7: wide | narrow ── -->
+      <div class="work-row alt">
+        <article class="work-card">
+          <a href="#"><div class="card-media r-wide">
+            <video src="assets/work/iifl.mp4" autoplay muted loop playsinline></video>
+          </div></a>
+          <div class="card-text"><span class="card-category">Work</span>
+            <div class="card-meta"><p class="card-title">IIFL</p><p class="card-desc">Motion identity for a leading financial services brand.</p></div>
+          </div>
+        </article>
+        <article class="work-card">
+          <a href="#"><div class="card-media r-wide">
+            <video src="assets/work/agenda.mp4" autoplay muted loop playsinline></video>
+          </div></a>
+          <div class="card-text"><span class="card-category">Work</span>
+            <div class="card-meta"><p class="card-title">Agenda</p><p class="card-desc">Event design and motion for a flagship conference.</p></div>
+          </div>
+        </article>
+      </div>
+
+      <!-- ── Row 8: narrow | wide ── -->
+      <div class="work-row">
+        <article class="work-card">
+          <a href="#"><div class="card-media r-wide">
+            <video src="assets/work/ntg.mp4" autoplay muted loop playsinline></video>
+          </div></a>
+          <div class="card-text"><span class="card-category">Work</span>
+            <div class="card-meta"><p class="card-title">NTG</p><p class="card-desc">Brand film and motion for NTG.</p></div>
+          </div>
+        </article>
+        <article class="work-card">
+          <a href="#"><div class="card-media r-wide">
+            <video src="assets/work/insight-w.mp4" autoplay muted loop playsinline></video>
+          </div></a>
+          <div class="card-text"><span class="card-category">Work</span>
+            <div class="card-meta"><p class="card-title">W — Insight Stall</p><p class="card-desc">Immersive experience design for the W booth at Insight.</p></div>
+          </div>
+        </article>
+      </div>
+
+      <!-- ── Row 9: wide | narrow
+           SSD files — copy to assets/work/ to activate
+           multicap-hd.mp4 · multicap2.mp4 ── -->
+      <div class="work-row alt">
+        <article class="work-card">
+          <a href="#"><div class="card-media r-wide">
+            <video src="assets/work/multicap-hd.mp4" autoplay muted loop playsinline></video>
+            <div class="pending">multicap-hd.mp4<small>copy from SSD to activate</small></div>
+          </div></a>
+          <div class="card-text"><span class="card-category">Work</span>
+            <div class="card-meta"><p class="card-title">MultiCap HD</p><p class="card-desc">Multi-cap product film.</p></div>
+          </div>
+        </article>
+        <article class="work-card">
+          <a href="#"><div class="card-media r-wide">
+            <video src="assets/work/multicap2.mp4" autoplay muted loop playsinline></video>
+            <div class="pending">multicap2.mp4<small>copy from SSD to activate</small></div>
+          </div></a>
+          <div class="card-text"><span class="card-category">Work</span>
+            <div class="card-meta"><p class="card-title">MultiCap</p><p class="card-desc">Multi-cap campaign creative.</p></div>
+          </div>
+        </article>
+      </div>
+
+      <!-- ── Row 10: narrow | wide
+           master-corp.mp4 · ipo-3d.mp4 ── -->
+      <div class="work-row">
+        <article class="work-card">
+          <a href="#"><div class="card-media r-wide">
+            <video src="assets/work/master-corp.mp4" autoplay muted loop playsinline></video>
+            <div class="pending">master-corp.mp4<small>copy from SSD to activate</small></div>
+          </div></a>
+          <div class="card-text"><span class="card-category">Work</span>
+            <div class="card-meta"><p class="card-title">Master Corp</p><p class="card-desc">Corporate brand film and identity.</p></div>
+          </div>
+        </article>
+        <article class="work-card">
+          <a href="#"><div class="card-media r-wide">
+            <video src="assets/work/ipo-3d.mp4" autoplay muted loop playsinline></video>
+            <div class="pending">ipo-3d.mp4<small>copy from SSD to activate</small></div>
+          </div></a>
+          <div class="card-text"><span class="card-category">Work</span>
+            <div class="card-meta"><p class="card-title">IPO — 3D</p><p class="card-desc">3D motion for an IPO product launch.</p></div>
+          </div>
+        </article>
+      </div>
+
+      <!-- ── Row 11: wide | narrow
+           scalper.mp4 · graph.mp4 ── -->
+      <div class="work-row alt">
+        <article class="work-card">
+          <a href="#"><div class="card-media r-wide">
+            <video src="assets/work/scalper.mp4" autoplay muted loop playsinline></video>
+            <div class="pending">scalper.mp4<small>copy from SSD to activate</small></div>
+          </div></a>
+          <div class="card-text"><span class="card-category">Work</span>
+            <div class="card-meta"><p class="card-title">Scalper Mode</p><p class="card-desc">Motion creative for a high-frequency trading feature.</p></div>
+          </div>
+        </article>
+        <article class="work-card">
+          <a href="#"><div class="card-media r-wide">
+            <video src="assets/work/graph.mp4" autoplay muted loop playsinline></video>
+          </div></a>
+          <div class="card-text"><span class="card-category">Work</span>
+            <div class="card-meta"><p class="card-title">Data in Motion</p><p class="card-desc">Animated data visualisation for a financial dashboard.</p></div>
+          </div>
+        </article>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- MARQUEE -->
+  <div class="marquee-wrap" aria-hidden="true">
+    <div class="marquee-track" id="marquee">
+      <span>Brand Films</span><span class="dot"> · </span>
+      <span>Product Design</span><span class="dot"> · </span>
+      <span>Interface Motion</span><span class="dot"> · </span>
+      <span>Launch Campaigns</span><span class="dot"> · </span>
+      <span>UI Animation</span><span class="dot"> · </span>
+      <span>Design Systems</span><span class="dot"> · </span>
+      <span>Demo Reels</span><span class="dot"> · </span>
+      <span>3D &amp; Motion</span><span class="dot"> · </span>
+      <span>Illustration</span><span class="dot"> · </span>
+      <span>Brand Films</span><span class="dot"> · </span>
+      <span>Product Design</span><span class="dot"> · </span>
+      <span>Interface Motion</span><span class="dot"> · </span>
+      <span>Launch Campaigns</span><span class="dot"> · </span>
+      <span>UI Animation</span><span class="dot"> · </span>
+      <span>Design Systems</span><span class="dot"> · </span>
+      <span>Demo Reels</span><span class="dot"> · </span>
+      <span>3D &amp; Motion</span><span class="dot"> · </span>
+      <span>Illustration</span><span class="dot"> · </span>
+    </div>
+  </div>
+
+
+  <!-- ABOUT -->
+  <section id="about">
+    <p class="about-label">About</p>
+    <div>
+      <p class="about-body">
+        Snacpac is a boutique studio embedded in the world of SaaS. We partner with product teams, founders, and growth leads to build visuals that <em>launch products, tell stories, and keep users coming back.</em> Fast, opinionated, and obsessed with craft.
+      </p>
+      <ul class="services-list">
+        <li>Brand Identity &amp; Visual Systems <span class="svc-num">01</span></li>
+        <li>Interface &amp; Product Design <span class="svc-num">02</span></li>
+        <li>Motion Design &amp; Animation <span class="svc-num">03</span></li>
+        <li>Launch Films &amp; Demo Reels <span class="svc-num">04</span></li>
+        <li>Marketing Design &amp; Campaigns <span class="svc-num">05</span></li>
+        <li>Illustration &amp; 3D <span class="svc-num">06</span></li>
+      </ul>
+    </div>
+  </section>
+
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <p class="contact-label">Contact</p>
+    <div>
+      <p class="contact-cta">Got a product that deserves<br>to look <em>alive?</em></p>
+      <a href="mailto:hello@snacpac.co" class="contact-email">hello@snacpac.co</a>
+    </div>
+  </section>
+
+
+  <!-- FOOTER -->
+  <footer>
+    <span class="footer-copy">© 2026 Snacpac Studio. All Rights Reserved.</span>
+    <ul class="footer-links">
+      <li><a href="#work">Work</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="https://twitter.com/snacpac" target="_blank" rel="noopener">Twitter</a></li>
+      <li><a href="https://instagram.com/snacpac" target="_blank" rel="noopener">Instagram</a></li>
+    </ul>
+  </footer>
+
+
+  <script>
+    // Play/pause videos as they scroll into view
+    const vids = document.querySelectorAll('video');
+    if (vids.length) {
+      const io = new IntersectionObserver(entries => {
+        entries.forEach(e => {
+          if (e.isIntersecting) {
+            e.target.play().catch(() => {});
+            // hide pending label once video plays
+            const p = e.target.nextElementSibling;
+            if (p && p.classList.contains('pending')) p.style.display = 'none';
+          } else {
+            e.target.pause();
+          }
+        });
+      }, { threshold: 0.15 });
+      vids.forEach(v => io.observe(v));
+    }
+    // Marquee pause on hover
+    const t = document.getElementById('marquee');
+    if (t) {
+      t.parentElement.addEventListener('mouseenter', () => t.style.animationPlayState = 'paused');
+      t.parentElement.addEventListener('mouseleave', () => t.style.animationPlayState = 'running');
+    }
+  </script>
+
+</body>
+</html>
