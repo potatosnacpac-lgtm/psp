@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Snacpac — Design & Motion for SaaS</title>
+  <title>Snacpac Design & Motion for SaaS</title>
   <meta name="description" content="Snacpac is a design and motion studio crafting world-class visuals for SaaS products." />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;1,300;1,400&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Instrument+Serif:ital@1&display=swap" rel="stylesheet" />
   <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie.min.js"></script>
 
   <style>
@@ -43,19 +43,27 @@
       display: flex;
       align-items: flex-start;
       justify-content: space-between;
-      padding: 28px var(--pad) 24px;
+      padding: 18px var(--pad) 16px;
       border-bottom: 1px solid var(--border);
       position: sticky;
       top: 0;
       background: var(--bg);
       z-index: 500;
+      transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+                  opacity 0.3s ease;
     }
-    .header-left { display: flex; align-items: center; gap: 24px; max-width: 640px; }
-    .logo-mark { width: 68px; flex-shrink: 0; }
+    header.header-hidden {
+      transform: translateY(-100%);
+      opacity: 0;
+      pointer-events: none;
+    }
+    .header-left { display: flex; align-items: center; gap: 20px; max-width: 580px; }
+    .logo-mark { width: 52px; flex-shrink: 0; }
     .logo-mark svg { width: 100%; height: auto; display: block; color: #111; }
-    #logo-lottie { width: 68px; height: 91px; display: block; }
-    .header-tagline { font-size: 20px; font-weight: 300; line-height: 1.35; letter-spacing: -0.01em; }
-    .header-nav { display: flex; align-items: center; gap: 28px; padding-top: 4px; flex-shrink: 0; }
+    #logo-lottie { width: 52px; height: 70px; display: block; }
+    .header-tagline { font-size: 20px; font-weight: 400; line-height: 1.4; letter-spacing: -0.01em; }
+    .header-tagline em { font-family: inherit; font-style: normal; font-weight: 700; color: inherit; }
+    .header-nav { display: flex; align-items: center; gap: 28px; padding-top: 2px; flex-shrink: 0; }
     .header-nav a { font-size: 14px; transition: color 0.15s; }
     .header-nav a:hover { color: var(--muted); }
     .nav-icon { display: flex; align-items: center; cursor: pointer; }
@@ -159,12 +167,25 @@
       40%           { transform: scale(1);   opacity: 1;   }
     }
 
-    .card-text { padding: 16px 0 32px; display: flex; gap: 40px; align-items: flex-start; }
+    .card-text { padding: 32px 0 64px; display: flex; gap: 40px; align-items: flex-start; }
     .card-category { font-size: 13px; white-space: nowrap; flex-shrink: 0; padding-top: 2px; }
     .card-meta { display: flex; flex-direction: column; gap: 4px; }
     .card-title { font-size: 18px; font-weight: 400; line-height: 1.25; letter-spacing: -0.01em; }
     .work-card:hover .card-title { text-decoration: underline; text-underline-offset: 2px; }
     .card-desc { font-size: 14px; color: var(--muted); line-height: 1.5; margin-top: 4px; }
+    .card-title-row { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; }
+    .biz-tag {
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 2px 8px;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
 
     /* ── WORD-LEVEL SCALE HOVER ── */
     /* Words are wrapped in <span class="w"> by JS; only the hovered span scales */
@@ -192,8 +213,8 @@
     /* ── ABOUT ── */
     #about { border-top: 1px solid var(--border); padding: 64px var(--pad); display: grid; grid-template-columns: 38fr 62fr; gap: 64px; }
     .about-label { font-size: 13px; }
-    .about-body { font-size: 18px; font-weight: 300; line-height: 1.5; letter-spacing: -0.01em; margin-bottom: 40px; max-width: 520px; }
-    .about-body em { font-style: italic; color: var(--muted); }
+    .about-body { font-size: 18px; font-weight: 400; line-height: 1.5; letter-spacing: -0.01em; margin-bottom: 40px; max-width: 520px; }
+    .about-body em { font-style: normal; font-weight: 600; color: inherit; }
     .services-list { list-style: none; border-top: 1px solid var(--border); }
     .services-list li { display: flex; justify-content: space-between; padding: 14px 0; border-bottom: 1px solid var(--border); font-size: 14px; }
     .svc-num { font-size: 11px; color: var(--muted); }
@@ -205,6 +226,70 @@
     .contact-cta em { font-style: italic; color: var(--muted); }
     .contact-email { font-size: 14px; border-bottom: 1px solid var(--fg); padding-bottom: 2px; display: inline-block; transition: color 0.2s, border-color 0.2s; }
     .contact-email:hover { color: var(--muted); border-color: var(--muted); }
+
+    /* ── ALIVE ── */
+    .glow-alive {
+      display: inline-block;
+      position: relative;
+      color: #111;
+      will-change: transform;
+      animation: aliveFloat 6s ease-in-out infinite;
+    }
+
+    @keyframes aliveFloat {
+      0%, 100% { transform: translateY(0);    }
+      50%       { transform: translateY(-3px); }
+    }
+
+    @keyframes letterWave {
+      0%, 100% { transform: scaleY(1)    translateY(0);    }
+      50%       { transform: scaleY(1.08) translateY(-2px); }
+    }
+
+    /* Soft light sweep — clipped to text letterforms */
+    .glow-alive::after {
+      content: attr(data-text);
+      position: absolute;
+      left: 0; top: 0;
+      pointer-events: none;
+      white-space: nowrap;
+      background: linear-gradient(
+        108deg,
+        transparent            10%,
+        rgba(255,255,255,0.0)  32%,
+        rgba(255,252,245,0.18) 42%,
+        rgba(255,255,255,0.52) 50%,
+        rgba(240,235,255,0.18) 58%,
+        rgba(255,255,255,0.0)  68%,
+        transparent            90%
+      );
+      background-size: 400% 100%;
+      background-position: 250% 0;
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      animation: aliveSweep 5s ease-in-out infinite;
+      animation-delay: 2s;
+    }
+
+    /* 3s rest + 2s sweep per cycle */
+    @keyframes aliveSweep {
+      0%,  60%  { background-position: 250% 0; opacity: 0; }
+      62%        { background-position: 250% 0; opacity: 1; }
+      99%        { background-position: -50% 0; opacity: 0.8; }
+      100%       { background-position: -50% 0; opacity: 0; }
+    }
+
+    /* click sweep */
+    .glow-alive.clicked::after {
+      animation: aliveSweepClick 2s ease-in-out forwards;
+    }
+    @keyframes aliveSweepClick {
+      0%   { background-position: 250% 0; opacity: 0; }
+      20%  { background-position: 250% 0; opacity: 1; }
+      90%  { background-position: -50% 0; opacity: 0.8; }
+      100% { background-position: -50% 0; opacity: 0; }
+    }
 
     /* ── FOOTER ── */
     footer { border-top: 1px solid var(--border); padding: 24px var(--pad); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
@@ -673,6 +758,18 @@
     .client-logo:hover { opacity: 1; }
     .client-logo img { height: 36px; width: auto; display: block; object-fit: contain; }
 
+    /* ── CARD ENTRANCE ── */
+    .work-card {
+      opacity: 0;
+      transform: translateY(36px);
+      transition: opacity 1.6s cubic-bezier(0.25, 0, 0.1, 1),
+                  transform 2s cubic-bezier(0.22, 0, 0.05, 1);
+    }
+    .work-card.in-view {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
     /* ── MOBILE ── */
     @media (max-width: 700px) {
       :root { --pad: 16px; }
@@ -697,7 +794,7 @@
         <div id="logo-lottie"></div>
       </div>
       <p class="header-tagline">
-        Snacpac is a design and motion studio that brings products to life through craft, motion, and visual storytelling. Come build with us and yes the snacks are on us.
+        Snacpac of <em>Motion & Design</em> films that makes <em>your business</em> <em>impossible to ignore.</em>
       </p>
     </div>
     <nav class="header-nav">
@@ -862,7 +959,7 @@
           <div class="card-text">
             <span class="card-category">Work</span>
             <div class="card-meta">
-              <p class="card-title">2026 Showreel</p>
+              <div class="card-title-row"><p class="card-title">2026 Showreel</p><span class="biz-tag">Reel</span></div>
               <p class="card-desc">Motion, craft, and stories that move.</p>
             </div>
           </div>
@@ -876,7 +973,7 @@
             <video preload="none" poster="assets/thumbs/prime.jpg" data-src="assets/work/prime.mp4" muted loop playsinline></video>
           </div></a>
           <div class="card-text"><span class="card-category">Work</span>
-            <div class="card-meta"><p class="card-title">Prime</p><p class="card-desc">Product film for a next-generation platform.</p></div>
+            <div class="card-meta"><div class="card-title-row"><p class="card-title">Prime</p><span class="biz-tag">SaaS</span></div><p class="card-desc">Product film for a next-generation platform.</p></div>
           </div>
         </article>
         <article class="work-card">
@@ -884,7 +981,7 @@
             <video preload="none" poster="assets/thumbs/glow-collagen.jpg" data-src="assets/work/glow-collagen.mp4" muted loop playsinline></video>
           </div></a>
           <div class="card-text"><span class="card-category">Work</span>
-            <div class="card-meta"><p class="card-title">Glow Collagen</p><p class="card-desc">Product launch film for a wellness brand.</p></div>
+            <div class="card-meta"><div class="card-title-row"><p class="card-title">Glow Collagen</p><span class="biz-tag">D2C</span></div><p class="card-desc">Product launch film for a wellness brand.</p></div>
           </div>
         </article>
       </div>
@@ -896,7 +993,7 @@
             <video preload="none" poster="assets/thumbs/sleep-melts.jpg" data-src="assets/work/sleep-melts.mp4" muted loop playsinline></video>
           </div></a>
           <div class="card-text"><span class="card-category">Work</span>
-            <div class="card-meta"><p class="card-title">Sleep Melts</p><p class="card-desc">Brand film for a sleep wellness product launch.</p></div>
+            <div class="card-meta"><div class="card-title-row"><p class="card-title">Sleep Melts</p><span class="biz-tag">D2C</span></div><p class="card-desc">Brand film for a sleep wellness product launch.</p></div>
           </div>
         </article>
         <article class="work-card">
@@ -904,7 +1001,7 @@
             <video preload="none" poster="assets/thumbs/w-features.jpg" data-src="assets/work/w-features.mp4" muted loop playsinline></video>
           </div></a>
           <div class="card-text"><span class="card-category">Work</span>
-            <div class="card-meta"><p class="card-title">W — Features</p><p class="card-desc">Motion design for the W feature suite.</p></div>
+            <div class="card-meta"><div class="card-title-row"><p class="card-title">W Features</p><span class="biz-tag">SaaS</span></div><p class="card-desc">Motion design for the W feature suite.</p></div>
           </div>
         </article>
       </div>
@@ -916,7 +1013,7 @@
             <video preload="none" poster="assets/thumbs/alpha-edge-wide.jpg" data-src="assets/work/alpha-edge-wide.mp4" muted loop playsinline></video>
           </div></a>
           <div class="card-text"><span class="card-category">Work</span>
-            <div class="card-meta"><p class="card-title">Alpha Edge</p><p class="card-desc">Brand film for Groww's Alpha Edge platform.</p></div>
+            <div class="card-meta"><div class="card-title-row"><p class="card-title">Alpha Edge</p><span class="biz-tag">SaaS</span></div><p class="card-desc">Brand film for Groww's Alpha Edge platform.</p></div>
           </div>
         </article>
         <article class="work-card">
@@ -924,7 +1021,7 @@
             <video preload="none" poster="assets/thumbs/pcos.jpg" data-src="assets/work/pcos.mp4" muted loop playsinline></video>
           </div></a>
           <div class="card-text"><span class="card-category">Work</span>
-            <div class="card-meta"><p class="card-title">PCOS</p><p class="card-desc">Motion design for a health awareness campaign.</p></div>
+            <div class="card-meta"><div class="card-title-row"><p class="card-title">PCOS</p><span class="biz-tag">D2C</span></div><p class="card-desc">Motion design for a health awareness campaign.</p></div>
           </div>
         </article>
       </div>
@@ -936,7 +1033,7 @@
             <video preload="none" poster="assets/thumbs/w-onboard.jpg" data-src="assets/work/w-onboard.mp4" muted loop playsinline></video>
           </div></a>
           <div class="card-text"><span class="card-category">Work</span>
-            <div class="card-meta"><p class="card-title">W — Onboarding</p><p class="card-desc">Interface motion that turns first impressions into loyalty.</p></div>
+            <div class="card-meta"><div class="card-title-row"><p class="card-title">W Onboarding</p><span class="biz-tag">SaaS</span></div><p class="card-desc">Interface motion that turns first impressions into loyalty.</p></div>
           </div>
         </article>
         <article class="work-card">
@@ -944,7 +1041,7 @@
             <video preload="none" poster="assets/thumbs/marine-cg.jpg" data-src="assets/work/marine-cg.mp4" muted loop playsinline></video>
           </div></a>
           <div class="card-text"><span class="card-category">Work</span>
-            <div class="card-meta"><p class="card-title">Marine CG</p><p class="card-desc">CG product film for a marine wellness range.</p></div>
+            <div class="card-meta"><div class="card-title-row"><p class="card-title">Marine CG</p><span class="biz-tag">D2C</span></div><p class="card-desc">CG product film for a marine wellness range.</p></div>
           </div>
         </article>
       </div>
@@ -956,7 +1053,7 @@
             <video preload="none" poster="assets/thumbs/book-launch.jpg" data-src="assets/work/book-launch.mp4" muted loop playsinline></video>
           </div></a>
           <div class="card-text"><span class="card-category">Work</span>
-            <div class="card-meta"><p class="card-title">Book Launch</p><p class="card-desc">Launch film for The Alpha Bets — Groww × ZebraLearn.</p></div>
+            <div class="card-meta"><div class="card-title-row"><p class="card-title">Book Launch</p><span class="biz-tag">SaaS</span></div><p class="card-desc">Launch film for The Alpha Bets Groww × ZebraLearn.</p></div>
           </div>
         </article>
         <article class="work-card">
@@ -964,7 +1061,7 @@
             <video preload="none" poster="assets/thumbs/slow-sci.jpg" data-src="assets/work/slow-sci.mp4" muted loop playsinline></video>
           </div></a>
           <div class="card-text"><span class="card-category">Work</span>
-            <div class="card-meta"><p class="card-title">Slow Science</p><p class="card-desc">Visual storytelling for a science-backed brand.</p></div>
+            <div class="card-meta"><div class="card-title-row"><p class="card-title">Slow Science</p><span class="biz-tag">D2C</span></div><p class="card-desc">Visual storytelling for a science-backed brand.</p></div>
           </div>
         </article>
       </div>
@@ -976,7 +1073,7 @@
             <video preload="none" poster="assets/thumbs/alpha-edge-uac.jpg" data-src="assets/work/alpha-edge-uac.mp4" muted loop playsinline></video>
           </div></a>
           <div class="card-text"><span class="card-category">Work</span>
-            <div class="card-meta"><p class="card-title">Alpha Edge — UAC</p><p class="card-desc">Performance creative for user acquisition campaigns.</p></div>
+            <div class="card-meta"><div class="card-title-row"><p class="card-title">Alpha Edge UAC</p><span class="biz-tag">SaaS</span></div><p class="card-desc">Performance creative for user acquisition campaigns.</p></div>
           </div>
         </article>
         <article class="work-card">
@@ -984,7 +1081,7 @@
             <video preload="none" poster="assets/thumbs/signedup.jpg" data-src="assets/work/signedup.mp4" muted loop playsinline></video>
           </div></a>
           <div class="card-text"><span class="card-category">Work</span>
-            <div class="card-meta"><p class="card-title">Signed Up</p><p class="card-desc">Onboarding motion for a new user experience.</p></div>
+            <div class="card-meta"><div class="card-title-row"><p class="card-title">Signed Up</p><span class="biz-tag">SaaS</span></div><p class="card-desc">Onboarding motion for a new user experience.</p></div>
           </div>
         </article>
       </div>
@@ -997,7 +1094,7 @@
             <div class="pending">MTF_Dark_V2.mp4<small>copy from SSD → assets/work/ to activate</small></div>
           </div></a>
           <div class="card-text"><span class="card-category">Work</span>
-            <div class="card-meta"><p class="card-title">MTF</p><p class="card-desc">Dark brand film — motion and identity.</p></div>
+            <div class="card-meta"><div class="card-title-row"><p class="card-title">MTF</p><span class="biz-tag">Brand</span></div><p class="card-desc">Dark brand film motion and identity.</p></div>
           </div>
         </article>
         <article class="work-card">
@@ -1005,7 +1102,7 @@
             <video preload="none" poster="assets/thumbs/wealth-circle.jpg" data-src="assets/work/wealth-circle.mp4" muted loop playsinline></video>
           </div></a>
           <div class="card-text"><span class="card-category">Work</span>
-            <div class="card-meta"><p class="card-title">Wealth Circle</p><p class="card-desc">Motion identity for Groww's wealth management tier.</p></div>
+            <div class="card-meta"><div class="card-title-row"><p class="card-title">Wealth Circle</p><span class="biz-tag">SaaS</span></div><p class="card-desc">Motion identity for Groww's wealth management tier.</p></div>
           </div>
         </article>
       </div>
@@ -1017,7 +1114,7 @@
             <video preload="none" poster="assets/thumbs/iifl.jpg" data-src="assets/work/iifl.mp4" muted loop playsinline></video>
           </div></a>
           <div class="card-text"><span class="card-category">Work</span>
-            <div class="card-meta"><p class="card-title">IIFL</p><p class="card-desc">Motion identity for a leading financial services brand.</p></div>
+            <div class="card-meta"><div class="card-title-row"><p class="card-title">IIFL</p><span class="biz-tag">SaaS</span></div><p class="card-desc">Motion identity for a leading financial services brand.</p></div>
           </div>
         </article>
         <article class="work-card">
@@ -1025,7 +1122,7 @@
             <video preload="none" poster="assets/thumbs/w-intro.jpg" data-src="assets/work/w-intro.mp4" muted loop playsinline></video>
           </div></a>
           <div class="card-text"><span class="card-category">Work</span>
-            <div class="card-meta"><p class="card-title">W — Intro</p><p class="card-desc">The opening statement for W by Groww.</p></div>
+            <div class="card-meta"><div class="card-title-row"><p class="card-title">W Intro</p><span class="biz-tag">SaaS</span></div><p class="card-desc">The opening statement for W by Groww.</p></div>
           </div>
         </article>
       </div>
@@ -1037,7 +1134,7 @@
             <video preload="none" poster="assets/thumbs/ntg.jpg" data-src="assets/work/ntg.mp4" muted loop playsinline></video>
           </div></a>
           <div class="card-text"><span class="card-category">Work</span>
-            <div class="card-meta"><p class="card-title">NTG</p><p class="card-desc">Brand film and motion for NTG.</p></div>
+            <div class="card-meta"><div class="card-title-row"><p class="card-title">NTG</p><span class="biz-tag">Brand</span></div><p class="card-desc">Brand film and motion for NTG.</p></div>
           </div>
         </article>
         <article class="work-card">
@@ -1045,7 +1142,7 @@
             <video preload="none" poster="assets/thumbs/wide-d3.jpg" data-src="assets/work/wide-d3.mp4" muted loop playsinline></video>
           </div></a>
           <div class="card-text"><span class="card-category">Work</span>
-            <div class="card-meta"><p class="card-title">D3 Wide</p><p class="card-desc">Wide-format film for a vitamin D3 product.</p></div>
+            <div class="card-meta"><div class="card-title-row"><p class="card-title">D3 Wide</p><span class="biz-tag">D2C</span></div><p class="card-desc">Wide-format film for a vitamin D3 product.</p></div>
           </div>
         </article>
       </div>
@@ -1057,7 +1154,7 @@
             <video preload="none" poster="assets/thumbs/agenda.jpg" data-src="assets/work/agenda.mp4" muted loop playsinline></video>
           </div></a>
           <div class="card-text"><span class="card-category">Work</span>
-            <div class="card-meta"><p class="card-title">Agenda</p><p class="card-desc">Event design and motion for a flagship conference.</p></div>
+            <div class="card-meta"><div class="card-title-row"><p class="card-title">Agenda</p><span class="biz-tag">Brand</span></div><p class="card-desc">Event design and motion for a flagship conference.</p></div>
           </div>
         </article>
         <article class="work-card">
@@ -1065,7 +1162,7 @@
             <video preload="none" poster="assets/thumbs/ipo-meesho.jpg" data-src="assets/work/ipo-meesho.mp4" muted loop playsinline></video>
           </div></a>
           <div class="card-text"><span class="card-category">Work</span>
-            <div class="card-meta"><p class="card-title">IPO — Meesho</p><p class="card-desc">Launch film for the Meesho IPO on Groww.</p></div>
+            <div class="card-meta"><div class="card-title-row"><p class="card-title">IPO Meesho</p><span class="biz-tag">SaaS</span></div><p class="card-desc">Launch film for the Meesho IPO on Groww.</p></div>
           </div>
         </article>
       </div>
@@ -1077,7 +1174,7 @@
             <video preload="none" poster="assets/thumbs/tv.jpg" data-src="assets/work/tv.mp4" muted loop playsinline></video>
           </div></a>
           <div class="card-text"><span class="card-category">Work</span>
-            <div class="card-meta"><p class="card-title">TV</p><p class="card-desc">Broadcast creative for a financial product launch.</p></div>
+            <div class="card-meta"><div class="card-title-row"><p class="card-title">TV</p><span class="biz-tag">SaaS</span></div><p class="card-desc">Broadcast creative for a financial product launch.</p></div>
           </div>
         </article>
         <article class="work-card">
@@ -1085,7 +1182,7 @@
             <video preload="none" poster="assets/thumbs/graph.jpg" data-src="assets/work/graph.mp4" muted loop playsinline></video>
           </div></a>
           <div class="card-text"><span class="card-category">Work</span>
-            <div class="card-meta"><p class="card-title">Data in Motion</p><p class="card-desc">Animated data visualisation for a financial dashboard.</p></div>
+            <div class="card-meta"><div class="card-title-row"><p class="card-title">Data in Motion</p><span class="biz-tag">SaaS</span></div><p class="card-desc">Animated data visualisation for a financial dashboard.</p></div>
           </div>
         </article>
       </div>
@@ -1097,7 +1194,7 @@
             <video preload="none" poster="assets/thumbs/insight-w.jpg" data-src="assets/work/insight-w.mp4" muted loop playsinline></video>
           </div></a>
           <div class="card-text"><span class="card-category">Work</span>
-            <div class="card-meta"><p class="card-title">W — Insight Stall</p><p class="card-desc">Immersive experience design for the W booth at Insight.</p></div>
+            <div class="card-meta"><div class="card-title-row"><p class="card-title">W Insight Stall</p><span class="biz-tag">SaaS</span></div><p class="card-desc">Immersive experience design for the W booth at Insight.</p></div>
           </div>
         </article>
         <article class="work-card">
@@ -1106,7 +1203,7 @@
             <div class="pending">multicap-hd.mp4<small>copy from SSD to activate</small></div>
           </div></a>
           <div class="card-text"><span class="card-category">Work</span>
-            <div class="card-meta"><p class="card-title">MultiCap HD</p><p class="card-desc">Multi-cap product film.</p></div>
+            <div class="card-meta"><div class="card-title-row"><p class="card-title">MultiCap HD</p><span class="biz-tag">SaaS</span></div><p class="card-desc">Multi-cap product film.</p></div>
           </div>
         </article>
       </div>
@@ -1119,7 +1216,7 @@
             <div class="pending">scalper.mp4<small>copy from SSD to activate</small></div>
           </div></a>
           <div class="card-text"><span class="card-category">Work</span>
-            <div class="card-meta"><p class="card-title">Scalper Mode</p><p class="card-desc">Motion creative for a high-frequency trading feature.</p></div>
+            <div class="card-meta"><div class="card-title-row"><p class="card-title">Scalper Mode</p><span class="biz-tag">SaaS</span></div><p class="card-desc">Motion creative for a high-frequency trading feature.</p></div>
           </div>
         </article>
         <article class="work-card">
@@ -1128,7 +1225,7 @@
             <div class="pending">multicap2.mp4<small>copy from SSD to activate</small></div>
           </div></a>
           <div class="card-text"><span class="card-category">Work</span>
-            <div class="card-meta"><p class="card-title">MultiCap</p><p class="card-desc">Multi-cap campaign creative.</p></div>
+            <div class="card-meta"><div class="card-title-row"><p class="card-title">MultiCap</p><span class="biz-tag">SaaS</span></div><p class="card-desc">Multi-cap campaign creative.</p></div>
           </div>
         </article>
       </div>
@@ -1141,7 +1238,7 @@
             <div class="pending">master-corp.mp4<small>copy from SSD to activate</small></div>
           </div></a>
           <div class="card-text"><span class="card-category">Work</span>
-            <div class="card-meta"><p class="card-title">Master Corp</p><p class="card-desc">Corporate brand film and identity.</p></div>
+            <div class="card-meta"><div class="card-title-row"><p class="card-title">Master Corp</p><span class="biz-tag">Brand</span></div><p class="card-desc">Corporate brand film and identity.</p></div>
           </div>
         </article>
         <article class="work-card">
@@ -1150,7 +1247,7 @@
             <div class="pending">ipo-3d.mp4<small>copy from SSD to activate</small></div>
           </div></a>
           <div class="card-text"><span class="card-category">Work</span>
-            <div class="card-meta"><p class="card-title">IPO — 3D</p><p class="card-desc">3D motion for an IPO product launch.</p></div>
+            <div class="card-meta"><div class="card-title-row"><p class="card-title">IPO 3D</p><span class="biz-tag">SaaS</span></div><p class="card-desc">3D motion for an IPO product launch.</p></div>
           </div>
         </article>
       </div>
@@ -1231,7 +1328,7 @@
     <p class="about-label">About</p>
     <div>
       <p class="about-body">
-        Snacpac is a boutique studio embedded in the world of SaaS. We partner with product teams, founders, and growth leads to build visuals that <em>launch products, tell stories, and keep users coming back.</em> Fast, opinionated, and obsessed with craft.
+        Snacpac is a small motion and design studio helping SaaS and D2C brands stay sharp, consistent, and on-brand across every touchpoint. From product launches and ads to socials and campaigns, we create marketing videos and visuals that not only look good, but also <em>explain products in a way that feels clear, engaging, and easy to understand.</em>
       </p>
       <ul class="services-list">
         <li>Brand Identity &amp; Visual Systems <span class="svc-num">01</span></li>
@@ -1248,7 +1345,7 @@
   <section id="contact">
     <p class="contact-label">Contact</p>
     <div>
-      <p class="contact-cta">Got a product that deserves<br>to look <em>alive?</em></p>
+      <p class="contact-cta">Got a product that deserves<br>to look <em><span class="glow-alive" data-text="alive?">alive?</span></em></p>
       <a href="mailto:potatosnacpac@gmail.com" class="contact-email">potatosnacpac@gmail.com</a>
     </div>
   </section>
@@ -1418,6 +1515,21 @@
 
     document.querySelectorAll('video[data-src]').forEach(v => io.observe(v));
 
+    // ── Card entrance animation ──
+    const entranceObserver = new IntersectionObserver(entries => {
+      entries.forEach((e, i) => {
+        if (e.isIntersecting) {
+          // slight stagger for cards in the same row
+          const cards = Array.from(e.target.closest('.work-row')?.querySelectorAll('.work-card') || [e.target]);
+          const idx = cards.indexOf(e.target);
+          setTimeout(() => e.target.classList.add('in-view'), idx * 80);
+          entranceObserver.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.08 });
+
+    document.querySelectorAll('.work-card').forEach(c => entranceObserver.observe(c));
+
     // ── Logo Lottie animation (inlined — no fetch needed) ──
     lottie.loadAnimation({
       container: document.getElementById('logo-lottie'),
@@ -1562,6 +1674,28 @@
       }
     });
 
+    // ── Hide header on scroll down, show on scroll up ──
+    (function() {
+      const hdr = document.querySelector('header');
+      let lastY = 0;
+      let ticking = false;
+      window.addEventListener('scroll', () => {
+        if (!ticking) {
+          requestAnimationFrame(() => {
+            const y = window.scrollY;
+            if (y > lastY && y > 80) {
+              hdr.classList.add('header-hidden');
+            } else {
+              hdr.classList.remove('header-hidden');
+            }
+            lastY = y;
+            ticking = false;
+          });
+          ticking = true;
+        }
+      }, { passive: true });
+    })();
+
     // Marquee pause on hover
     const t = document.getElementById('marquee');
     if (t) {
@@ -1581,6 +1715,40 @@
 
     document.addEventListener('mousedown', () => dot.classList.add('clicking'));
     document.addEventListener('mouseup',   () => dot.classList.remove('clicking'));
+
+    // ── Alive letter wave ──
+    (function () {
+      const el = document.querySelector('.glow-alive');
+      if (!el) return;
+      const text = el.dataset.text || el.textContent.trim();
+      el.innerHTML = '';
+      text.split('').forEach((ch, i) => {
+        const s = document.createElement('span');
+        s.textContent = ch;
+        s.style.cssText = `
+          display: inline-block;
+          animation: letterWave 3.2s ease-in-out infinite;
+          animation-delay: ${i * 0.18}s;
+          will-change: transform;
+        `;
+        el.appendChild(s);
+      });
+      // update data-text for the ::after sweep
+      el.dataset.text = text;
+    })();
+
+    // ── Alive glow on click ──
+    const glowEl = document.querySelector('.glow-alive');
+    if (glowEl) {
+      glowEl.addEventListener('click', () => {
+        glowEl.classList.remove('clicked');
+        void glowEl.offsetWidth; // force reflow to restart animation
+        glowEl.classList.add('clicked');
+        glowEl.addEventListener('animationend', (e) => {
+          if (e.animationName === 'aliveClick') glowEl.classList.remove('clicked');
+        }, { once: true });
+      });
+    }
   </script>
 
 </body>
