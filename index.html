@@ -6,10 +6,31 @@
   <title>Snacpac Design & Motion for SaaS</title>
   <meta name="description" content="Snacpac is a design and motion studio crafting world-class visuals for SaaS products." />
 
+  <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+  <link rel="apple-touch-icon" href="apple-touch-icon.png" />
+  <meta name="theme-color" content="#ffffff" />
+  <link rel="canonical" href="/" />
+
+  <!-- Social share / Open Graph.
+       NOTE: og:url and og:image should be ABSOLUTE https URLs (e.g. https://your-domain/assets/thumbs/reel2026.jpg)
+       for previews to render on WhatsApp / iMessage / LinkedIn. Replace once the live domain is set. -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Snacpac Studio" />
+  <meta property="og:title" content="Snacpac — Design & Motion for SaaS" />
+  <meta property="og:description" content="A design and motion studio crafting world-class visuals for SaaS and D2C brands." />
+  <meta property="og:image" content="assets/thumbs/reel2026.jpg" />
+  <meta property="og:url" content="/" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Snacpac — Design & Motion for SaaS" />
+  <meta name="twitter:description" content="A design and motion studio crafting world-class visuals for SaaS and D2C brands." />
+  <meta name="twitter:image" content="assets/thumbs/reel2026.jpg" />
+
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Instrument+Serif:ital@1&display=swap" rel="stylesheet" />
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet" />
+
+  <!-- Preload the hero poster so the first tile paints instantly -->
+  <link rel="preload" as="image" href="assets/thumbs/reel2026.jpg" fetchpriority="high" />
 
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -17,16 +38,17 @@
     :root {
       --bg:     #ffffff;
       --fg:     #111111;
-      --muted:  #888888;
+      --muted:  #6e6e6e;
       --border: #e5e5e5;
       --pad:    32px;
       --gap:    2px;
     }
 
     html { scroll-behavior: smooth; }
+    ::selection { background: #111; color: #fff; }
 
     body {
-      background: var(--bg);
+      background: linear-gradient(180deg, #ffffff 0%, #fafaf8 100%);
       color: var(--fg);
       font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
       font-size: 14px;
@@ -37,6 +59,35 @@
 
     a { color: inherit; text-decoration: none; }
     img, video { display: block; width: 100%; height: 100%; object-fit: cover; }
+
+    /* visually hidden but available to screen readers / SEO */
+    .sr-only {
+      position: absolute;
+      width: 1px; height: 1px;
+      padding: 0; margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    /* keyboard focus rings — the custom cursor hides the pointer, so these matter */
+    :focus-visible { outline: 2px solid var(--fg); outline-offset: 3px; border-radius: 3px; }
+    .menu-overlay :focus-visible,
+    .vl-backdrop  :focus-visible { outline-color: #fff; }
+
+    /* ── GRAIN TEXTURE ── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 9999;
+      opacity: 0.032;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+      background-size: 180px 180px;
+      background-repeat: repeat;
+    }
 
     /* ── HEADER ── */
     header {
@@ -57,11 +108,21 @@
       opacity: 0;
       pointer-events: none;
     }
+    header::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent 0%, rgba(0,0,0,0.08) 20%, rgba(0,0,0,0.12) 50%, rgba(0,0,0,0.08) 80%, transparent 100%);
+      opacity: 0;
+      transition: opacity 0.4s ease;
+    }
+    header.scrolled::after { opacity: 1; }
     .header-left { display: flex; align-items: center; gap: 20px; max-width: 580px; }
     .logo-mark { width: 52px; flex-shrink: 0; }
     .logo-mark svg { width: 100%; height: auto; display: block; color: #111; }
     #logo-lottie { width: 52px; height: 70px; display: block; }
-    .header-tagline { font-size: 20px; font-weight: 400; line-height: 1.4; letter-spacing: -0.01em; }
+    .header-tagline { font-size: 20px; font-weight: 400; line-height: 1.4; letter-spacing: -0.01em; text-wrap: balance; }
     .header-tagline em { font-family: inherit; font-style: normal; font-weight: 700; color: inherit; }
     .header-nav { display: flex; align-items: center; gap: 28px; padding-top: 2px; flex-shrink: 0; }
     .header-nav a { font-size: 14px; transition: color 0.15s; }
@@ -75,7 +136,6 @@
     .work-row {
       display: grid;
       gap: var(--gap);
-      border-top: 1px solid var(--border);
       grid-template-columns: 38fr 62fr;
     }
     .work-row.alt  { grid-template-columns: 62fr 38fr; }
@@ -86,11 +146,47 @@
     .work-row .work-card:last-child  { padding-left:  calc(var(--pad) / 2); }
     .work-row.full .work-card        { padding: 0 var(--pad); }
 
-    .card-media { position: relative; overflow: hidden; background: #111; }
+    .card-media { position: relative; overflow: hidden; background: #111; border-radius: 2px; }
     .r-wide  { aspect-ratio: 16 / 9; }
 
     .card-media video { transition: transform 0.65s cubic-bezier(0.16, 1, 0.3, 1); }
     .work-card:hover .card-media video { transform: scale(1.03); }
+
+    /* ── PLAY ICON OVERLAY ── */
+    .card-media::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(0,0,0,0);
+      transition: background 0.45s ease;
+      pointer-events: none;
+      z-index: 3;
+    }
+    .play-icon {
+      position: absolute;
+      inset: 0;
+      margin: auto;
+      width: 56px; height: 56px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.12);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border: 1px solid rgba(255,255,255,0.22);
+      display: flex; align-items: center; justify-content: center;
+      opacity: 0;
+      transform: scale(0.82);
+      transition: opacity 0.4s ease, transform 0.4s cubic-bezier(0.16,1,0.3,1);
+      pointer-events: none;
+      z-index: 4;
+    }
+    .play-icon svg { width: 25px; height: 25px; fill: #fff; margin-left: 4px; }
+    .work-card:hover .play-icon {
+      opacity: 1;
+      transform: scale(1);
+    }
 
     /* pending slot — shows when video file not yet copied in */
     .card-media video:not([src]) ~ .pending,
@@ -168,7 +264,7 @@
     }
 
     .card-text { padding: 32px 0 64px; display: flex; gap: 40px; align-items: flex-start; }
-    .card-category { font-size: 13px; white-space: nowrap; flex-shrink: 0; padding-top: 2px; }
+    .card-category { font-size: 13px; white-space: nowrap; flex-shrink: 0; padding-top: 2px; color: var(--muted); }
     .card-meta { display: flex; flex-direction: column; gap: 4px; }
     .card-title { font-size: 18px; font-weight: 400; line-height: 1.25; letter-spacing: -0.01em; }
     .work-card:hover .card-title { text-decoration: underline; text-underline-offset: 2px; }
@@ -192,7 +288,6 @@
     .hover-words .w {
       display: inline-block;
       transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
-      will-change: transform;
     }
     .hover-words .w:hover {
       transform: scale(1.08);
@@ -204,13 +299,14 @@
     }
 
     /* ── MARQUEE ── */
-    .marquee-wrap { overflow: hidden; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 14px 0; }
+    .marquee-wrap { overflow: hidden; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 14px 0; -webkit-mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent); mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent); }
     .marquee-track { display: flex; gap: 48px; width: max-content; animation: marquee 24s linear infinite; }
     .marquee-track span { font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); white-space: nowrap; }
     .marquee-track .dot { color: var(--border); }
     @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 
     /* ── ABOUT ── */
+    #work, #about, #contact { scroll-margin-top: 96px; } /* clear the sticky header on anchor jumps */
     #about { border-top: 1px solid var(--border); padding: 64px var(--pad); display: grid; grid-template-columns: 38fr 62fr; gap: 64px; }
     .about-label { font-size: 13px; }
     .about-body { font-size: 18px; font-weight: 400; line-height: 1.5; letter-spacing: -0.01em; margin-bottom: 40px; max-width: 520px; }
@@ -222,10 +318,26 @@
     /* ── CONTACT ── */
     #contact { border-top: 1px solid var(--border); padding: 64px var(--pad) 48px; display: grid; grid-template-columns: 38fr 62fr; gap: 64px; }
     .contact-label { font-size: 13px; }
-    .contact-cta { font-size: clamp(22px, 3vw, 42px); font-weight: 300; line-height: 1.2; letter-spacing: -0.02em; margin-bottom: 32px; }
-    .contact-cta em { font-style: italic; color: var(--muted); }
+    .contact-cta { font-size: clamp(28px, 4vw, 56px); font-weight: 300; line-height: 1.15; letter-spacing: -0.02em; margin-bottom: 40px; text-wrap: balance; }
+    .contact-cta em { font-family: 'DM Serif Display', Georgia, serif; font-style: italic; color: inherit; }
     .contact-email { font-size: 14px; border-bottom: 1px solid var(--fg); padding-bottom: 2px; display: inline-block; transition: color 0.2s, border-color 0.2s; }
     .contact-email:hover { color: var(--muted); border-color: var(--muted); }
+    .contact-email-large {
+      display: block;
+      font-size: clamp(18px, 2.5vw, 32px);
+      font-weight: 300;
+      letter-spacing: -0.02em;
+      color: var(--fg);
+      border-bottom: 1px solid var(--fg);
+      padding-bottom: 4px;
+      margin-bottom: 28px;
+      width: fit-content;
+      transition: color 0.2s, border-color 0.2s;
+    }
+    .contact-email-large:hover { color: var(--muted); border-color: var(--muted); }
+    .contact-socials { display: flex; gap: 28px; }
+    .contact-socials a { font-size: 13px; color: var(--muted); transition: color 0.15s; }
+    .contact-socials a:hover { color: var(--fg); }
 
     /* ── ALIVE ── */
     .glow-alive {
@@ -462,26 +574,79 @@
     }
     .vl-close-btn:hover { background: rgba(0,0,0,0.8); }
 
-    /* ── CUSTOM CURSOR ── */
-    *, *::before, *::after { cursor: none !important; }
-    .cursor-dot {
-      position: fixed;
-      top: 0; left: 0;
-      width: 12px;
-      height: 12px;
-      background: #fff;
+    /* buffering loader inside the lightbox */
+    .vl-loader {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #000;
+      z-index: 1;
+      pointer-events: none; /* never block the controls/close */
+      transition: opacity 0.3s ease;
+    }
+    .vl-loader.hidden { opacity: 0; }
+    .vl-ring {
+      width: 34px; height: 34px;
       border-radius: 50%;
+      border: 2px solid rgba(255,255,255,0.2);
+      border-top-color: #fff;
+      animation: vlspin 0.8s linear infinite;
+    }
+    @keyframes vlspin { to { transform: rotate(360deg); } }
+
+    /* prev / next project */
+    .vl-nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 44px; height: 44px;
+      border-radius: 50%;
+      background: rgba(0,0,0,0.45);
+      border: none;
+      cursor: pointer;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 3;
+      opacity: 0;
+      transition: opacity 0.2s ease, background 0.15s ease;
+    }
+    .vl-box:hover .vl-nav { opacity: 1; }
+    .vl-nav:hover { background: rgba(0,0,0,0.78); }
+    .vl-prev { left: 14px; }
+    .vl-next { right: 14px; }
+
+    /* ── CUSTOM CURSOR ── */
+    * { cursor: none !important; }
+    .cursor-dot {
+      position: fixed; top: 0; left: 0;
+      width: 11px; height: 11px;
+      border-radius: 50%;
+      background: #fff;
       pointer-events: none;
       z-index: 99999;
       transform: translate(-50%, -50%);
-      mix-blend-mode: difference;   /* inverts whatever's beneath — always visible */
-      transition: width 0.12s, height 0.12s;
-      will-change: left, top;
+      mix-blend-mode: difference;
+      transition: width 0.2s ease, height 0.2s ease, opacity 0.2s ease;
+      will-change: transform;
     }
-    .cursor-dot.clicking {
-      width: 18px;
-      height: 18px;
+    .cursor-ring {
+      position: fixed; top: 0; left: 0;
+      width: 36px; height: 36px;
+      border-radius: 50%;
+      border: 1px solid rgba(0,0,0,0.25);
+      pointer-events: none;
+      z-index: 99998;
+      transform: translate(-50%, -50%);
+      transition: width 0.35s cubic-bezier(0.16,1,0.3,1), height 0.35s cubic-bezier(0.16,1,0.3,1), opacity 0.2s ease;
+      will-change: transform;
     }
+    body.cursor-hover .cursor-dot  { width: 17px; height: 17px; }
+    body.cursor-hover .cursor-ring { width: 56px; height: 56px; border-color: rgba(0,0,0,0.15); }
+    body.cursor-menu .cursor-ring  { border-color: rgba(255,255,255,0.3); }
 
     .card-media { cursor: none; }
 
@@ -489,14 +654,15 @@
     .menu-overlay {
       position: fixed;
       inset: 0;
-      background: #111;
+      background: #0d1b2a;
+      transition: opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+                  background 0.4s ease;
       z-index: 1000;
       display: flex;
       flex-direction: column;
       padding: 28px var(--pad) 28px;
       opacity: 0;
       pointer-events: none;
-      transition: opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1);
     }
     .menu-overlay.open {
       opacity: 1;
@@ -509,6 +675,7 @@
       align-items: flex-start;
     }
     .menu-logo { width: 36px; height: auto; }
+    #menu-lottie { width: 36px; height: 48px; display: block; filter: brightness(0) invert(1); }
 
     .menu-close {
       cursor: pointer;
@@ -540,7 +707,7 @@
       letter-spacing: -0.02em;
       color: #fff;
       text-transform: uppercase;
-      line-height: 1.15;
+      line-height: 0.95;
       transition: opacity 0.15s;
       display: block;
     }
@@ -761,9 +928,9 @@
     /* ── CARD ENTRANCE ── */
     .work-card {
       opacity: 0;
-      transform: translateY(36px);
-      transition: opacity 1.6s cubic-bezier(0.25, 0, 0.1, 1),
-                  transform 2s cubic-bezier(0.22, 0, 0.05, 1);
+      transform: translateY(44px);
+      transition: opacity 2.6s cubic-bezier(0.33, 1, 0.68, 1),
+                  transform 3.2s cubic-bezier(0.33, 1, 0.68, 1);
     }
     .work-card.in-view {
       opacity: 1;
@@ -773,8 +940,9 @@
     /* ── MOBILE ── */
     @media (max-width: 700px) {
       :root { --pad: 16px; }
-      header { flex-direction: column; gap: 16px; }
-      .header-nav { display: none; }
+      header { gap: 16px; }
+      .header-nav { display: flex; gap: 16px; }
+      .header-nav a[href="#about"] { display: none; } /* hide About text link, keep search + menu icons tappable */
       .header-tagline { font-size: 16px; }
       .work-row, .work-row.alt, .work-row.full { grid-template-columns: 1fr; }
       .work-row .work-card:first-child,
@@ -783,9 +951,30 @@
       #about, #contact { grid-template-columns: 1fr; gap: 24px; }
       .menu-nav { padding-left: 0; }
     }
+
+    /* ── REDUCED MOTION: respect the OS "reduce motion" setting ── */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.001ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.001ms !important;
+        scroll-behavior: auto !important;
+      }
+      .marquee-track, .clients-track { animation: none !important; }
+      * { cursor: auto !important; }
+      .cursor-dot, .cursor-ring { display: none !important; }
+    }
+
+    /* ── TOUCH / NO-MOUSE: restore the system cursor (the custom cursor needs a mouse) ── */
+    @media (hover: none), (pointer: coarse) {
+      * { cursor: auto !important; }
+      .cursor-dot, .cursor-ring { display: none !important; }
+    }
   </style>
 </head>
 <body>
+<div class="cursor-dot"  id="cursor-dot"></div>
+<div class="cursor-ring" id="cursor-ring"></div>
 
   <!-- HEADER -->
   <header>
@@ -793,9 +982,9 @@
       <div class="logo-mark">
         <div id="logo-lottie"></div>
       </div>
-      <p class="header-tagline">
+      <h1 class="header-tagline">
         Snacpac of <em>Motion & Design</em> films that makes <em>your business</em> <em>impossible to ignore.</em>
-      </p>
+      </h1>
     </div>
     <nav class="header-nav">
       <a href="#about">About</a>
@@ -859,6 +1048,17 @@
     <div class="vl-box" id="vl-box">
       <video id="vl-player" playsinline></video>
 
+      <!-- buffering loader -->
+      <div class="vl-loader hidden" id="vl-loader"><div class="vl-ring"></div></div>
+
+      <!-- prev / next project -->
+      <button class="vl-nav vl-prev" id="vl-prev" aria-label="Previous project">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><polyline points="15 18 9 12 15 6"/></svg>
+      </button>
+      <button class="vl-nav vl-next" id="vl-next" aria-label="Next project">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><polyline points="9 18 15 12 9 6"/></svg>
+      </button>
+
       <!-- close × -->
       <button class="vl-close-btn" id="vl-close" aria-label="Close">
         <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
@@ -906,13 +1106,8 @@
   <!-- FULLSCREEN MENU OVERLAY -->
   <div class="menu-overlay" id="menu-overlay" role="dialog" aria-modal="true" aria-label="Site navigation">
     <div class="menu-top">
-      <!-- Brand logo in white -->
-      <svg class="menu-logo" viewBox="0 0 289 386" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M121.944 0.50899C124.299 0.332857 125.734 0.414067 128.089 0.531488C128.754 3.95219 128.729 11.5143 128.747 15.1628L128.768 36.6025V117.63L128.736 210.415L128.813 237.352C128.838 243.547 129.063 250.323 128.36 256.424C121.209 257.004 112.647 255.799 105.648 254.5C81.415 250.001 60.9502 239.124 42.4597 222.958C42.3666 222.879 42.2738 222.8 42.1806 222.721C17.4963 200.146 2.80104 168.588 0.733504 135.486C-1.40435 101.708 10.072 68.4804 32.6009 43.2221C55.5206 17.6754 87.6686 2.30618 121.944 0.50899Z" fill="white"/>
-        <path d="M160.76 129.049C194.267 129.588 226.27 143.057 250.078 166.642C274.36 190.431 288.17 222.91 288.458 256.902C288.753 291.721 274.831 322.93 250.549 347.536C249.02 349.072 247.445 350.563 245.831 352.011C223.893 371.393 189.799 386.159 160.222 384.369C159.881 379.721 160.148 372.423 160.162 367.575L160.176 337.063L160.166 239.098L160.19 166.472C160.19 157.61 159.649 136.886 160.76 129.049Z" fill="white"/>
-        <path d="M0.292753 256.39C4.49428 256.209 8.7032 256.364 12.8798 256.855C47.4092 260.524 79.0255 277.884 100.652 305.05C114.86 322.927 124.039 344.274 127.245 366.883C128.019 372.103 128.796 379.49 128.177 384.629C119.754 385.294 109.037 385.055 100.473 385.055L55.5707 385.062L18.3448 385.048C13.3389 385.006 4.91158 385.195 0.229474 384.527C-0.218065 379.848 0.124009 371.523 0.140532 366.429L0.180958 332.535L0.186945 284.036C0.179211 275.302 -0.144239 264.918 0.292753 256.39Z" fill="white"/>
-        <path d="M164.314 0.174655C172.499 -0.149134 181.959 0.0758646 190.231 0.0790287L236.265 0.0818396L267.983 0.0670767C274.269 0.066022 282.031 -0.150892 288.191 0.473131C288.989 5.62212 288.785 13.5157 288.792 18.8915V46.1615L288.799 96.4736C288.806 100.602 289.319 125.395 288.261 127.898C287.196 128.709 287.027 128.458 285.434 128.616C252.63 127.563 221.436 114.156 198.096 91.0799C174.137 67.0025 160.623 34.4594 160.475 0.492464L164.314 0.174655Z" fill="white"/>
-      </svg>
+      <!-- Brand logo in white — Lottie -->
+      <div id="menu-lottie"></div>
       <span class="menu-close" id="menu-close" aria-label="Close menu">
         <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
           <line x1="1" y1="1" x2="19" y2="19" stroke="white" stroke-width="1.5"/>
@@ -948,6 +1143,7 @@
 
 
   <section id="work">
+    <h2 class="sr-only">Selected work</h2>
     <div class="work-rows">
 
       <!-- ── Reel 2026: full width top ── -->
@@ -957,9 +1153,9 @@
             <video preload="none" poster="assets/thumbs/reel2026.jpg" data-src="assets/work/reel2026.mp4" muted loop playsinline></video>
           </div></a>
           <div class="card-text">
-            <span class="card-category">Work</span>
+            <span class="card-category">2024</span>
             <div class="card-meta">
-              <div class="card-title-row"><p class="card-title">2026 Showreel</p><span class="biz-tag">Reel</span></div>
+              <div class="card-title-row"><h3 class="card-title">2026 Showreel</h3><span class="biz-tag">Reel</span></div>
               <p class="card-desc">Motion, craft, and stories that move.</p>
             </div>
           </div>
@@ -972,16 +1168,16 @@
           <a href="#"><div class="card-media r-wide">
             <video preload="none" poster="assets/thumbs/prime.jpg" data-src="assets/work/prime.mp4" muted loop playsinline></video>
           </div></a>
-          <div class="card-text"><span class="card-category">Work</span>
-            <div class="card-meta"><div class="card-title-row"><p class="card-title">Prime</p><span class="biz-tag">SaaS</span></div><p class="card-desc">Product film for a next-generation platform.</p></div>
+          <div class="card-text"><span class="card-category">2024</span>
+            <div class="card-meta"><div class="card-title-row"><h3 class="card-title">Prime</h3><span class="biz-tag">SaaS</span></div><p class="card-desc">Product film for a next-generation platform.</p></div>
           </div>
         </article>
         <article class="work-card">
           <a href="#"><div class="card-media r-wide">
             <video preload="none" poster="assets/thumbs/glow-collagen.jpg" data-src="assets/work/glow-collagen.mp4" muted loop playsinline></video>
           </div></a>
-          <div class="card-text"><span class="card-category">Work</span>
-            <div class="card-meta"><div class="card-title-row"><p class="card-title">Glow Collagen</p><span class="biz-tag">D2C</span></div><p class="card-desc">Product launch film for a wellness brand.</p></div>
+          <div class="card-text"><span class="card-category">2024</span>
+            <div class="card-meta"><div class="card-title-row"><h3 class="card-title">Glow Collagen</h3><span class="biz-tag">D2C</span></div><p class="card-desc">Product launch film for a wellness brand.</p></div>
           </div>
         </article>
       </div>
@@ -992,16 +1188,16 @@
           <a href="#"><div class="card-media r-wide">
             <video preload="none" poster="assets/thumbs/sleep-melts.jpg" data-src="assets/work/sleep-melts.mp4" muted loop playsinline></video>
           </div></a>
-          <div class="card-text"><span class="card-category">Work</span>
-            <div class="card-meta"><div class="card-title-row"><p class="card-title">Sleep Melts</p><span class="biz-tag">D2C</span></div><p class="card-desc">Brand film for a sleep wellness product launch.</p></div>
+          <div class="card-text"><span class="card-category">2024</span>
+            <div class="card-meta"><div class="card-title-row"><h3 class="card-title">Sleep Melts</h3><span class="biz-tag">D2C</span></div><p class="card-desc">Brand film for a sleep wellness product launch.</p></div>
           </div>
         </article>
         <article class="work-card">
           <a href="#"><div class="card-media r-wide">
             <video preload="none" poster="assets/thumbs/w-features.jpg" data-src="assets/work/w-features.mp4" muted loop playsinline></video>
           </div></a>
-          <div class="card-text"><span class="card-category">Work</span>
-            <div class="card-meta"><div class="card-title-row"><p class="card-title">W Features</p><span class="biz-tag">SaaS</span></div><p class="card-desc">Motion design for the W feature suite.</p></div>
+          <div class="card-text"><span class="card-category">2024</span>
+            <div class="card-meta"><div class="card-title-row"><h3 class="card-title">W Features</h3><span class="biz-tag">SaaS</span></div><p class="card-desc">Motion design for the W feature suite.</p></div>
           </div>
         </article>
       </div>
@@ -1012,16 +1208,16 @@
           <a href="#"><div class="card-media r-wide">
             <video preload="none" poster="assets/thumbs/alpha-edge-wide.jpg" data-src="assets/work/alpha-edge-wide.mp4" muted loop playsinline></video>
           </div></a>
-          <div class="card-text"><span class="card-category">Work</span>
-            <div class="card-meta"><div class="card-title-row"><p class="card-title">Alpha Edge</p><span class="biz-tag">SaaS</span></div><p class="card-desc">Brand film for Groww's Alpha Edge platform.</p></div>
+          <div class="card-text"><span class="card-category">2024</span>
+            <div class="card-meta"><div class="card-title-row"><h3 class="card-title">Alpha Edge</h3><span class="biz-tag">SaaS</span></div><p class="card-desc">Brand film for Groww's Alpha Edge platform.</p></div>
           </div>
         </article>
         <article class="work-card">
           <a href="#"><div class="card-media r-wide">
             <video preload="none" poster="assets/thumbs/pcos.jpg" data-src="assets/work/pcos.mp4" muted loop playsinline></video>
           </div></a>
-          <div class="card-text"><span class="card-category">Work</span>
-            <div class="card-meta"><div class="card-title-row"><p class="card-title">PCOS</p><span class="biz-tag">D2C</span></div><p class="card-desc">Motion design for a health awareness campaign.</p></div>
+          <div class="card-text"><span class="card-category">2024</span>
+            <div class="card-meta"><div class="card-title-row"><h3 class="card-title">PCOS</h3><span class="biz-tag">D2C</span></div><p class="card-desc">Motion design for a health awareness campaign.</p></div>
           </div>
         </article>
       </div>
@@ -1032,16 +1228,16 @@
           <a href="#"><div class="card-media r-wide">
             <video preload="none" poster="assets/thumbs/w-onboard.jpg" data-src="assets/work/w-onboard.mp4" muted loop playsinline></video>
           </div></a>
-          <div class="card-text"><span class="card-category">Work</span>
-            <div class="card-meta"><div class="card-title-row"><p class="card-title">W Onboarding</p><span class="biz-tag">SaaS</span></div><p class="card-desc">Interface motion that turns first impressions into loyalty.</p></div>
+          <div class="card-text"><span class="card-category">2024</span>
+            <div class="card-meta"><div class="card-title-row"><h3 class="card-title">W Onboarding</h3><span class="biz-tag">SaaS</span></div><p class="card-desc">Interface motion that turns first impressions into loyalty.</p></div>
           </div>
         </article>
         <article class="work-card">
           <a href="#"><div class="card-media r-wide">
             <video preload="none" poster="assets/thumbs/marine-cg.jpg" data-src="assets/work/marine-cg.mp4" muted loop playsinline></video>
           </div></a>
-          <div class="card-text"><span class="card-category">Work</span>
-            <div class="card-meta"><div class="card-title-row"><p class="card-title">Marine CG</p><span class="biz-tag">D2C</span></div><p class="card-desc">CG product film for a marine wellness range.</p></div>
+          <div class="card-text"><span class="card-category">2024</span>
+            <div class="card-meta"><div class="card-title-row"><h3 class="card-title">Marine CG</h3><span class="biz-tag">D2C</span></div><p class="card-desc">CG product film for a marine wellness range.</p></div>
           </div>
         </article>
       </div>
@@ -1052,16 +1248,16 @@
           <a href="#"><div class="card-media r-wide">
             <video preload="none" poster="assets/thumbs/book-launch.jpg" data-src="assets/work/book-launch.mp4" muted loop playsinline></video>
           </div></a>
-          <div class="card-text"><span class="card-category">Work</span>
-            <div class="card-meta"><div class="card-title-row"><p class="card-title">Book Launch</p><span class="biz-tag">SaaS</span></div><p class="card-desc">Launch film for The Alpha Bets Groww × ZebraLearn.</p></div>
+          <div class="card-text"><span class="card-category">2024</span>
+            <div class="card-meta"><div class="card-title-row"><h3 class="card-title">Book Launch</h3><span class="biz-tag">SaaS</span></div><p class="card-desc">Launch film for The Alpha Bets Groww × ZebraLearn.</p></div>
           </div>
         </article>
         <article class="work-card">
           <a href="#"><div class="card-media r-wide">
             <video preload="none" poster="assets/thumbs/slow-sci.jpg" data-src="assets/work/slow-sci.mp4" muted loop playsinline></video>
           </div></a>
-          <div class="card-text"><span class="card-category">Work</span>
-            <div class="card-meta"><div class="card-title-row"><p class="card-title">Slow Science</p><span class="biz-tag">D2C</span></div><p class="card-desc">Visual storytelling for a science-backed brand.</p></div>
+          <div class="card-text"><span class="card-category">2024</span>
+            <div class="card-meta"><div class="card-title-row"><h3 class="card-title">Slow Science</h3><span class="biz-tag">D2C</span></div><p class="card-desc">Visual storytelling for a science-backed brand.</p></div>
           </div>
         </article>
       </div>
@@ -1072,16 +1268,16 @@
           <a href="#"><div class="card-media r-wide">
             <video preload="none" poster="assets/thumbs/alpha-edge-uac.jpg" data-src="assets/work/alpha-edge-uac.mp4" muted loop playsinline></video>
           </div></a>
-          <div class="card-text"><span class="card-category">Work</span>
-            <div class="card-meta"><div class="card-title-row"><p class="card-title">Alpha Edge UAC</p><span class="biz-tag">SaaS</span></div><p class="card-desc">Performance creative for user acquisition campaigns.</p></div>
+          <div class="card-text"><span class="card-category">2024</span>
+            <div class="card-meta"><div class="card-title-row"><h3 class="card-title">Alpha Edge UAC</h3><span class="biz-tag">SaaS</span></div><p class="card-desc">Performance creative for user acquisition campaigns.</p></div>
           </div>
         </article>
         <article class="work-card">
           <a href="#"><div class="card-media r-wide">
             <video preload="none" poster="assets/thumbs/signedup.jpg" data-src="assets/work/signedup.mp4" muted loop playsinline></video>
           </div></a>
-          <div class="card-text"><span class="card-category">Work</span>
-            <div class="card-meta"><div class="card-title-row"><p class="card-title">Signed Up</p><span class="biz-tag">SaaS</span></div><p class="card-desc">Onboarding motion for a new user experience.</p></div>
+          <div class="card-text"><span class="card-category">2024</span>
+            <div class="card-meta"><div class="card-title-row"><h3 class="card-title">Signed Up</h3><span class="biz-tag">SaaS</span></div><p class="card-desc">Onboarding motion for a new user experience.</p></div>
           </div>
         </article>
       </div>
@@ -1091,18 +1287,18 @@
         <article class="work-card">
           <a href="#"><div class="card-media r-wide">
             <video preload="none" data-src="assets/work/MTF_Dark_V2.mp4" muted loop playsinline></video>
-            <div class="pending">MTF_Dark_V2.mp4<small>copy from SSD → assets/work/ to activate</small></div>
+            <div class="pending">Coming soon</div>
           </div></a>
-          <div class="card-text"><span class="card-category">Work</span>
-            <div class="card-meta"><div class="card-title-row"><p class="card-title">MTF</p><span class="biz-tag">Brand</span></div><p class="card-desc">Dark brand film motion and identity.</p></div>
+          <div class="card-text"><span class="card-category">2024</span>
+            <div class="card-meta"><div class="card-title-row"><h3 class="card-title">MTF</h3><span class="biz-tag">Brand</span></div><p class="card-desc">Dark brand film motion and identity.</p></div>
           </div>
         </article>
         <article class="work-card">
           <a href="#"><div class="card-media r-wide">
             <video preload="none" poster="assets/thumbs/wealth-circle.jpg" data-src="assets/work/wealth-circle.mp4" muted loop playsinline></video>
           </div></a>
-          <div class="card-text"><span class="card-category">Work</span>
-            <div class="card-meta"><div class="card-title-row"><p class="card-title">Wealth Circle</p><span class="biz-tag">SaaS</span></div><p class="card-desc">Motion identity for Groww's wealth management tier.</p></div>
+          <div class="card-text"><span class="card-category">2024</span>
+            <div class="card-meta"><div class="card-title-row"><h3 class="card-title">Wealth Circle</h3><span class="biz-tag">SaaS</span></div><p class="card-desc">Motion identity for Groww's wealth management tier.</p></div>
           </div>
         </article>
       </div>
@@ -1113,16 +1309,16 @@
           <a href="#"><div class="card-media r-wide">
             <video preload="none" poster="assets/thumbs/iifl.jpg" data-src="assets/work/iifl.mp4" muted loop playsinline></video>
           </div></a>
-          <div class="card-text"><span class="card-category">Work</span>
-            <div class="card-meta"><div class="card-title-row"><p class="card-title">IIFL</p><span class="biz-tag">SaaS</span></div><p class="card-desc">Motion identity for a leading financial services brand.</p></div>
+          <div class="card-text"><span class="card-category">2024</span>
+            <div class="card-meta"><div class="card-title-row"><h3 class="card-title">IIFL</h3><span class="biz-tag">SaaS</span></div><p class="card-desc">Motion identity for a leading financial services brand.</p></div>
           </div>
         </article>
         <article class="work-card">
           <a href="#"><div class="card-media r-wide">
             <video preload="none" poster="assets/thumbs/w-intro.jpg" data-src="assets/work/w-intro.mp4" muted loop playsinline></video>
           </div></a>
-          <div class="card-text"><span class="card-category">Work</span>
-            <div class="card-meta"><div class="card-title-row"><p class="card-title">W Intro</p><span class="biz-tag">SaaS</span></div><p class="card-desc">The opening statement for W by Groww.</p></div>
+          <div class="card-text"><span class="card-category">2024</span>
+            <div class="card-meta"><div class="card-title-row"><h3 class="card-title">W Intro</h3><span class="biz-tag">SaaS</span></div><p class="card-desc">The opening statement for W by Groww.</p></div>
           </div>
         </article>
       </div>
@@ -1133,16 +1329,16 @@
           <a href="#"><div class="card-media r-wide">
             <video preload="none" poster="assets/thumbs/ntg.jpg" data-src="assets/work/ntg.mp4" muted loop playsinline></video>
           </div></a>
-          <div class="card-text"><span class="card-category">Work</span>
-            <div class="card-meta"><div class="card-title-row"><p class="card-title">NTG</p><span class="biz-tag">Brand</span></div><p class="card-desc">Brand film and motion for NTG.</p></div>
+          <div class="card-text"><span class="card-category">2024</span>
+            <div class="card-meta"><div class="card-title-row"><h3 class="card-title">NTG</h3><span class="biz-tag">Brand</span></div><p class="card-desc">Brand film and motion for NTG.</p></div>
           </div>
         </article>
         <article class="work-card">
           <a href="#"><div class="card-media r-wide">
             <video preload="none" poster="assets/thumbs/wide-d3.jpg" data-src="assets/work/wide-d3.mp4" muted loop playsinline></video>
           </div></a>
-          <div class="card-text"><span class="card-category">Work</span>
-            <div class="card-meta"><div class="card-title-row"><p class="card-title">D3 Wide</p><span class="biz-tag">D2C</span></div><p class="card-desc">Wide-format film for a vitamin D3 product.</p></div>
+          <div class="card-text"><span class="card-category">2024</span>
+            <div class="card-meta"><div class="card-title-row"><h3 class="card-title">D3 Wide</h3><span class="biz-tag">D2C</span></div><p class="card-desc">Wide-format film for a vitamin D3 product.</p></div>
           </div>
         </article>
       </div>
@@ -1153,16 +1349,16 @@
           <a href="#"><div class="card-media r-wide">
             <video preload="none" poster="assets/thumbs/agenda.jpg" data-src="assets/work/agenda.mp4" muted loop playsinline></video>
           </div></a>
-          <div class="card-text"><span class="card-category">Work</span>
-            <div class="card-meta"><div class="card-title-row"><p class="card-title">Agenda</p><span class="biz-tag">Brand</span></div><p class="card-desc">Event design and motion for a flagship conference.</p></div>
+          <div class="card-text"><span class="card-category">2024</span>
+            <div class="card-meta"><div class="card-title-row"><h3 class="card-title">Agenda</h3><span class="biz-tag">Brand</span></div><p class="card-desc">Event design and motion for a flagship conference.</p></div>
           </div>
         </article>
         <article class="work-card">
           <a href="#"><div class="card-media r-wide">
             <video preload="none" poster="assets/thumbs/ipo-meesho.jpg" data-src="assets/work/ipo-meesho.mp4" muted loop playsinline></video>
           </div></a>
-          <div class="card-text"><span class="card-category">Work</span>
-            <div class="card-meta"><div class="card-title-row"><p class="card-title">IPO Meesho</p><span class="biz-tag">SaaS</span></div><p class="card-desc">Launch film for the Meesho IPO on Groww.</p></div>
+          <div class="card-text"><span class="card-category">2024</span>
+            <div class="card-meta"><div class="card-title-row"><h3 class="card-title">IPO Meesho</h3><span class="biz-tag">SaaS</span></div><p class="card-desc">Launch film for the Meesho IPO on Groww.</p></div>
           </div>
         </article>
       </div>
@@ -1173,16 +1369,16 @@
           <a href="#"><div class="card-media r-wide">
             <video preload="none" poster="assets/thumbs/tv.jpg" data-src="assets/work/tv.mp4" muted loop playsinline></video>
           </div></a>
-          <div class="card-text"><span class="card-category">Work</span>
-            <div class="card-meta"><div class="card-title-row"><p class="card-title">TV</p><span class="biz-tag">SaaS</span></div><p class="card-desc">Broadcast creative for a financial product launch.</p></div>
+          <div class="card-text"><span class="card-category">2024</span>
+            <div class="card-meta"><div class="card-title-row"><h3 class="card-title">TV</h3><span class="biz-tag">SaaS</span></div><p class="card-desc">Broadcast creative for a financial product launch.</p></div>
           </div>
         </article>
         <article class="work-card">
           <a href="#"><div class="card-media r-wide">
             <video preload="none" poster="assets/thumbs/graph.jpg" data-src="assets/work/graph.mp4" muted loop playsinline></video>
           </div></a>
-          <div class="card-text"><span class="card-category">Work</span>
-            <div class="card-meta"><div class="card-title-row"><p class="card-title">Data in Motion</p><span class="biz-tag">SaaS</span></div><p class="card-desc">Animated data visualisation for a financial dashboard.</p></div>
+          <div class="card-text"><span class="card-category">2024</span>
+            <div class="card-meta"><div class="card-title-row"><h3 class="card-title">Data in Motion</h3><span class="biz-tag">SaaS</span></div><p class="card-desc">Animated data visualisation for a financial dashboard.</p></div>
           </div>
         </article>
       </div>
@@ -1193,17 +1389,17 @@
           <a href="#"><div class="card-media r-wide">
             <video preload="none" poster="assets/thumbs/insight-w.jpg" data-src="assets/work/insight-w.mp4" muted loop playsinline></video>
           </div></a>
-          <div class="card-text"><span class="card-category">Work</span>
-            <div class="card-meta"><div class="card-title-row"><p class="card-title">W Insight Stall</p><span class="biz-tag">SaaS</span></div><p class="card-desc">Immersive experience design for the W booth at Insight.</p></div>
+          <div class="card-text"><span class="card-category">2024</span>
+            <div class="card-meta"><div class="card-title-row"><h3 class="card-title">W Insight Stall</h3><span class="biz-tag">SaaS</span></div><p class="card-desc">Immersive experience design for the W booth at Insight.</p></div>
           </div>
         </article>
         <article class="work-card">
           <a href="#"><div class="card-media r-wide">
             <video preload="none" poster="assets/thumbs/multicap-hd.jpg" data-src="assets/work/multicap-hd.mp4" muted loop playsinline></video>
-            <div class="pending">multicap-hd.mp4<small>copy from SSD to activate</small></div>
+            <div class="pending">Coming soon</div>
           </div></a>
-          <div class="card-text"><span class="card-category">Work</span>
-            <div class="card-meta"><div class="card-title-row"><p class="card-title">MultiCap HD</p><span class="biz-tag">SaaS</span></div><p class="card-desc">Multi-cap product film.</p></div>
+          <div class="card-text"><span class="card-category">2024</span>
+            <div class="card-meta"><div class="card-title-row"><h3 class="card-title">MultiCap HD</h3><span class="biz-tag">SaaS</span></div><p class="card-desc">Multi-cap product film.</p></div>
           </div>
         </article>
       </div>
@@ -1213,19 +1409,19 @@
         <article class="work-card">
           <a href="#"><div class="card-media r-wide">
             <video preload="none" poster="assets/thumbs/scalper.jpg" data-src="assets/work/scalper.mp4" muted loop playsinline></video>
-            <div class="pending">scalper.mp4<small>copy from SSD to activate</small></div>
+            <div class="pending">Coming soon</div>
           </div></a>
-          <div class="card-text"><span class="card-category">Work</span>
-            <div class="card-meta"><div class="card-title-row"><p class="card-title">Scalper Mode</p><span class="biz-tag">SaaS</span></div><p class="card-desc">Motion creative for a high-frequency trading feature.</p></div>
+          <div class="card-text"><span class="card-category">2024</span>
+            <div class="card-meta"><div class="card-title-row"><h3 class="card-title">Scalper Mode</h3><span class="biz-tag">SaaS</span></div><p class="card-desc">Motion creative for a high-frequency trading feature.</p></div>
           </div>
         </article>
         <article class="work-card">
           <a href="#"><div class="card-media r-wide">
             <video preload="none" poster="assets/thumbs/multicap2.jpg" data-src="assets/work/multicap2.mp4" muted loop playsinline></video>
-            <div class="pending">multicap2.mp4<small>copy from SSD to activate</small></div>
+            <div class="pending">Coming soon</div>
           </div></a>
-          <div class="card-text"><span class="card-category">Work</span>
-            <div class="card-meta"><div class="card-title-row"><p class="card-title">MultiCap</p><span class="biz-tag">SaaS</span></div><p class="card-desc">Multi-cap campaign creative.</p></div>
+          <div class="card-text"><span class="card-category">2024</span>
+            <div class="card-meta"><div class="card-title-row"><h3 class="card-title">MultiCap</h3><span class="biz-tag">SaaS</span></div><p class="card-desc">Multi-cap campaign creative.</p></div>
           </div>
         </article>
       </div>
@@ -1235,19 +1431,19 @@
         <article class="work-card">
           <a href="#"><div class="card-media r-wide">
             <video preload="none" poster="assets/thumbs/master-corp.jpg" data-src="assets/work/master-corp.mp4" muted loop playsinline></video>
-            <div class="pending">master-corp.mp4<small>copy from SSD to activate</small></div>
+            <div class="pending">Coming soon</div>
           </div></a>
-          <div class="card-text"><span class="card-category">Work</span>
-            <div class="card-meta"><div class="card-title-row"><p class="card-title">Master Corp</p><span class="biz-tag">Brand</span></div><p class="card-desc">Corporate brand film and identity.</p></div>
+          <div class="card-text"><span class="card-category">2024</span>
+            <div class="card-meta"><div class="card-title-row"><h3 class="card-title">Master Corp</h3><span class="biz-tag">Brand</span></div><p class="card-desc">Corporate brand film and identity.</p></div>
           </div>
         </article>
         <article class="work-card">
           <a href="#"><div class="card-media r-wide">
             <video preload="none" poster="assets/thumbs/ipo-3d.jpg" data-src="assets/work/ipo-3d.mp4" muted loop playsinline></video>
-            <div class="pending">ipo-3d.mp4<small>copy from SSD to activate</small></div>
+            <div class="pending">Coming soon</div>
           </div></a>
-          <div class="card-text"><span class="card-category">Work</span>
-            <div class="card-meta"><div class="card-title-row"><p class="card-title">IPO 3D</p><span class="biz-tag">SaaS</span></div><p class="card-desc">3D motion for an IPO product launch.</p></div>
+          <div class="card-text"><span class="card-category">2024</span>
+            <div class="card-meta"><div class="card-title-row"><h3 class="card-title">IPO 3D</h3><span class="biz-tag">SaaS</span></div><p class="card-desc">3D motion for an IPO product launch.</p></div>
           </div>
         </article>
       </div>
@@ -1258,45 +1454,45 @@
 
   <!-- CLIENTS -->
   <section class="clients-section">
-    <p class="clients-label">Clients</p>
+    <h2 class="clients-label">Clients</h2>
     <div class="clients-marquee">
       <div class="clients-track">
         <!-- Set 1 -->
-        <div class="client-logo"><img src="assets/logos/lego.png" alt="LEGO"></div>
-        <div class="client-logo"><img src="assets/logos/jsw.png" alt="JSW"></div>
-        <div class="client-logo"><img src="assets/logos/spotify.png" alt="Spotify"></div>
-        <div class="client-logo"><img src="assets/logos/asianpaints.png" alt="Asian Paints"></div>
-        <div class="client-logo"><img src="assets/logos/groww.png" alt="Groww"></div>
-        <div class="client-logo"><img src="assets/logos/oml.png" alt="OML"></div>
-        <div class="client-logo"><img src="assets/logos/ifb.png" alt="IFB"></div>
-        <div class="client-logo"><img src="assets/logos/allohealth.png" alt="Allo Health"></div>
-        <div class="client-logo"><img src="assets/logos/nutrabay.png" alt="Nutrabay"></div>
-        <div class="client-logo"><img src="assets/logos/qwr.png" alt="QWR"></div>
-        <div class="client-logo"><img src="assets/logos/wellbeing.png" alt="Wellbeing Nutrition"></div>
-        <div class="client-logo"><img src="assets/logos/swiggy.png" alt="Swiggy"></div>
-        <div class="client-logo"><img src="assets/logos/healthkart.png" alt="HealthKart"></div>
-        <div class="client-logo"><img src="assets/logos/evig.png" alt="EVIG"></div>
-        <div class="client-logo"><img src="assets/logos/postoffice.png" alt="Post Office"></div>
-        <div class="client-logo"><img src="assets/logos/kukri.png" alt="Kukri Collective"></div>
-        <div class="client-logo"><img src="assets/logos/gullygang.png" alt="Gully Gang"></div>
+        <div class="client-logo"><img loading="lazy" decoding="async" src="assets/logos/lego.png" alt="LEGO"></div>
+        <div class="client-logo"><img loading="lazy" decoding="async" src="assets/logos/jsw.png" alt="JSW"></div>
+        <div class="client-logo"><img loading="lazy" decoding="async" src="assets/logos/spotify.png" alt="Spotify"></div>
+        <div class="client-logo"><img loading="lazy" decoding="async" src="assets/logos/asianpaints.png" alt="Asian Paints"></div>
+        <div class="client-logo"><img loading="lazy" decoding="async" src="assets/logos/groww.png" alt="Groww"></div>
+        <div class="client-logo"><img loading="lazy" decoding="async" src="assets/logos/oml.png" alt="OML"></div>
+        <div class="client-logo"><img loading="lazy" decoding="async" src="assets/logos/ifb.png" alt="IFB"></div>
+        <div class="client-logo"><img loading="lazy" decoding="async" src="assets/logos/allohealth.png" alt="Allo Health"></div>
+        <div class="client-logo"><img loading="lazy" decoding="async" src="assets/logos/nutrabay.png" alt="Nutrabay"></div>
+        <div class="client-logo"><img loading="lazy" decoding="async" src="assets/logos/qwr.png" alt="QWR"></div>
+        <div class="client-logo"><img loading="lazy" decoding="async" src="assets/logos/wellbeing.png" alt="Wellbeing Nutrition"></div>
+        <div class="client-logo"><img loading="lazy" decoding="async" src="assets/logos/swiggy.png" alt="Swiggy"></div>
+        <div class="client-logo"><img loading="lazy" decoding="async" src="assets/logos/healthkart.png" alt="HealthKart"></div>
+        <div class="client-logo"><img loading="lazy" decoding="async" src="assets/logos/evig.png" alt="EVIG"></div>
+        <div class="client-logo"><img loading="lazy" decoding="async" src="assets/logos/postoffice.png" alt="Post Office"></div>
+        <div class="client-logo"><img loading="lazy" decoding="async" src="assets/logos/kukri.png" alt="Kukri Collective"></div>
+        <div class="client-logo"><img loading="lazy" decoding="async" src="assets/logos/gullygang.png" alt="Gully Gang"></div>
         <!-- Set 2 — duplicate for seamless loop -->
-        <div class="client-logo"><img src="assets/logos/lego.png" alt="LEGO"></div>
-        <div class="client-logo"><img src="assets/logos/jsw.png" alt="JSW"></div>
-        <div class="client-logo"><img src="assets/logos/spotify.png" alt="Spotify"></div>
-        <div class="client-logo"><img src="assets/logos/asianpaints.png" alt="Asian Paints"></div>
-        <div class="client-logo"><img src="assets/logos/groww.png" alt="Groww"></div>
-        <div class="client-logo"><img src="assets/logos/oml.png" alt="OML"></div>
-        <div class="client-logo"><img src="assets/logos/ifb.png" alt="IFB"></div>
-        <div class="client-logo"><img src="assets/logos/allohealth.png" alt="Allo Health"></div>
-        <div class="client-logo"><img src="assets/logos/nutrabay.png" alt="Nutrabay"></div>
-        <div class="client-logo"><img src="assets/logos/qwr.png" alt="QWR"></div>
-        <div class="client-logo"><img src="assets/logos/wellbeing.png" alt="Wellbeing Nutrition"></div>
-        <div class="client-logo"><img src="assets/logos/swiggy.png" alt="Swiggy"></div>
-        <div class="client-logo"><img src="assets/logos/healthkart.png" alt="HealthKart"></div>
-        <div class="client-logo"><img src="assets/logos/evig.png" alt="EVIG"></div>
-        <div class="client-logo"><img src="assets/logos/postoffice.png" alt="Post Office"></div>
-        <div class="client-logo"><img src="assets/logos/kukri.png" alt="Kukri Collective"></div>
-        <div class="client-logo"><img src="assets/logos/gullygang.png" alt="Gully Gang"></div>
+        <div class="client-logo"><img loading="lazy" decoding="async" src="assets/logos/lego.png" alt="LEGO"></div>
+        <div class="client-logo"><img loading="lazy" decoding="async" src="assets/logos/jsw.png" alt="JSW"></div>
+        <div class="client-logo"><img loading="lazy" decoding="async" src="assets/logos/spotify.png" alt="Spotify"></div>
+        <div class="client-logo"><img loading="lazy" decoding="async" src="assets/logos/asianpaints.png" alt="Asian Paints"></div>
+        <div class="client-logo"><img loading="lazy" decoding="async" src="assets/logos/groww.png" alt="Groww"></div>
+        <div class="client-logo"><img loading="lazy" decoding="async" src="assets/logos/oml.png" alt="OML"></div>
+        <div class="client-logo"><img loading="lazy" decoding="async" src="assets/logos/ifb.png" alt="IFB"></div>
+        <div class="client-logo"><img loading="lazy" decoding="async" src="assets/logos/allohealth.png" alt="Allo Health"></div>
+        <div class="client-logo"><img loading="lazy" decoding="async" src="assets/logos/nutrabay.png" alt="Nutrabay"></div>
+        <div class="client-logo"><img loading="lazy" decoding="async" src="assets/logos/qwr.png" alt="QWR"></div>
+        <div class="client-logo"><img loading="lazy" decoding="async" src="assets/logos/wellbeing.png" alt="Wellbeing Nutrition"></div>
+        <div class="client-logo"><img loading="lazy" decoding="async" src="assets/logos/swiggy.png" alt="Swiggy"></div>
+        <div class="client-logo"><img loading="lazy" decoding="async" src="assets/logos/healthkart.png" alt="HealthKart"></div>
+        <div class="client-logo"><img loading="lazy" decoding="async" src="assets/logos/evig.png" alt="EVIG"></div>
+        <div class="client-logo"><img loading="lazy" decoding="async" src="assets/logos/postoffice.png" alt="Post Office"></div>
+        <div class="client-logo"><img loading="lazy" decoding="async" src="assets/logos/kukri.png" alt="Kukri Collective"></div>
+        <div class="client-logo"><img loading="lazy" decoding="async" src="assets/logos/gullygang.png" alt="Gully Gang"></div>
       </div><!-- /.clients-track -->
     </div><!-- /.clients-marquee -->
   </section>
@@ -1325,7 +1521,7 @@
 
   <!-- ABOUT -->
   <section id="about">
-    <p class="about-label">About</p>
+    <h2 class="about-label">About</h2>
     <div>
       <p class="about-body">
         Snacpac is a small motion and design studio helping SaaS and D2C brands stay sharp, consistent, and on-brand across every touchpoint. From product launches and ads to socials and campaigns, we create marketing videos and visuals that not only look good, but also <em>explain products in a way that feels clear, engaging, and easy to understand.</em>
@@ -1343,10 +1539,14 @@
 
   <!-- CONTACT -->
   <section id="contact">
-    <p class="contact-label">Contact</p>
+    <h2 class="contact-label">Contact</h2>
     <div>
       <p class="contact-cta">Got a product that deserves<br>to look <em><span class="glow-alive" data-text="alive?">alive?</span></em></p>
-      <a href="mailto:potatosnacpac@gmail.com" class="contact-email">potatosnacpac@gmail.com</a>
+      <a href="mailto:potatosnacpac@gmail.com" class="contact-email-large">potatosnacpac@gmail.com</a>
+      <div class="contact-socials">
+        <a href="https://www.instagram.com/potatosnacpac" target="_blank" rel="noopener">Instagram ↗</a>
+        <a href="https://www.linkedin.com/in/motionman/" target="_blank" rel="noopener">LinkedIn ↗</a>
+      </div>
     </div>
   </section>
 
@@ -1362,6 +1562,11 @@
     </ul>
   </footer>
 
+
+  <!-- Lottie — moved out of <head> so it no longer blocks first paint.
+       Kept as a plain (non-defer) script here so `lottie` is defined
+       before the inline init code below runs. -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie.min.js"></script>
 
   <script>
     // ── Word-level hover: wrap each word in a span.w for scale effect ──
@@ -1455,6 +1660,7 @@
     }
 
     function openSearch() {
+      lastFocused = document.activeElement;
       searchOverlay.classList.add('open');
       document.body.style.overflow = 'hidden';
       setTimeout(() => searchInput.focus(), 50);
@@ -1464,6 +1670,7 @@
       document.body.style.overflow = '';
       searchInput.value = '';
       searchResults.innerHTML = '';
+      popFocus();
     }
 
     searchOpenBtn.addEventListener('click', openSearch);
@@ -1485,35 +1692,44 @@
       const hideLoader = () => loader.classList.add('hidden');
       vid.addEventListener('canplay',  hideLoader, { once: true });
       vid.addEventListener('playing',  hideLoader, { once: true });
+      // If the source fails to load (e.g. 404 on the live site), stop the spinner
+      // so the poster stays visible instead of spinning forever.
+      vid.addEventListener('error',    hideLoader, { once: true });
 
       // If poster is already showing (before src loads), hide loader until src assigned
       if (!vid.getAttribute('src')) loader.classList.add('hidden');
     });
 
-    // ── Play when in viewport, pause when out ──
-    const io = new IntersectionObserver(entries => {
+    // ── Load the source when the card gets near the viewport (generous margin) ──
+    const loadObserver = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (!e.isIntersecting) return;
+        const v = e.target;
+        if (v.dataset.src && v.getAttribute('src') !== v.dataset.src) {
+          const loader = v.parentElement.querySelector('.card-loader');
+          if (loader) loader.classList.remove('hidden'); // show spinner while loading
+          v.src = v.dataset.src;
+          const p = v.parentElement.querySelector('.pending');
+          if (p) p.style.display = 'none';
+        }
+        loadObserver.unobserve(v); // load once
+      });
+    }, { rootMargin: '0px 0px 600px 0px' });
+
+    // ── Only play videos actually on screen; pause the rest so we don't
+    //    decode several 1080p clips at once (big perf/jank win on tall screens). ──
+    const playObserver = new IntersectionObserver(entries => {
       entries.forEach(e => {
         const v = e.target;
-        if (e.isIntersecting) {
-          // First time visible: load the src + show loader while buffering
-          if (v.dataset.src && v.getAttribute('src') !== v.dataset.src) {
-            const loader = v.parentElement.querySelector('.card-loader');
-            if (loader) loader.classList.remove('hidden'); // show spinner while loading
-            v.src = v.dataset.src;
-            const p = v.parentElement.querySelector('.pending');
-            if (p) p.style.display = 'none';
-          }
-          v.play().catch(() => {});
-        } else {
-          v.pause();
-        }
+        if (e.isIntersecting) v.play().catch(() => {});
+        else v.pause();
       });
-    }, {
-      threshold: 0.2,
-      rootMargin: '0px 0px 400px 0px'
-    });
+    }, { threshold: 0.25 });
 
-    document.querySelectorAll('video[data-src]').forEach(v => io.observe(v));
+    document.querySelectorAll('video[data-src]').forEach(v => {
+      loadObserver.observe(v);
+      playObserver.observe(v);
+    });
 
     // ── Card entrance animation ──
     const entranceObserver = new IntersectionObserver(entries => {
@@ -1522,7 +1738,7 @@
           // slight stagger for cards in the same row
           const cards = Array.from(e.target.closest('.work-row')?.querySelectorAll('.work-card') || [e.target]);
           const idx = cards.indexOf(e.target);
-          setTimeout(() => e.target.classList.add('in-view'), idx * 80);
+          setTimeout(() => e.target.classList.add('in-view'), idx * 160);
           entranceObserver.unobserve(e.target);
         }
       });
@@ -1530,13 +1746,32 @@
 
     document.querySelectorAll('.work-card').forEach(c => entranceObserver.observe(c));
 
+    // ── Inject play icons into every card-media ──
+    document.querySelectorAll('.card-media').forEach(m => {
+      const icon = document.createElement('div');
+      icon.className = 'play-icon';
+      icon.innerHTML = `<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M8 5v14l11-7z"/></svg>`;
+      m.appendChild(icon);
+    });
+
     // ── Logo Lottie animation (inlined — no fetch needed) ──
+    // Logo animation data — defined once, reused by both Lottie instances
+    const LOGO_ANIM = {"nm":"Comp 1","ddd":0,"h":1080,"w":1080,"meta":{"g":"@lottiefiles/toolkit-js 0.71.10","tc":"#1f1f1f"},"layers":[{"ty":0,"nm":"Pre-comp 1","sr":1,"st":0,"op":150,"ip":0,"ln":"74","hasMask":false,"ao":0,"ks":{"a":{"a":0,"k":[540,540]},"s":{"a":0,"k":[224,224]},"p":{"s":true,"x":{"a":0,"k":540},"y":{"a":0,"k":604.85}},"r":{"a":0,"k":0},"sa":{"a":0,"k":0},"o":{"a":0,"k":100}},"w":1080,"h":1080,"refId":"1","ind":1}],"v":"5.7.0","fr":29.97,"op":150.81677419354838,"ip":0,"assets":[{"nm":"Pre-comp 1","id":"1","fr":29.97,"layers":[{"ty":4,"nm":"R","sr":1,"st":0,"op":150,"ip":0,"ln":"63","hasMask":false,"ao":0,"ks":{"a":{"a":0,"k":[0,0]},"s":{"a":0,"k":[100,100]},"p":{"s":true,"x":{"a":1,"k":[{"o":{"x":0.3,"y":0},"i":{"x":0.8,"y":-3.289},"s":[466.533],"t":8},{"o":{"x":0.05,"y":1.4},"i":{"x":0.1,"y":1},"s":[459.133],"t":13},{"o":{"x":0.232,"y":1.045},"i":{"x":0.8,"y":1},"s":[447.932],"t":23},{"o":{"x":0.05,"y":0},"i":{"x":0.1,"y":1},"s":[447.015],"t":32},{"s":[447.015],"t":56.999}]},"y":{"a":1,"k":[{"o":{"x":0.3,"y":0},"i":{"x":0.8,"y":-12.634},"s":[520.575],"t":8},{"o":{"x":0.05,"y":1.4},"i":{"x":0.1,"y":1},"s":[520.848],"t":13},{"o":{"x":0.232,"y":0.036},"i":{"x":0.8,"y":0.654},"s":[522.162],"t":23},{"o":{"x":0.05,"y":0.7},"i":{"x":0.1,"y":1},"s":[465.108],"t":32},{"s":[445.765],"t":56.999}]}},"r":{"a":0,"k":0},"sa":{"a":0,"k":0},"o":{"a":0,"k":100}},"shapes":[{"ty":"gr","nm":"Vector","it":[{"ty":"sh","nm":"Path 1","d":1,"ks":{"a":0,"k":{"c":true,"i":[[0.665,3.421],[2.356,-0.176],[22.92,-25.547],[-2.138,-33.778],[-24.684,-22.575],[-0.093,-0.079],[-24.234,-4.498],[-7.151,0.58],[0.024,6.195],[0,0],[0,0],[0,0],[0,0]],"o":[[-2.355,-0.117],[-34.275,1.797],[-22.529,25.258],[2.067,33.101],[0.093,0.079],[18.49,16.166],[6.998,1.3],[0.703,-6.101],[0,0],[0,0],[0,0],[0,0],[-0.018,-3.649]],"v":[[63.415,-127.959],[57.27,-127.981],[-32.073,-85.268],[-63.94,6.996],[-22.493,94.231],[-22.214,94.468],[40.975,126.009],[63.686,127.934],[64.14,108.862],[64.062,81.925],[64.094,-10.861],[64.094,-91.888],[64.073,-113.327]]}}},{"ty":"fl","nm":"Fill 1","c":{"a":0,"k":[0,0,0]},"r":1,"o":{"a":0,"k":100}},{"ty":"tr","a":{"a":0,"k":[0,0]},"s":{"a":0,"k":[100,100]},"p":{"a":0,"k":[0,0]},"r":{"a":0,"k":0},"sa":{"a":0,"k":0},"o":{"a":0,"k":100}}]}],"ind":1},{"ty":4,"nm":"L","sr":1,"st":0,"op":150,"ip":0,"ln":"62","hasMask":false,"ao":0,"ks":{"a":{"a":0,"k":[0,0]},"s":{"a":0,"k":[100,100]},"p":{"s":true,"x":{"a":1,"k":[{"o":{"x":0.3,"y":0},"i":{"x":0.8,"y":-3.25},"s":[593.847],"t":8},{"o":{"x":0.05,"y":1.4},"i":{"x":0.1,"y":1},"s":[598.837],"t":13},{"o":{"x":0.232,"y":2.277},"i":{"x":0.8,"y":1},"s":[606.323],"t":23},{"o":{"x":0.05,"y":0},"i":{"x":0.1,"y":1},"s":[606.597],"t":32},{"s":[606.597],"t":56.999}]},"y":{"a":1,"k":[{"o":{"x":0.3,"y":0},"i":{"x":0.8,"y":-3.249},"s":[520.41],"t":8},{"o":{"x":0.05,"y":1.4},"i":{"x":0.1,"y":1},"s":[521.018],"t":13},{"o":{"x":0.232,"y":0.029},"i":{"x":0.8,"y":0.297},"s":[521.93],"t":23},{"o":{"x":0.05,"y":0.7},"i":{"x":0.1,"y":1},"s":[552.781],"t":32},{"s":[574.058],"t":56.999}]}},"r":{"a":0,"k":0},"sa":{"a":0,"k":0},"o":{"a":0,"k":100}},"shapes":[{"ty":"gr","nm":"Vector","it":[{"ty":"sh","nm":"Path 1","d":1,"ks":{"a":0,"k":{"c":true,"i":[[24.282,23.79],[33.507,0.538],[0,-8.862],[0,0],[0,0],[0,0],[-0.341,-4.647],[-21.938,19.381],[-1.529,1.537],[0.295,34.819]],"o":[[-23.808,-23.585],[-1.111,7.836],[0,0],[0,0],[0,0],[-0.014,4.848],[29.577,1.79],[1.614,-1.449],[24.282,-24.606],[-0.288,-33.992]],"v":[[25.822,-90.141],[-63.496,-127.733],[-64.066,-90.311],[-64.09,-17.684],[-64.08,80.28],[-64.094,110.792],[-64.034,127.586],[21.575,95.229],[26.293,90.753],[64.202,0.119]]}}},{"ty":"fl","nm":"Fill 1","c":{"a":0,"k":[0,0,0]},"r":1,"o":{"a":0,"k":100}},{"ty":"tr","a":{"a":0,"k":[0,0]},"s":{"a":0,"k":[100,100]},"p":{"a":0,"k":[0,0]},"r":{"a":0,"k":0},"sa":{"a":0,"k":0},"o":{"a":0,"k":100}}]}],"ind":2},{"ty":4,"nm":"lv","sr":1,"st":0,"op":150,"ip":0,"ln":"61","hasMask":false,"ao":0,"ks":{"a":{"a":0,"k":[0,0]},"s":{"a":0,"k":[100,100]},"p":{"s":true,"x":{"a":1,"k":[{"o":{"x":0.3,"y":0},"i":{"x":0.8,"y":1},"s":[0.446],"t":27},{"o":{"x":0.05,"y":0},"i":{"x":0.1,"y":1},"s":[0.446],"t":32},{"s":[0.446],"t":56.999}]},"y":{"a":1,"k":[{"o":{"x":0.3,"y":0},"i":{"x":0.8,"y":0.15},"s":[-63.525],"t":27},{"o":{"x":0.05,"y":0.7},"i":{"x":0.1,"y":1},"s":[-114.911],"t":32},{"s":[-191.988],"t":56.999}]}},"r":{"a":1,"k":[{"o":{"x":0.3,"y":0},"i":{"x":0.8,"y":0.15},"s":[180],"t":27},{"o":{"x":0.05,"y":0.7},"i":{"x":0.1,"y":1},"s":[108],"t":32},{"s":[0],"t":56.999}]},"sa":{"a":0,"k":0},"o":{"a":1,"k":[{"o":{"x":0.3,"y":0},"i":{"x":0.8,"y":0.992},"s":[0],"t":34.333},{"o":{"x":0.05,"y":0.015},"i":{"x":0.1,"y":1},"s":[40],"t":35},{"s":[100],"t":42}]}},"shapes":[{"ty":"gr","nm":"Vector","it":[{"ty":"sh","nm":"Path 1","d":1,"ks":{"a":0,"k":{"c":true,"i":[[0,0],[8.184,-0.324],[0,0],[-23.959,-24.078],[-32.804,-1.053],[-1.066,0.811],[0.007,4.129],[0,0],[0,0],[0.798,5.149],[6.286,-0.001],[0,0]],"o":[[-8.272,-0.003],[0,0],[0.147,33.967],[23.34,23.076],[1.593,-0.158],[1.058,-2.503],[0,0],[0,0],[-0.007,-5.375],[-6.159,-0.624],[0,0],[0,0]],"v":[[-34.471,-64.229],[-60.388,-64.133],[-64.227,-63.816],[-26.606,26.772],[60.732,64.308],[63.559,63.59],[64.097,32.165],[64.09,-18.147],[64.09,-45.417],[63.488,-63.835],[43.281,-64.241],[11.563,-64.226]]}}},{"ty":"fl","nm":"Fill 1","c":{"a":0,"k":[0,0,0]},"r":1,"o":{"a":0,"k":100}},{"ty":"tr","a":{"a":0,"k":[0,0]},"s":{"a":0,"k":[100,100]},"p":{"a":0,"k":[0,0]},"r":{"a":0,"k":0},"sa":{"a":0,"k":0},"o":{"a":0,"k":100}}]}],"ind":3,"parent":2},{"ty":4,"nm":"rv","sr":1,"st":0,"op":150,"ip":0,"ln":"60","hasMask":false,"ao":0,"ks":{"a":{"a":0,"k":[0,0]},"s":{"a":0,"k":[100,100]},"p":{"s":true,"x":{"a":1,"k":[{"o":{"x":0.3,"y":0},"i":{"x":0.8,"y":1},"s":[-0.473],"t":27},{"o":{"x":0.05,"y":0},"i":{"x":0.1,"y":1},"s":[-0.473],"t":32},{"s":[-0.473],"t":56.999}]},"y":{"a":1,"k":[{"o":{"x":0.3,"y":0},"i":{"x":0.8,"y":0.15},"s":[63.268],"t":27},{"o":{"x":0.05,"y":0.7},"i":{"x":0.1,"y":1},"s":[115.382],"t":32},{"s":[193.555],"t":56.999}]}},"r":{"a":1,"k":[{"o":{"x":0.3,"y":0},"i":{"x":0.8,"y":0.15},"s":[180],"t":27},{"o":{"x":0.05,"y":0.7},"i":{"x":0.1,"y":1},"s":[108],"t":32},{"s":[0],"t":56.999}]},"sa":{"a":0,"k":0},"o":{"a":1,"k":[{"o":{"x":0.3,"y":0},"i":{"x":0.8,"y":0.992},"s":[0],"t":34.333},{"o":{"x":0.05,"y":0.015},"i":{"x":0.1,"y":1},"s":[40],"t":35},{"s":[100],"t":42}]}},"shapes":[{"ty":"gr","nm":"Vector","it":[{"ty":"sh","nm":"Path 1","d":1,"ks":{"a":0,"k":{"c":true,"i":[[34.529,3.669],[4.202,-0.182],[-0.007,-8.735],[0,0],[0,0],[-0.448,-4.68],[-5.006,-0.042],[0,0],[0,0],[-8.423,0.664],[0.773,5.221],[14.208,17.877]],"o":[[-4.177,-0.491],[-0.437,8.527],[0,0],[0,0],[-0.017,5.094],[4.682,0.668],[0,0],[0,0],[8.563,0],[0.619,-5.14],[-3.206,-22.609],[-21.626,-27.166]],"v":[[-51.321,-63.852],[-63.908,-64.316],[-64.014,-36.67],[-64.02,11.828],[-64.06,45.722],[-63.971,63.821],[-45.856,64.341],[-8.63,64.355],[36.273,64.348],[63.976,63.923],[63.045,46.176],[36.451,-15.657]]}}},{"ty":"fl","nm":"Fill 1","c":{"a":0,"k":[0,0,0]},"r":1,"o":{"a":0,"k":100}},{"ty":"tr","a":{"a":0,"k":[0,0]},"s":{"a":0,"k":[100,100]},"p":{"a":0,"k":[0,0]},"r":{"a":0,"k":0},"sa":{"a":0,"k":0},"o":{"a":0,"k":100}}]}],"ind":4,"parent":1}]}]};
     lottie.loadAnimation({
       container: document.getElementById('logo-lottie'),
       renderer: 'svg',
       loop: true,
       autoplay: true,
-      animationData: {"nm":"Comp 1","ddd":0,"h":1080,"w":1080,"meta":{"g":"@lottiefiles/toolkit-js 0.71.10","tc":"#1f1f1f"},"layers":[{"ty":0,"nm":"Pre-comp 1","sr":1,"st":0,"op":150,"ip":0,"ln":"74","hasMask":false,"ao":0,"ks":{"a":{"a":0,"k":[540,540]},"s":{"a":0,"k":[224,224]},"p":{"s":true,"x":{"a":0,"k":540},"y":{"a":0,"k":604.85}},"r":{"a":0,"k":0},"sa":{"a":0,"k":0},"o":{"a":0,"k":100}},"w":1080,"h":1080,"refId":"1","ind":1}],"v":"5.7.0","fr":29.97,"op":150.81677419354838,"ip":0,"assets":[{"nm":"Pre-comp 1","id":"1","fr":29.97,"layers":[{"ty":4,"nm":"R","sr":1,"st":0,"op":150,"ip":0,"ln":"63","hasMask":false,"ao":0,"ks":{"a":{"a":0,"k":[0,0]},"s":{"a":0,"k":[100,100]},"p":{"s":true,"x":{"a":1,"k":[{"o":{"x":0.3,"y":0},"i":{"x":0.8,"y":-3.289},"s":[466.533],"t":8},{"o":{"x":0.05,"y":1.4},"i":{"x":0.1,"y":1},"s":[459.133],"t":13},{"o":{"x":0.232,"y":1.045},"i":{"x":0.8,"y":1},"s":[447.932],"t":23},{"o":{"x":0.05,"y":0},"i":{"x":0.1,"y":1},"s":[447.015],"t":32},{"s":[447.015],"t":56.999}]},"y":{"a":1,"k":[{"o":{"x":0.3,"y":0},"i":{"x":0.8,"y":-12.634},"s":[520.575],"t":8},{"o":{"x":0.05,"y":1.4},"i":{"x":0.1,"y":1},"s":[520.848],"t":13},{"o":{"x":0.232,"y":0.036},"i":{"x":0.8,"y":0.654},"s":[522.162],"t":23},{"o":{"x":0.05,"y":0.7},"i":{"x":0.1,"y":1},"s":[465.108],"t":32},{"s":[445.765],"t":56.999}]}},"r":{"a":0,"k":0},"sa":{"a":0,"k":0},"o":{"a":0,"k":100}},"shapes":[{"ty":"gr","nm":"Vector","it":[{"ty":"sh","nm":"Path 1","d":1,"ks":{"a":0,"k":{"c":true,"i":[[0.665,3.421],[2.356,-0.176],[22.92,-25.547],[-2.138,-33.778],[-24.684,-22.575],[-0.093,-0.079],[-24.234,-4.498],[-7.151,0.58],[0.024,6.195],[0,0],[0,0],[0,0],[0,0]],"o":[[-2.355,-0.117],[-34.275,1.797],[-22.529,25.258],[2.067,33.101],[0.093,0.079],[18.49,16.166],[6.998,1.3],[0.703,-6.101],[0,0],[0,0],[0,0],[0,0],[-0.018,-3.649]],"v":[[63.415,-127.959],[57.27,-127.981],[-32.073,-85.268],[-63.94,6.996],[-22.493,94.231],[-22.214,94.468],[40.975,126.009],[63.686,127.934],[64.14,108.862],[64.062,81.925],[64.094,-10.861],[64.094,-91.888],[64.073,-113.327]]}}},{"ty":"fl","nm":"Fill 1","c":{"a":0,"k":[0,0,0]},"r":1,"o":{"a":0,"k":100}},{"ty":"tr","a":{"a":0,"k":[0,0]},"s":{"a":0,"k":[100,100]},"p":{"a":0,"k":[0,0]},"r":{"a":0,"k":0},"sa":{"a":0,"k":0},"o":{"a":0,"k":100}}]}],"ind":1},{"ty":4,"nm":"L","sr":1,"st":0,"op":150,"ip":0,"ln":"62","hasMask":false,"ao":0,"ks":{"a":{"a":0,"k":[0,0]},"s":{"a":0,"k":[100,100]},"p":{"s":true,"x":{"a":1,"k":[{"o":{"x":0.3,"y":0},"i":{"x":0.8,"y":-3.25},"s":[593.847],"t":8},{"o":{"x":0.05,"y":1.4},"i":{"x":0.1,"y":1},"s":[598.837],"t":13},{"o":{"x":0.232,"y":2.277},"i":{"x":0.8,"y":1},"s":[606.323],"t":23},{"o":{"x":0.05,"y":0},"i":{"x":0.1,"y":1},"s":[606.597],"t":32},{"s":[606.597],"t":56.999}]},"y":{"a":1,"k":[{"o":{"x":0.3,"y":0},"i":{"x":0.8,"y":-3.249},"s":[520.41],"t":8},{"o":{"x":0.05,"y":1.4},"i":{"x":0.1,"y":1},"s":[521.018],"t":13},{"o":{"x":0.232,"y":0.029},"i":{"x":0.8,"y":0.297},"s":[521.93],"t":23},{"o":{"x":0.05,"y":0.7},"i":{"x":0.1,"y":1},"s":[552.781],"t":32},{"s":[574.058],"t":56.999}]}},"r":{"a":0,"k":0},"sa":{"a":0,"k":0},"o":{"a":0,"k":100}},"shapes":[{"ty":"gr","nm":"Vector","it":[{"ty":"sh","nm":"Path 1","d":1,"ks":{"a":0,"k":{"c":true,"i":[[24.282,23.79],[33.507,0.538],[0,-8.862],[0,0],[0,0],[0,0],[-0.341,-4.647],[-21.938,19.381],[-1.529,1.537],[0.295,34.819]],"o":[[-23.808,-23.585],[-1.111,7.836],[0,0],[0,0],[0,0],[-0.014,4.848],[29.577,1.79],[1.614,-1.449],[24.282,-24.606],[-0.288,-33.992]],"v":[[25.822,-90.141],[-63.496,-127.733],[-64.066,-90.311],[-64.09,-17.684],[-64.08,80.28],[-64.094,110.792],[-64.034,127.586],[21.575,95.229],[26.293,90.753],[64.202,0.119]]}}},{"ty":"fl","nm":"Fill 1","c":{"a":0,"k":[0,0,0]},"r":1,"o":{"a":0,"k":100}},{"ty":"tr","a":{"a":0,"k":[0,0]},"s":{"a":0,"k":[100,100]},"p":{"a":0,"k":[0,0]},"r":{"a":0,"k":0},"sa":{"a":0,"k":0},"o":{"a":0,"k":100}}]}],"ind":2},{"ty":4,"nm":"lv","sr":1,"st":0,"op":150,"ip":0,"ln":"61","hasMask":false,"ao":0,"ks":{"a":{"a":0,"k":[0,0]},"s":{"a":0,"k":[100,100]},"p":{"s":true,"x":{"a":1,"k":[{"o":{"x":0.3,"y":0},"i":{"x":0.8,"y":1},"s":[0.446],"t":27},{"o":{"x":0.05,"y":0},"i":{"x":0.1,"y":1},"s":[0.446],"t":32},{"s":[0.446],"t":56.999}]},"y":{"a":1,"k":[{"o":{"x":0.3,"y":0},"i":{"x":0.8,"y":0.15},"s":[-63.525],"t":27},{"o":{"x":0.05,"y":0.7},"i":{"x":0.1,"y":1},"s":[-114.911],"t":32},{"s":[-191.988],"t":56.999}]}},"r":{"a":1,"k":[{"o":{"x":0.3,"y":0},"i":{"x":0.8,"y":0.15},"s":[180],"t":27},{"o":{"x":0.05,"y":0.7},"i":{"x":0.1,"y":1},"s":[108],"t":32},{"s":[0],"t":56.999}]},"sa":{"a":0,"k":0},"o":{"a":1,"k":[{"o":{"x":0.3,"y":0},"i":{"x":0.8,"y":0.992},"s":[0],"t":34.333},{"o":{"x":0.05,"y":0.015},"i":{"x":0.1,"y":1},"s":[40],"t":35},{"s":[100],"t":42}]}},"shapes":[{"ty":"gr","nm":"Vector","it":[{"ty":"sh","nm":"Path 1","d":1,"ks":{"a":0,"k":{"c":true,"i":[[0,0],[8.184,-0.324],[0,0],[-23.959,-24.078],[-32.804,-1.053],[-1.066,0.811],[0.007,4.129],[0,0],[0,0],[0.798,5.149],[6.286,-0.001],[0,0]],"o":[[-8.272,-0.003],[0,0],[0.147,33.967],[23.34,23.076],[1.593,-0.158],[1.058,-2.503],[0,0],[0,0],[-0.007,-5.375],[-6.159,-0.624],[0,0],[0,0]],"v":[[-34.471,-64.229],[-60.388,-64.133],[-64.227,-63.816],[-26.606,26.772],[60.732,64.308],[63.559,63.59],[64.097,32.165],[64.09,-18.147],[64.09,-45.417],[63.488,-63.835],[43.281,-64.241],[11.563,-64.226]]}}},{"ty":"fl","nm":"Fill 1","c":{"a":0,"k":[0,0,0]},"r":1,"o":{"a":0,"k":100}},{"ty":"tr","a":{"a":0,"k":[0,0]},"s":{"a":0,"k":[100,100]},"p":{"a":0,"k":[0,0]},"r":{"a":0,"k":0},"sa":{"a":0,"k":0},"o":{"a":0,"k":100}}]}],"ind":3,"parent":2},{"ty":4,"nm":"rv","sr":1,"st":0,"op":150,"ip":0,"ln":"60","hasMask":false,"ao":0,"ks":{"a":{"a":0,"k":[0,0]},"s":{"a":0,"k":[100,100]},"p":{"s":true,"x":{"a":1,"k":[{"o":{"x":0.3,"y":0},"i":{"x":0.8,"y":1},"s":[-0.473],"t":27},{"o":{"x":0.05,"y":0},"i":{"x":0.1,"y":1},"s":[-0.473],"t":32},{"s":[-0.473],"t":56.999}]},"y":{"a":1,"k":[{"o":{"x":0.3,"y":0},"i":{"x":0.8,"y":0.15},"s":[63.268],"t":27},{"o":{"x":0.05,"y":0.7},"i":{"x":0.1,"y":1},"s":[115.382],"t":32},{"s":[193.555],"t":56.999}]}},"r":{"a":1,"k":[{"o":{"x":0.3,"y":0},"i":{"x":0.8,"y":0.15},"s":[180],"t":27},{"o":{"x":0.05,"y":0.7},"i":{"x":0.1,"y":1},"s":[108],"t":32},{"s":[0],"t":56.999}]},"sa":{"a":0,"k":0},"o":{"a":1,"k":[{"o":{"x":0.3,"y":0},"i":{"x":0.8,"y":0.992},"s":[0],"t":34.333},{"o":{"x":0.05,"y":0.015},"i":{"x":0.1,"y":1},"s":[40],"t":35},{"s":[100],"t":42}]}},"shapes":[{"ty":"gr","nm":"Vector","it":[{"ty":"sh","nm":"Path 1","d":1,"ks":{"a":0,"k":{"c":true,"i":[[34.529,3.669],[4.202,-0.182],[-0.007,-8.735],[0,0],[0,0],[-0.448,-4.68],[-5.006,-0.042],[0,0],[0,0],[-8.423,0.664],[0.773,5.221],[14.208,17.877]],"o":[[-4.177,-0.491],[-0.437,8.527],[0,0],[0,0],[-0.017,5.094],[4.682,0.668],[0,0],[0,0],[8.563,0],[0.619,-5.14],[-3.206,-22.609],[-21.626,-27.166]],"v":[[-51.321,-63.852],[-63.908,-64.316],[-64.014,-36.67],[-64.02,11.828],[-64.06,45.722],[-63.971,63.821],[-45.856,64.341],[-8.63,64.355],[36.273,64.348],[63.976,63.923],[63.045,46.176],[36.451,-15.657]]}}},{"ty":"fl","nm":"Fill 1","c":{"a":0,"k":[0,0,0]},"r":1,"o":{"a":0,"k":100}},{"ty":"tr","a":{"a":0,"k":[0,0]},"s":{"a":0,"k":[100,100]},"p":{"a":0,"k":[0,0]},"r":{"a":0,"k":0},"sa":{"a":0,"k":0},"o":{"a":0,"k":100}}]}],"ind":4,"parent":1}]}]}
+      animationData: LOGO_ANIM
+    });
+
+    // ── Menu Lottie logo (same animation data, inverted white via CSS) ──
+    lottie.loadAnimation({
+      container: document.getElementById('menu-lottie'),
+      renderer: 'svg',
+      loop: true,
+      autoplay: true,
+      animationData: LOGO_ANIM
     });
 
     // ── Tools submenu toggle ──
@@ -1553,10 +1788,12 @@
       closeMenu();                          // close nav menu first
       contactOverlay.classList.add('open');
       document.body.style.overflow = 'hidden';
+      pushFocus(contactOverlay);
     }
     function closeContact() {
       contactOverlay.classList.remove('open');
       document.body.style.overflow = '';
+      popFocus();
     }
 
     menuContactLink.addEventListener('click', e => { e.preventDefault(); openContact(); });
@@ -1574,13 +1811,23 @@
     const iconMuted = document.getElementById('icon-mute');
     const iconExp   = document.getElementById('icon-expand');
     const iconShrk  = document.getElementById('icon-shrink');
+    const vlLoader  = document.getElementById('vl-loader');
+    const vlPrev    = document.getElementById('vl-prev');
+    const vlNext    = document.getElementById('vl-next');
 
-    function openLightbox(src) {
+    // Ordered playlist of playable projects (skip "Coming soon" cards with no real file)
+    const vlPlaylist = Array.from(document.querySelectorAll('.card-media'))
+      .filter(m => !m.querySelector('.pending'))
+      .map(m => m.querySelector('video[data-src]'))
+      .filter(Boolean)
+      .map(v => v.dataset.src);
+    let vlIndex = -1;
+
+    function loadVideo(src) {
+      vlLoader.classList.remove('hidden');   // show spinner until it can play
       player.src = src;
       player.muted = false;
       player.currentTime = 0;
-      backdrop.classList.add('open');
-      document.body.style.overflow = 'hidden';
       player.play().catch(() => {
         // autoplay with audio blocked — fall back to muted
         player.muted = true;
@@ -1588,6 +1835,27 @@
         player.play().catch(() => {});
       });
       syncMuteIcon();
+      updateNav();
+    }
+
+    function openLightbox(src) {
+      vlIndex = vlPlaylist.indexOf(src);
+      backdrop.classList.add('open');
+      document.body.style.overflow = 'hidden';
+      loadVideo(src);
+      pushFocus(vlBox);
+    }
+
+    function vlGo(dir) {
+      if (vlIndex < 0 || vlPlaylist.length < 2) return;
+      vlIndex = (vlIndex + dir + vlPlaylist.length) % vlPlaylist.length;
+      loadVideo(vlPlaylist[vlIndex]);
+    }
+
+    function updateNav() {
+      const show = vlIndex >= 0 && vlPlaylist.length > 1;
+      vlPrev.style.display = show ? '' : 'none';
+      vlNext.style.display = show ? '' : 'none';
     }
 
     function closeLightbox() {
@@ -1595,8 +1863,10 @@
       document.body.style.overflow = '';
       player.pause();
       player.src = '';
+      vlLoader.classList.add('hidden');
       // exit native fullscreen if active
       if (document.fullscreenElement) document.exitFullscreen().catch(() => {});
+      popFocus();
     }
 
     function syncMuteIcon() {
@@ -1604,10 +1874,17 @@
       iconMuted.style.display = player.muted ? ''     : 'none';
     }
 
+    // Hide the spinner once playback can start; show it again if the video re-buffers
+    player.addEventListener('canplay', () => vlLoader.classList.add('hidden'));
+    player.addEventListener('playing', () => vlLoader.classList.add('hidden'));
+    player.addEventListener('waiting', () => vlLoader.classList.remove('hidden'));
+    player.addEventListener('error',   () => vlLoader.classList.add('hidden'));
+
     // Click any card-media to open lightbox
     document.querySelectorAll('.card-media').forEach(card => {
       card.addEventListener('click', e => {
         e.preventDefault();
+        if (card.querySelector('.pending')) return; // "Coming soon" — nothing to play yet
         const vid = card.querySelector('video[data-src]');
         if (!vid) return;
         // use already-loaded src if available, else data-src
@@ -1637,6 +1914,10 @@
       }
     });
 
+    // Prev / next project
+    vlPrev.addEventListener('click', e => { e.stopPropagation(); vlGo(-1); });
+    vlNext.addEventListener('click', e => { e.stopPropagation(); vlGo(1); });
+
     // Sync fullscreen icon
     document.addEventListener('fullscreenchange', () => {
       const fs = !!document.fullscreenElement;
@@ -1649,13 +1930,39 @@
     const btnOpen  = document.getElementById('menu-open');
     const btnClose = document.getElementById('menu-close');
 
+    // Rich, dark-enough palette — all work well with white text
+    const menuPalette = [
+      '#0d1b2a', // deep navy
+      '#1a0a2e', // dark violet
+      '#0a1f0a', // forest black
+      '#2a0a0a', // oxblood
+      '#0a1a2a', // midnight blue
+      '#1c1c0a', // dark olive
+      '#0f1f1f', // dark teal
+      '#1a0f00', // dark amber
+      '#1f0a1f', // dark plum
+      '#001a1a', // deep cyan
+      '#1a1500', // dark gold
+      '#0a0f1f', // ink blue
+    ];
+    let lastMenuColor = -1;
+    function pickMenuColor() {
+      let idx;
+      do { idx = Math.floor(Math.random() * menuPalette.length); } while (idx === lastMenuColor);
+      lastMenuColor = idx;
+      return menuPalette[idx];
+    }
+
     function openMenu() {
+      overlay.style.background = pickMenuColor();
       overlay.classList.add('open');
       document.body.style.overflow = 'hidden';
+      pushFocus(overlay);
     }
     function closeMenu() {
       overlay.classList.remove('open');
       document.body.style.overflow = '';
+      popFocus();
     }
 
     btnOpen.addEventListener('click', openMenu);
@@ -1664,6 +1971,38 @@
     // Close when a nav link is clicked
     overlay.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMenu));
 
+    // ── Focus management: trap Tab inside the open overlay, restore focus on close ──
+    let lastFocused = null;
+    const FOCUSABLE = 'a[href], button:not([disabled]), input, [tabindex]:not([tabindex="-1"])';
+    function focusablesIn(el) {
+      return Array.from(el.querySelectorAll(FOCUSABLE))
+        .filter(n => n.offsetWidth || n.offsetHeight || n === document.activeElement);
+    }
+    function pushFocus(el) {
+      lastFocused = document.activeElement;
+      const f = focusablesIn(el);
+      if (f.length) setTimeout(() => f[0].focus(), 60);
+    }
+    function popFocus() {
+      if (lastFocused && typeof lastFocused.focus === 'function') lastFocused.focus();
+      lastFocused = null;
+    }
+    function openOverlayEl() {
+      if (backdrop.classList.contains('open'))       return vlBox;
+      if (contactOverlay.classList.contains('open')) return contactOverlay;
+      if (searchOverlay.classList.contains('open'))  return searchOverlay;
+      if (overlay.classList.contains('open'))        return overlay;
+      return null;
+    }
+    document.addEventListener('keydown', e => {
+      if (e.key !== 'Tab') return;
+      const m = openOverlayEl(); if (!m) return;
+      const f = focusablesIn(m); if (!f.length) return;
+      const first = f[0], last = f[f.length - 1];
+      if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+      else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+    });
+
     // Close on Escape key (any overlay)
     document.addEventListener('keydown', e => {
       if (e.key === 'Escape') {
@@ -1671,6 +2010,17 @@
         else if (contactOverlay.classList.contains('open'))  closeContact();
         else if (searchOverlay.classList.contains('open'))   closeSearch();
         else closeMenu();
+      }
+    });
+
+    // ── Lightbox keyboard: ← / → navigate projects, Space toggles play/pause ──
+    document.addEventListener('keydown', e => {
+      if (!backdrop.classList.contains('open')) return;
+      if (e.key === 'ArrowLeft')       { e.preventDefault(); vlGo(-1); }
+      else if (e.key === 'ArrowRight') { e.preventDefault(); vlGo(1); }
+      else if (e.key === ' ' || e.code === 'Space') {
+        e.preventDefault();
+        if (player.paused) player.play().catch(() => {}); else player.pause();
       }
     });
 
@@ -1688,6 +2038,7 @@
             } else {
               hdr.classList.remove('header-hidden');
             }
+            hdr.classList.toggle('scrolled', y > 20);
             lastY = y;
             ticking = false;
           });
@@ -1703,18 +2054,33 @@
       t.parentElement.addEventListener('mouseleave', () => t.style.animationPlayState = 'running');
     }
 
-    // ── Custom cursor dot (mix-blend-mode:difference handles all color contexts) ──
-    const dot = document.createElement('div');
-    dot.className = 'cursor-dot';
-    document.body.appendChild(dot);
-
-    document.addEventListener('mousemove', e => {
-      dot.style.left = e.clientX + 'px';
-      dot.style.top  = e.clientY + 'px';
-    });
-
-    document.addEventListener('mousedown', () => dot.classList.add('clicking'));
-    document.addEventListener('mouseup',   () => dot.classList.remove('clicking'));
+    // ── Custom cursor ──
+    (function() {
+      const dot  = document.getElementById('cursor-dot');
+      const ring = document.getElementById('cursor-ring');
+      let mx = -100, my = -100, rx = -100, ry = -100;
+      document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
+      (function loop() {
+        dot.style.transform  = `translate(${mx}px, ${my}px) translate(-50%,-50%)`;
+        rx += (mx - rx) * 0.12;
+        ry += (my - ry) * 0.12;
+        ring.style.transform = `translate(${rx}px, ${ry}px) translate(-50%,-50%)`;
+        requestAnimationFrame(loop);
+      })();
+      const hoverEls = 'a, button, .work-card, .nav-icon, .menu-close, [role="button"]';
+      document.addEventListener('mouseover', e => {
+        if (e.target.closest(hoverEls)) document.body.classList.add('cursor-hover');
+      });
+      document.addEventListener('mouseout', e => {
+        if (e.target.closest(hoverEls)) document.body.classList.remove('cursor-hover');
+      });
+      // White cursor inside dark menu
+      const menuOverlay = document.getElementById('menu-overlay');
+      const menuOpen  = document.getElementById('menu-open');
+      const menuClose = document.getElementById('menu-close');
+      if (menuOpen)  menuOpen.addEventListener('click',  () => document.body.classList.add('cursor-menu'));
+      if (menuClose) menuClose.addEventListener('click', () => document.body.classList.remove('cursor-menu'));
+    })();
 
     // ── Alive letter wave ──
     (function () {
