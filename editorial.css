@@ -201,3 +201,41 @@ a.product-link:hover,a.product-link:focus-visible{color:var(--blue);border-color
 .product-timeline-rail i{width:7px;height:7px;background:#1983ff;transform:rotate(45deg)}
 @media(max-width:760px){.products-section{padding:80px var(--pad) 105px;scroll-margin-top:68px}.products-intro{display:block}.products-intro h2{font-size:clamp(56px,10vw,84px);margin:52px 0 25px}.products-intro p{margin-bottom:50px}.product-card{grid-template-columns:1fr}.product-card-copy{min-height:340px;padding:35px}.product-logo{margin-top:38px}.product-card h3{font-size:clamp(80px,18vw,130px)}.product-visual{min-height:360px}.product-screenshot{margin:24px 0}}
 @media(max-width:480px){.product-visual{padding:20px 16px}}
+
+/* Compact mobile composition: keep the reel in its native landscape frame. */
+@media (max-width: 760px) {
+  .reel-media {
+    height: auto;
+    min-height: 0;
+    aspect-ratio: 16 / 9;
+  }
+  .reel-media img, .reel-background {
+    object-fit: cover;
+    object-position: center;
+  }
+  .reel-time { top: 14px; font-size: 9px; }
+  .reel-caption { bottom: 14px; font-size: 9px; }
+  .play-disc { width: 52px; height: 52px; }
+  .reel-intro { padding: 48px var(--pad) 56px; }
+  .reel-intro .motion-headline {
+    min-height: 0;
+    font-size: clamp(42px, 10.5vw, 72px);
+    margin: 0 0 24px;
+  }
+  .reel-intro p { font-size: 20px; }
+  .reel-intro-controls { margin-top: 24px; }
+  .work-section, .archive-section, .studio-section, .contact-section {
+    padding-top: 48px;
+    padding-bottom: 64px;
+  }
+  .work-intro h2, .archive-intro h2 { margin-top: 32px; }
+  .studio-layout h2 { margin-top: 36px; }
+  .studio-services { padding-top: 36px; }
+  .contact-section { min-height: 0; }
+  .products-section { padding-top: 48px; padding-bottom: 64px; }
+  .products-intro h2 { margin-top: 32px; }
+  .products-intro p { margin-bottom: 32px; }
+  .product-card-copy { min-height: 0; padding: 28px; }
+  .product-visual { min-height: 0; }
+  .featured-list, .archive-grid { row-gap: 40px; }
+}
