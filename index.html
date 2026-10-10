@@ -28,6 +28,11 @@
   <link rel="stylesheet" href="site.css">
   <link rel="stylesheet" href="editorial.css">
   <link rel="stylesheet" href="seo.css">
+  <style>
+    .reel-intro { grid-template-columns: minmax(0, 1fr); }
+    .reel-intro h1, .reel-intro p, .reel-intro-controls { grid-column: 1; }
+    .cinemuah-card { display: block; margin-top: 32px; }
+  </style>
   <script src="assets/lottie_light.min.js" defer></script>
   <script src="site.js" defer></script>
 </head>
@@ -50,16 +55,6 @@
         <span class="reel-caption">MOTION WITH A POINT. <span>WATCH FILM ↗</span></span>
       </a>
       <div class="reel-intro" data-motion-stage data-style="rise">
-        <div class="reel-intro-side">
-          <span class="reel-intro-label">INDEPENDENT MOTION STUDIO<br>BASED IN INDIA / WORKING EVERYWHERE<br><span class="motion-study-label">MOTION STUDY <span id="motion-count">01 / 08</span></span></span>
-          <div class="motion-inspector" aria-label="Animation timeline and easing curve">
-            <div class="motion-inspector-heading"><span>TIMELINE / POSITION</span><span class="motion-live-indicator">PLAYING</span></div>
-            <div class="motion-timeline" aria-hidden="true"><span class="motion-timeline-fill"></span><span class="motion-keyframe motion-keyframe-start"></span><span class="motion-keyframe motion-keyframe-end"></span><span class="motion-playhead"></span></div>
-            <div class="motion-time"><span id="motion-current-time">00:00</span><span>00:06</span></div>
-            <svg class="motion-ease-chart" viewBox="0 0 200 100" role="img" aria-label="Current easing curve"><path class="motion-chart-grid" d="M12 12H188M12 50H188M12 88H188M12 12V88M100 12V88M188 12V88"/><path class="motion-chart-guide" d="M12 88L188 12"/><path id="motion-ease-path" d="M12 88 C40.16 12 64.8 12 188 12"/><circle id="motion-ease-runner" cx="12" cy="88" r="5"/></svg>
-            <div class="motion-easing-data"><span id="motion-ease-name">EXPO OUT</span><code id="motion-ease-value">cubic-bezier(.16, 1, .3, 1)</code></div>
-          </div>
-        </div>
         <h1 id="reel-heading" class="motion-headline" aria-label="Ideas deserve to move people."><span class="motion-line"><span class="motion-word">Ideas</span> <span class="motion-word">deserve</span></span><span class="motion-line"><span class="motion-word">to</span> <span class="motion-word motion-accent">move</span> <span class="motion-word motion-accent">people.</span></span></h1>
         <p>We create design and motion for SaaS, B2B and D2C brands: product films, brand identities and campaigns. Based in India, working worldwide.</p>
         <div class="reel-intro-controls"><a href="#work" aria-label="Explore selected work">EXPLORE THE WORK <span>↘</span></a><button type="button" class="motion-remix" aria-label="Change the headline and animation">CHANGE THE MOTION <span>↗</span></button></div>
@@ -160,6 +155,9 @@
       <div class="product-card">
         <div class="product-card-copy"><span class="product-eyebrow"><i class="key-diamond" aria-hidden="true"></i> PRODUCT 01 / BLENDER TOOL</span><img class="product-logo" src="assets/renq-icon.png" alt="RenQ logo" loading="lazy" decoding="async"><h3>RenQ<span>.</span></h3><p>Queue your Blender renders, track live progress and ETA, and get back to making things.</p><a class="product-link" href="https://5554792048798.gumroad.com/l/rlgegw" target="_blank" rel="noopener noreferrer" aria-label="Explore RenQ on Gumroad (opens in a new tab)">EXPLORE RENQ <span>↗</span></a></div>
         <div class="product-visual"><div class="product-visual-top" aria-hidden="true"><span>RENQ / RENDER QUEUE</span><span>◆ THE ACTUAL TOOL</span></div><img class="product-screenshot" src="assets/renq-interface.png" alt="RenQ app interface showing three Blender render jobs, live progress, and render settings" loading="lazy" decoding="async"><div class="product-timeline" aria-hidden="true"><span>QUEUE / 03 JOBS</span><span class="product-timeline-rail"><i></i><i></i><i></i><i></i></span><span>RENDER READY</span></div></div>
+      </div>
+      <div class="product-card cinemuah-card">
+        <div class="product-card-copy"><span class="product-eyebrow"><i class="key-diamond" aria-hidden="true"></i> PRODUCT 02</span><h3>Cinemuah<span>.</span></h3><a class="product-link" href="https://www.cinemuah.com/" target="_blank" rel="noopener noreferrer" aria-label="Visit Cinemuah (opens in a new tab)">EXPLORE CINEMUAH <span>↗</span></a></div>
       </div>
     </section>
 
