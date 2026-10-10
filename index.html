@@ -18,9 +18,9 @@
   <meta name="twitter:description" content="Snacpac is an independent design and motion studio creating product films, brand identities and campaigns for SaaS, B2B and D2C brands worldwide.">
   <meta name="twitter:image" content="https://www.snacpac.biz/assets/thumbs/reel2026.jpg">
   <title>Snacpac | Design &amp; Motion Studio for SaaS, B2B &amp; D2C</title>
-  <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://www.snacpac.biz/#studio","name":"Snacpac","url":"https://www.snacpac.biz/","description":"Snacpac is an independent design and motion studio creating product films, brand identities and campaigns for SaaS, B2B and D2C brands worldwide.","email":"potatosnacpac@gmail.com","sameAs":["https://www.instagram.com/snacpac.biz"]},{"@type":"WebSite","@id":"https://www.snacpac.biz/#website","url":"https://www.snacpac.biz/","name":"Snacpac","publisher":{"@id":"https://www.snacpac.biz/#studio"}}]}</script>
-  <link rel="icon" href="favicon.svg" type="image/svg+xml">
-  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://www.snacpac.biz/#studio","name":"Snacpac","logo":"https://www.snacpac.biz/assets/snacpac-logo.png","url":"https://www.snacpac.biz/","description":"Snacpac is an independent design and motion studio creating product films, brand identities and campaigns for SaaS, B2B and D2C brands worldwide.","email":"potatosnacpac@gmail.com","sameAs":["https://www.instagram.com/snacpac.biz"]},{"@type":"WebSite","@id":"https://www.snacpac.biz/#website","url":"https://www.snacpac.biz/","name":"Snacpac","publisher":{"@id":"https://www.snacpac.biz/#studio"}}]}</script>
+  <link rel="icon" href="/assets/snacpac-icon.png" type="image/png">
+  <link rel="apple-touch-icon" href="/assets/snacpac-icon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -29,6 +29,8 @@
   <link rel="stylesheet" href="editorial.css">
   <link rel="stylesheet" href="seo.css">
   <style>
+    .brand-logo { display:block; width:200px; height:auto; max-width:100%; }
+    @media(max-width:760px) { .brand-logo { width:150px; } }
     .reel-intro { grid-template-columns: minmax(0, 1fr); }
     .reel-intro h1, .reel-intro p, .reel-intro-controls { grid-column: 1; }
     .cinemuah-card { display: block; margin-top: 32px; }
@@ -43,7 +45,7 @@
   <a class="skip-link" href="#work">Skip to work</a>
   <div class="site-progress" aria-hidden="true"></div>
   <header class="site-header" id="top">
-    <a class="brand" href="#top" aria-label="Snacpac, back to top"><span class="brand-icon" aria-hidden="true"><span class="brand-mark"><i></i><i></i><i></i><i></i></span><span class="brand-lottie"></span></span><span>SNACPAC<span class="brand-period">.</span></span></a>
+    <a class="brand" href="#top" aria-label="Snacpac, back to top"><img class="brand-logo" src="/assets/snacpac-logo.png" alt="Snacpac" width="720" height="240"></a>
     <nav class="main-nav" aria-label="Main navigation"><a href="#work">Work</a><a href="#products">Products</a><a href="#services">Services</a><a href="#studio">Studio</a><a href="#contact">Contact</a></nav>
     <a class="header-cta" href="#reel"><span class="cta-dot"></span><span class="header-cta-label">WATCH THE REEL</span><span aria-hidden="true">↗</span></a>
   </header>
@@ -235,6 +237,7 @@
   <div class="film-dialog" id="film-dialog" role="dialog" aria-modal="true" aria-label="Project film" aria-hidden="true"><div class="film-backdrop" data-close-dialog></div><div class="film-panel" role="document"><div class="film-topbar"><span id="film-index">FRAME 01 / 38</span><button type="button" id="film-close" aria-label="Close film">CLOSE ✕</button></div><div class="film-screen"><video id="film-player" controls playsinline preload="metadata"></video></div><div class="film-details"><div><span id="film-category"></span><h2 id="film-title"></h2><p id="film-description"></p><div class="film-case-study"><div><span>THE BRIEF</span><p id="film-brief"></p></div><div><span>THE APPROACH</span><p id="film-approach"></p></div></div></div><div class="film-navigation"><button type="button" id="film-prev" aria-label="Previous project">← PREV</button><button type="button" id="film-next" aria-label="Next project">NEXT →</button></div></div></div></div>
 </body>
 </html>
+
 
 
 
