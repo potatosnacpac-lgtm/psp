@@ -148,12 +148,13 @@
       const { name, points } = styles[phraseIndex];
       const value = `cubic-bezier(${points.join(', ')})`;
       motionStage.style.setProperty('--motion-ease', value);
-      easeName.textContent = name;
-      easeValue.textContent = value;
-      easePath.setAttribute('d', `M12 88 C${12 + 176 * points[0]} ${88 - 76 * points[1]} ${12 + 176 * points[2]} ${88 - 76 * points[3]} 188 12`);
+      if (easeName) easeName.textContent = name;
+      if (easeValue) easeValue.textContent = value;
+      if (easePath) easePath.setAttribute('d', `M12 88 C${12 + 176 * points[0]} ${88 - 76 * points[1]} ${12 + 176 * points[2]} ${88 - 76 * points[3]} 188 12`);
     }
 
     function renderProgress(progress) {
+      if (!timelineFill) return;
       const clamped = Math.max(0, Math.min(1, progress));
       timelineFill.style.width = `${clamped * 100}%`;
       timelinePlayhead.style.left = `${clamped * 100}%`;
@@ -188,7 +189,7 @@
       });
       headline.replaceChildren(fragment);
       headline.setAttribute('aria-label', `${first} ${second}`);
-      counter.textContent = `${String(phraseIndex + 1).padStart(2, '0')} / ${String(phrases.length).padStart(2, '0')}`;
+      if (counter) counter.textContent = `${String(phraseIndex + 1).padStart(2, '0')} / ${String(phrases.length).padStart(2, '0')}`;
       renderEasing();
       renderProgress(0);
     }
@@ -197,8 +198,8 @@
       clearTimeout(rotationTimer);
       cancelAnimationFrame(progressFrame);
       const playing = visible && !document.hidden && !prefersReducedMotion.matches;
-      liveIndicator.textContent = playing ? 'PLAYING' : 'READY';
-      liveIndicator.classList.toggle('is-playing', playing);
+      if (liveIndicator) liveIndicator.textContent = playing ? 'PLAYING' : 'READY';
+      if (liveIndicator) liveIndicator.classList.toggle('is-playing', playing);
       if (playing) {
         cycleStarted = performance.now();
         renderProgress(0);
